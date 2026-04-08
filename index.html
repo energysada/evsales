@@ -971,6 +971,14 @@ function renderNews() {
   }).join('');
 }
 
+function fmtDate(iso) {
+  // "2026-04-08" -> "4-08 Wed"
+  const [y, m, d] = iso.split('-').map(Number);
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const dow = days[new Date(y, m - 1, d).getDay()];
+  return `${m}-${String(d).padStart(2,'0')} ${dow}`;
+}
+
 function renderDaily() {
   const tbody = document.getElementById('daily-tbody');
   const sorted = [...DAILY].sort((a,b) => b.date.localeCompare(a.date));
@@ -978,7 +986,7 @@ function renderDaily() {
   tbody.innerHTML = sorted.map(d => {
     const isFirstOfDate = d.date !== lastDate;
     const cls = isFirstOfDate && lastDate !== null ? ' class="date-break"' : '';
-    const dateCell = isFirstOfDate ? d.date : '';
+    const dateCell = isFirstOfDate ? fmtDate(d.date) : '';
     lastDate = d.date;
     return `
     <tr${cls}>
