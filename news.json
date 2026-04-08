@@ -36,6 +36,90 @@
     "subcategory": "Milestone"
   },
   {
+    "date": "2026-04-07",
+    "region": "Europe",
+    "country": "Germany",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "ecomento.de: BEV + hybrid breakdown",
+    "data_point": "",
+    "source_name": "ecomento.de",
+    "source_url": "https://ecomento.de/2026/04/07/elektroauto-hybridauto-neuzulassungen-maerz-2026/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Europe",
+    "country": "Germany",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "Elektroauto News: +66% detail",
+    "data_point": "",
+    "source_name": "Elektroauto News",
+    "source_url": "https://www.elektroauto-news.net/news/eautos-kba-zahlen-maerz-plus-66-prozent",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Europe",
+    "country": "UK",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "SMMT EV data: Registration data hub",
+    "data_point": "",
+    "source_name": "SMMT EV data",
+    "source_url": "https://www.smmt.co.uk/vehicle-data/electric-vehicle-registrations/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Europe",
+    "country": "UK",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "Transport & Energy: Analysis",
+    "data_point": "",
+    "source_name": "Transport & Energy",
+    "source_url": "https://transportandenergy.com/2026/04/07/battery-electric-vehicles-hit-new-registrations-record/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Asia-Pacific",
+    "country": "Australia",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "CarExpert: Analysis + brand ranking",
+    "data_point": "",
+    "source_name": "CarExpert",
+    "source_url": "https://www.carexpert.com.au/car-news/vfacts-march-2026-market-down-but-ev-sales-jump-kia-and-byd-enter-top-three",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Asia-Pacific",
+    "country": "Australia",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "The Driven: EV breakdown by model",
+    "data_point": "",
+    "source_name": "The Driven",
+    "source_url": "https://thedriven.io/2026/04/07/australian-electric-vehicle-sales-by-month-in-2026-by-model-and-by-brand/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "Asia-Pacific",
+    "country": "Australia",
+    "category": "Market Data",
+    "subcategory": "Milestone",
+    "headline": "WhichCar: Record share detail",
+    "data_point": "",
+    "source_name": "WhichCar",
+    "source_url": "https://www.whichcar.com.au/news/vfacts-march-2026-ev-sales-surge-record-market-share-demand-accelerates",
+    "key_country": true
+  },
+  {
     "date": "2026-04-06",
     "region": "Asia",
     "country": "South Korea",
@@ -58,6 +142,30 @@
     "source_url": "https://gulfnews.com/business/energy/vinfasts-breakout-year-vietnamese-ev-maker-nearly-doubles-sales-in-2025-eyes-300000-deliveries-in-2026-1.500497570",
     "key_country": true,
     "subcategory": "OEM Report"
+  },
+  {
+    "date": "2026-04-06",
+    "region": "Asia",
+    "country": "South Korea",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "YourNews (Tesla): Tesla +330% YoY",
+    "data_point": "",
+    "source_name": "YourNews (Tesla)",
+    "source_url": "https://www.yournews.com/2026/04/06/tesla-korea-registrations-surge-330-yoy/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-06",
+    "region": "Asia-Pacific",
+    "country": "New Zealand",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "CleanTechnica: 'Cars selling off the boat'",
+    "data_point": "",
+    "source_name": "CleanTechnica",
+    "source_url": "https://cleantechnica.com/2026/04/06/new-zealand-car-yards-empty-as-electric-vehicle-sales-surge/",
+    "key_country": true
   },
   {
     "date": "2026-04-05",
@@ -96,6 +204,18 @@
     "subcategory": "Quarterly"
   },
   {
+    "date": "2026-04-05",
+    "region": "North America",
+    "country": "US",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "National Today (GM #1): GM Q1 leadership",
+    "data_point": "",
+    "source_name": "National Today (GM #1)",
+    "source_url": "https://nationaltoday.com/us/il/chicago/news/2026/04/05/gm-tops-q1-auto-sales-despite-ev-slump",
+    "key_country": true
+  },
+  {
     "date": "2026-04-04",
     "region": "Europe",
     "country": "France",
@@ -118,6 +238,54 @@
     "source_url": "https://www.ecomotorsnews.com/en/news/stellantis-is-the-market-leader-in-france-in-early-2026",
     "key_country": true,
     "subcategory": "Official Data"
+  },
+  {
+    "date": "2026-04-04",
+    "region": "Europe",
+    "country": "France",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Ministère de l'Écologie: Official registrations",
+    "data_point": "",
+    "source_name": "Ministère de l'Écologie",
+    "source_url": "https://www.statistiques.developpement-durable.gouv.fr/motorisations-des-vehicules-legers-neufs-emissions-de-co2-et-bonus-ecologique-mars-2026",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-04",
+    "region": "Europe",
+    "country": "France",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "Journal de l'Auto: Model breakdown",
+    "data_point": "",
+    "source_name": "Journal de l'Auto",
+    "source_url": "https://journalauto.com/constructeurs/les-10-points-marquants-du-marche-automobile-en-mars-2026-larbre-qui-cache-la-foret/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-04",
+    "region": "Europe",
+    "country": "Italy",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "CityNext: Market commentary",
+    "data_point": "",
+    "source_name": "CityNext",
+    "source_url": "https://citynext.it/2026/04/04/italia-le-immatricolazioni-auto-crescono-anche-a-marzo-il-merito-e-sempre-delle-ibride-ed-elettriche-i-numeri/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-04",
+    "region": "Asia",
+    "country": "China",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "Basenor (Tesla): Tesla China wholesale",
+    "data_point": "",
+    "source_name": "Basenor (Tesla)",
+    "source_url": "https://www.basenor.com/blogs/news/tesla-china-march-2026-85-670-wholesale-deliveries-up-46",
+    "key_country": true
   },
   {
     "date": "2026-04-03",
@@ -154,6 +322,54 @@
     "source_url": "https://cleantechnica.com/2026/04/03/evs-sweep-2026-world-car-awards/",
     "key_country": false,
     "subcategory": "Milestone"
+  },
+  {
+    "date": "2026-04-03",
+    "region": "Europe",
+    "country": "Denmark",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "meremobil.dk: March model breakdown",
+    "data_point": "",
+    "source_name": "meremobil.dk",
+    "source_url": "https://meremobil.dk/2026/04/disse-biler-koebte-danskerne-i-marts-2026/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-03",
+    "region": "Europe",
+    "country": "Netherlands",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "eletric-vehicles.com: Tesla NL March data",
+    "data_point": "",
+    "source_name": "eletric-vehicles.com",
+    "source_url": "https://eletric-vehicles.com/tesla/tesla-dutch-sales-jump-in-march-ahead-of-local-fsd-approval/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-03",
+    "region": "Asia",
+    "country": "South Korea",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Korea Times (KAIDA): Imported car totals",
+    "data_point": "",
+    "source_name": "Korea Times (KAIDA)",
+    "source_url": "https://www.koreatimes.co.kr/economy/20260403/imported-car-sales-jump-346-in-march-on-strong-ev-demand",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-03",
+    "region": "Asia",
+    "country": "India",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Autocar Pro (FADA): FY2026 full-year",
+    "data_point": "",
+    "source_name": "Autocar Pro (FADA)",
+    "source_url": "https://autocarpro.in/analysis-sales/ev-sales-in-india-surpass-245-million-units-in-fy2026-all-4-segments-register-double-digit-growth-131974",
+    "key_country": true
   },
   {
     "date": "2026-04-02",
@@ -262,6 +478,66 @@
     "source_url": "https://electrek.co/2026/04/02/toyota-sold-more-evs-in-the-us-than-ford-q1-one-suv/",
     "key_country": true,
     "subcategory": "Milestone"
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Europe",
+    "country": "Sweden",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Mobility Sweden: March + Q1 2026 data",
+    "data_point": "",
+    "source_name": "Mobility Sweden",
+    "source_url": "https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/stark-marsmanad-lyfter-kvartalet-elfordon-okar-i-samtliga-segment",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Europe",
+    "country": "Denmark",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Mobility Denmark: Q1 2026 overview",
+    "data_point": "",
+    "source_name": "Mobility Denmark",
+    "source_url": "https://mobility.dk/nyheder/elbiler-bag-vaekst-i-bilsalget-i-foerste-kvartal/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Asia",
+    "country": "China",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "CnEVPost (wholesale): CPCA wholesale est.",
+    "data_point": "",
+    "source_name": "CnEVPost (wholesale)",
+    "source_url": "https://cnevpost.com/2026/04/02/china-mar-nev-wholesale-cpca-estimates/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Asia",
+    "country": "India",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "EVreporter: Monthly sales trend",
+    "data_point": "",
+    "source_name": "EVreporter",
+    "source_url": "https://evreporter.com/indias-electric-vehicle-sales-trend-march-2026/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Asia",
+    "country": "India",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "e-vehicleinfo: e4W model breakdown",
+    "data_point": "",
+    "source_name": "e-vehicleinfo",
+    "source_url": "https://e-vehicleinfo.com/electric-car-sales-march-2026/",
+    "key_country": true
   },
   {
     "date": "2026-04-01",
@@ -396,6 +672,66 @@
     "key_country": true
   },
   {
+    "date": "2026-04-01",
+    "region": "Europe",
+    "country": "Norway",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "OFV: Official monthly registrations",
+    "data_point": "",
+    "source_name": "OFV",
+    "source_url": "https://ofv.no/bilsalget/bilsalget-i-mars-2026",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Europe",
+    "country": "Italy",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "UNRAE statistics: Official monthly data",
+    "data_point": "",
+    "source_name": "UNRAE statistics",
+    "source_url": "https://unrae.it/dati-statistici/immatricolazioni/tag/elettrico",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Asia",
+    "country": "South Korea",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "OurAutoWorld (Hyundai+Kia): Hyundai+Kia EV +144% YoY",
+    "data_point": "",
+    "source_name": "OurAutoWorld (Hyundai+Kia)",
+    "source_url": "https://www.ourautoworld.com/archives/21859",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Asia-Pacific",
+    "country": "New Zealand",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "EVs & Beyond NZ: MIA data + Iran crisis attribution",
+    "data_point": "",
+    "source_name": "EVs & Beyond NZ",
+    "source_url": "https://evsandbeyond.co.nz/plug-in-vehicles-claim-third-of-new-passenger-registrations/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Asia-Pacific",
+    "country": "New Zealand",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "NZTA Motor Vehicle Register: NZ March 2026 BEV surge broad-based — petrol share dropped 16pp to 28.1% as EV jumped to 33.9%",
+    "data_point": "BEV 2,303 (+286%), PHEV 1,107 (+273%), petrol share fell 44.3%→28.1% (-16.2pp), diesel -0.8pp. Total market 10,063 (+20%). Top brands: Tesla 540, BYD 420, Dongfeng 340 (new), MG 200, Leapmotor 90",
+    "source_name": "NZTA / EVs & Beyond",
+    "source_url": "https://evsandbeyond.co.nz/plug-in-vehicles-claim-third-of-new-passenger-registrations/",
+    "key_country": true
+  },
+  {
     "date": "2026-03-31",
     "region": "North America",
     "country": "US",
@@ -442,6 +778,18 @@
     "source_url": "https://electriccarsreport.com/2026/03/us-ev-market-splits-in-q1-as-new-sales-drop-28-while-used-demand-surges/",
     "key_country": true,
     "subcategory": "Milestone"
+  },
+  {
+    "date": "2026-03-25",
+    "region": "North America",
+    "country": "US",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Cox Automotive (Q1): Q1 forecast 212,600 BEV",
+    "data_point": "",
+    "source_name": "Cox Automotive (Q1)",
+    "source_url": "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/",
+    "key_country": true
   },
   {
     "date": "2026-03-20",
@@ -492,6 +840,18 @@
     "subcategory": "Milestone"
   },
   {
+    "date": "2026-03-05",
+    "region": "Asia-Pacific",
+    "country": "New Zealand",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "MIA (via Scoop): MIA press release: 100K EV fleet milestone",
+    "data_point": "",
+    "source_name": "MIA (via Scoop)",
+    "source_url": "https://business.scoop.co.nz/2026/03/05/nz-new-electrified-vehicle-registrations-pass-100000-milestone/",
+    "key_country": true
+  },
+  {
     "date": "2026-02-28",
     "region": "Asia-Pacific",
     "country": "Cambodia",
@@ -526,5 +886,17 @@
     "source_url": "https://asia.nikkei.com/business/automobiles/electric-vehicles/vietnam-s-vinfast-targets-300-000-ev-sales-in-2026-a-50-jump",
     "key_country": true,
     "subcategory": "OEM Report"
+  },
+  {
+    "date": "2026-02-01",
+    "region": "Europe",
+    "country": "Netherlands",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "NL Times (Jan context): Jan '26 BEV −35% YoY",
+    "data_point": "",
+    "source_name": "NL Times (Jan context)",
+    "source_url": "https://nltimes.nl/2026/02/01/dutch-new-car-sales-fall-13-january-electric-vehicle-registrations-plunge-35",
+    "key_country": true
   }
 ]
