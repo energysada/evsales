@@ -21,11 +21,11 @@
       padding: 22px 0 18px;
       border-bottom: 3px solid #c00000;
     }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .header-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; }
     header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
     .header-sub { font-size: 12px; color: #888; }
 
-    main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 48px; }
+    main { max-width: 1600px; margin: 0 auto; padding: 24px 24px 48px; }
 
     /* ── SECTION LABEL ── */
     .section-label {
@@ -147,7 +147,9 @@
     .yoy-na  { color: #bbb; }
 
     /* ── DETAIL CARDS ── */
-    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 1280px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 800px)  { .card-grid { grid-template-columns: 1fr; } }
 
     .dcard {
       background: #fff; border-radius: 8px;
@@ -383,6 +385,7 @@
 // DAILY UPDATES — first appearance of each country's March BEV data
 // ─────────────────────────────────────────────────────────────────────────────
 const DAILY = [
+  { date: "2026-04-08", country: "🇦🇺🇳🇿 AU/NZ", isNew: true,  summary: "Australia + NZ bulletproof as dark-green: Tesla's cheaper Model Y/3 Standard versions confirmed NOT coming to AU/NZ (CarExpert). Rules out the European Tesla-recovery confounder. Combined with fuel +43% (AU) and +30% petrol / +74% diesel (NZ), both are clean fuel-shock pops.", source: "CarExpert", url: "https://www.carexpert.com.au/car-news/2026-tesla-model-y-standard-cut-price-electric-suv-and-cheaper-model-3-revealed" },
   { date: "2026-04-08", country: "🇺🇸 US",       isNew: true,  summary: "First US estimate added — derived from Cox Automotive's published Q1 2026 BEV total (212,600). Implies March BEV YoY around −27%, slightly improving from the recent trend. Stabilizing in a post-incentive range. Argonne official monthly still pending.", source: "Cox Automotive", url: "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/" },
   { date: "2026-04-08", country: "🇰🇷 S. Korea", isNew: false, summary: "Earlier-attributed Hyundai+Kia data corrected — that was Feb 2026, not March. Korea March still partial: only KAIDA imports confirmed.", source: "(correction)", url: null },
   { date: "2026-04-07", country: "🇩🇪 Germany",  isNew: false, summary: "KBA: BEV 70,663 (+63.2% YoY), 24.0% share. PHEV 29,996. First green flag.", source: "KBA", url: "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html" },
@@ -429,7 +432,7 @@ const STATUS = [
   { flag:"🇻🇳", country:"Vietnam",      status:"pending",   metric:"—",        sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"VAMA (no EV breakdown)",        id:null        },
   { flag:"🇵🇭", country:"Philippines",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"CAMPI",                         id:null        },
   { flag:"🇮🇩", country:"Indonesia",    status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"GAIKINDO",                      id:null        },
-  { flag:"🇳🇿", country:"New Zealand",  status:"published", metric:"BEV+PHEV", sales:"~2,422",      share:"~10.6% (BEV)", yoy:"+278%", yoyDir:"pos", source:"MIA / EVDB NZ",           id:null        },
+  { flag:"🇳🇿", country:"New Zealand",  status:"published", metric:"BEV+PHEV", sales:"3,410",       share:"33.9% (EV)",  yoy:"+281%", yoyDir:"pos", source:"MIA",                         id:"nz", swing:"up" },
   { flag:"🇸🇬", country:"Singapore",    status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"LTA",                           id:null        },
   { flag:"🇪🇹", country:"Ethiopia",     status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"—",                             id:null        },
 ];
@@ -771,7 +774,7 @@ const DETAIL = [
   {
     id:"australia", flag:"🇦🇺", name:"Australia", metric:"BEV", metricCls:"bev",
     swing:"up",
-    swingSummary:"Both YoY growth and market share hit levels well above any trailing benchmark — share nearly doubled vs. the same month last year. The fuel crisis is the dominant catalyst, with no structural policy change this month.",
+    swingSummary:"BEV +115% YoY, share nearly doubled vs. same month last year (7.5% → 14.6%). Fuel crisis the dominant catalyst (petrol +43% — sharpest rise among tracked markets). IMPORTANTLY: Tesla's cheaper Model Y/3 Standard versions are confirmed NOT coming to Australia — ruling out the European Tesla-recovery confounder. Combined with no recent policy change, this is the cleanest dark-green fuel-shock case.",
     sourceLabel:"FCAI VFACTS — published Apr 7",
     stats:[
       { val:"15,839", lbl:"March BEV (record)" },
@@ -784,12 +787,12 @@ const DETAIL = [
       "EVs are the sole growth segment — total market down 3.3% YoY while BEV up 88.9%",
     ],
     structural:[
-      "NVES (New Vehicle Efficiency Standard) effective Jan 2025 — forces manufacturers to supply more EVs or pay penalties",
-      "Fringe Benefits Tax (FBT) exemption for employer-provided EVs still in place",
+      "NVES (New Vehicle Efficiency Standard) effective Jan 2025 — forces manufacturers to supply more EVs; in place 14 months with no prior March-sized surge, so NOT the main March driver",
+      "Tesla 'Premium' rebrand — CONFIRMED no price cuts for Australia (CarExpert/CarsGuide). Cheaper Standard Models locked out of AU/NZ, so European Tesla-recovery story does NOT apply here",
       "BYD and Kia entered overall top 3 brands — affordable BEV model range expanding",
-      "Combined BEV+PHEV share: 22.9% of total market",
+      "Fringe Benefits Tax (FBT) exemption for employer-provided EVs still in place",
     ],
-    caveat:"Total market 105,058 (-3.3% YoY). PHEV 8,215 (+18.5% YoY). Tesla 3,485 units (Model Y 2,818). BEV +94.7% YoY. Previous BEV share record was 7.5% (Mar 2025).",
+    caveat:"Bulletproof green: fuel +43%, no Tesla price cut confounder, no recent policy change, total market −3.3% (so the growth is real demand not market-wide lift). Tesla 3,485 units (Model Y 2,818). BEV share went 7.5% → 14.6%, doubling in a year.",
     sources:[
       { date:"2026-04-07", name:"FCAI", url:"https://www.fcai.com.au/evs-surge-as-buyers-respond-to-fuel-uncertainty/", note:"Official VFACTS release" },
       { date:"2026-04-07", name:"CarExpert", url:"https://www.carexpert.com.au/car-news/vfacts-march-2026-market-down-but-ev-sales-jump-kia-and-byd-enter-top-three", note:"Analysis + brand ranking" },
@@ -822,6 +825,35 @@ const DETAIL = [
       { date:"2026-04-02", name:"EVreporter", url:"https://evreporter.com/indias-electric-vehicle-sales-trend-march-2026/", note:"Monthly sales trend" },
       { date:"2026-04-02", name:"e-vehicleinfo", url:"https://e-vehicleinfo.com/electric-car-sales-march-2026/", note:"e4W model breakdown" },
       { date:"2026-04-03", name:"Autocar Pro (FADA)", url:"https://autocarpro.in/analysis-sales/ev-sales-in-india-surpass-245-million-units-in-fy2026-all-4-segments-register-double-digit-growth-131974", note:"FY2026 full-year" },
+    ],
+  },
+  {
+    id:"nz", flag:"🇳🇿", name:"New Zealand", metric:"BEV+PHEV", metricCls:"nev",
+    swing:"up",
+    swingSummary:"Total EV share tripled from 10.6% to 33.9% in a single month — a step-change, not a trajectory extension. NZ did NOT get Tesla's cheaper Model Y/3 Standard versions (confirmed locked out alongside Australia), ruling out the European Tesla-recovery explanation. Massive fuel exposure (petrol +30%, diesel +74%) + no recent policy change (Clean Car Discount already removed Dec 2023) + explicit MIA attribution to Iran-driven fuel crisis = clean dark-green fuel-shock case.",
+    sourceLabel:"MIA / EVs & Beyond — published Apr 1",
+    stats:[
+      { val:"2,303",  lbl:"March BEV (+286% YoY)", cls:"green" },
+      { val:"1,107",  lbl:"March PHEV (+273% YoY)", cls:"green" },
+      { val:"33.9%",  lbl:"EV share (was 10.6%)", cls:"green" },
+      { val:"14,908", lbl:"Total market (+25% YoY)" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel crisis is the dominant catalyst: petrol +30%, diesel +74% since Feb 28 — among the sharpest rises of any tracked market",
+      "MIA press release explicitly cites 'Iran-driven fuel crisis' as the acceleration catalyst",
+      "Dealer 'EV FOMO' — cars selling off the boat, waiting lists forming",
+    ],
+    structural:[
+      "Clean Car Discount already removed Dec 2023 under the National government — NO recent policy change, rules out subsidy explanation",
+      "Tesla's cheaper Model Y/3 Standard versions NOT coming to NZ (confirmed with Australia) — rules out Tesla recovery confounder that affected Europe",
+      "100K cumulative BEV+PHEV milestone crossed in early March — structural tipping point",
+      "BEV share went 7.1% → 22.9%, PHEV share 3.5% → 11.0% YoY — both tripled roughly in lockstep",
+    ],
+    caveat:"Dark green: clearest fuel-shock signal among all tracked markets. Massive fuel exposure + explicit press attribution + no Tesla or subsidy confounders + step-change (not trajectory) + BNP Paribas order-book concern doesn't apply (NZ has shorter delivery cycles on in-stock BEVs).",
+    sources:[
+      { date:"2026-04-01", name:"EVs & Beyond NZ", url:"https://evsandbeyond.co.nz/plug-in-vehicles-claim-third-of-new-passenger-registrations/", note:"MIA data + Iran crisis attribution" },
+      { date:"2026-04-01", name:"1News NZ", url:"https://www.1news.co.nz/2026/04/01/ev-sales-surge-in-nz-as-global-tensions-and-fuel-prices-drive-demand/", note:"Fuel crisis + dealer context" },
+      { date:"2026-04-06", name:"CleanTechnica", url:"https://cleantechnica.com/2026/04/06/new-zealand-car-yards-empty-as-electric-vehicle-sales-surge/", note:"'Cars selling off the boat'" },
     ],
   },
 ];
