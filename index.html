@@ -61,13 +61,15 @@
     .pill-pending { background: #f0f0f0; color: #888; }
 
     .swing-icon { font-size: 14px; text-align: center; }
-    .swing-up   { color: #1a8a3a; }
-    .swing-down { color: #c00000; }
+    .swing-up    { color: #0d6e2a; }   /* dark green — high confidence fuel-shock */
+    .swing-up2   { color: #4caf50; }   /* light green — likely fuel-shock but with confounders */
+    .swing-down  { color: #c00000; }
     .swing-watch { color: #d4a017; }
     .swing-decel { color: #e67e22; }
 
-    .dcard.flagged { border: 2px solid #1a8a3a; box-shadow: 0 2px 8px rgba(26,138,58,0.15); }
-    .dcard.flagged-down { border: 2px solid #c00000; box-shadow: 0 2px 8px rgba(192,0,0,0.15); }
+    .dcard.flagged       { border: 2px solid #0d6e2a; box-shadow: 0 2px 8px rgba(13,110,42,0.18); }
+    .dcard.flagged-up2   { border: 2px solid #4caf50; box-shadow: 0 2px 8px rgba(76,175,80,0.15); }
+    .dcard.flagged-down  { border: 2px solid #c00000; box-shadow: 0 2px 8px rgba(192,0,0,0.15); }
     .dcard.flagged-watch { border: 2px solid #d4a017; box-shadow: 0 2px 8px rgba(212,160,23,0.12); }
     .dcard.flagged-decel { border: 2px solid #e67e22; box-shadow: 0 2px 8px rgba(230,126,34,0.12); }
 
@@ -87,6 +89,10 @@
     .swing-banner.decel {
       background: #fdf2e6; border-left-color: #e67e22;
       color: #7a3f00;
+    }
+    .swing-banner.up2 {
+      background: #f0f9f1; border-left-color: #4caf50;
+      color: #1f5e2a;
     }
     .swing-banner.trend {
       background: #f5f5f5; border-left-color: #aaa;
@@ -312,7 +318,8 @@
 
   <div class="section-label" style="margin-top:28px;">Data availability
     <span style="float:right; font-weight:400; text-transform:none; letter-spacing:0; font-size:11px; color:#666;">
-      <span style="color:#1a8a3a">▲</span> fuel-shock pop &nbsp;·&nbsp;
+      <span style="color:#0d6e2a">▲</span> fuel-shock (high conf) &nbsp;·&nbsp;
+      <span style="color:#4caf50">▲</span> fuel-shock (medium) &nbsp;·&nbsp;
       <span style="color:#d4a017">▲</span> in line / structural &nbsp;·&nbsp;
       <span style="color:#e67e22">▼</span> expected drop &nbsp;·&nbsp;
       <span style="color:#c00000">▼</span> beyond trajectory
@@ -405,7 +412,7 @@ const STATUS = [
   { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"watch" },
   { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"watch" },
   { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
-  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"watch" },
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up2" },
   { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
   { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
@@ -542,8 +549,8 @@ const DETAIL = [
   },
   {
     id:"sweden", flag:"🇸🇪", name:"Sweden", metric:"BEV", metricCls:"bev",
-    swing:"watch",
-    swingSummary:"BEV YoY of +27% is well above the trailing trend (low single digits for months). Sweden has no active EV subsidy, so this is a pure market signal — but the +20pp acceleration isn't directly attributable to a fuel-price shock (Swedish fuel only +7-8%). Yellow because the catalyst isn't clearly the energy crisis.",
+    swing:"up2",
+    swingSummary:"BEV YoY of +27% is dramatically above the trailing trend of low single digits — a 4-5x jump in growth rate. Sweden has NO active EV subsidy (klimatbonusen ended Nov 2022), so this isn't a structural-policy story. The energy crisis is the most plausible catalyst, but Swedish pump prices only rose ~7-8%, modest vs Australia's +43%. Light green = likely fuel-shock-related but with confounders (could also be Tesla price cuts, model launches).",
     sourceLabel:"Mobility Sweden — Apr 2026",
     stats:[
       { val:"~10,897", lbl:"March BEV" },
@@ -847,6 +854,7 @@ function renderStatus() {
                   : `<span class="yoy-na">${r.yoy}</span>`;
     const mCls = r.metric.startsWith('NEV') ? 'nev' : r.metric.includes('+') ? 'nev' : r.metric==='BEV' || r.metric.startsWith('BEV') ? 'bev' : '';
     const swingHtml = r.swing === 'up' ? '<span class="swing-icon swing-up">▲</span>'
+                    : r.swing === 'up2' ? '<span class="swing-icon swing-up2">▲</span>'
                     : r.swing === 'down' ? '<span class="swing-icon swing-down">▼</span>'
                     : r.swing === 'watch' ? '<span class="swing-icon swing-watch">▲</span>'
                     : r.swing === 'decel' ? '<span class="swing-icon swing-decel">▼</span>'
@@ -881,9 +889,22 @@ function renderCards() {
           `<tr><td>${s.date}</td><td><a href="${s.url}" target="_blank" rel="noopener">${s.name}</a></td><td>${s.note}</td></tr>`
         ).join('')}</table>
       </div>` : '';
-    const flaggedCls = d.swing === 'up' ? ' flagged' : d.swing === 'down' ? ' flagged-down' : d.swing === 'watch' ? ' flagged-watch' : d.swing === 'decel' ? ' flagged-decel' : '';
-    const swingLabel = d.swing === 'up' ? '▲ Notable swing' : d.swing === 'down' ? '▼ Notable drop' : d.swing === 'watch' ? '● Monitoring (growing)' : d.swing === 'decel' ? '● Monitoring (decelerating)' : d.swing === 'trend' ? 'Trend context' : '';
-    const swingCls = d.swing === 'down' ? ' down' : d.swing === 'watch' ? ' watch' : d.swing === 'decel' ? ' decel' : d.swing === 'trend' ? ' trend' : '';
+    const flaggedCls = d.swing === 'up' ? ' flagged'
+                     : d.swing === 'up2' ? ' flagged-up2'
+                     : d.swing === 'down' ? ' flagged-down'
+                     : d.swing === 'watch' ? ' flagged-watch'
+                     : d.swing === 'decel' ? ' flagged-decel' : '';
+    const swingLabel = d.swing === 'up' ? '▲ Fuel-shock pop (high confidence)'
+                     : d.swing === 'up2' ? '▲ Likely fuel-shock pop (medium confidence)'
+                     : d.swing === 'down' ? '▼ Notable drop'
+                     : d.swing === 'watch' ? '▲ Monitoring (growing in line / structural)'
+                     : d.swing === 'decel' ? '▼ Monitoring (decelerating)'
+                     : d.swing === 'trend' ? 'Trend context' : '';
+    const swingCls = d.swing === 'down' ? ' down'
+                   : d.swing === 'up2' ? ' up2'
+                   : d.swing === 'watch' ? ' watch'
+                   : d.swing === 'decel' ? ' decel'
+                   : d.swing === 'trend' ? ' trend' : '';
     const swingBanner = d.swingSummary
       ? `<div class="swing-banner${swingCls}"><strong>${swingLabel}:</strong> ${d.swingSummary}</div>`
       : '';

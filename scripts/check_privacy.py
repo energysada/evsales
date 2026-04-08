@@ -37,6 +37,20 @@ except ImportError:
 SITE = Path("/Users/energysada/ev/evsales-site")
 DEPLOY_ARTIFACTS = ["index.html", "news.json"]
 
+# bev.xlsx Table 1 column structure:
+#   col 2  = Jan 2024
+#   col 14 = Jan 2025
+#   col 25 = Dec 2025  ← last historic column (proprietary BNEF data)
+#   col 26 = Jan 2026  ← first "current" column (publicly available from KBA/SMMT/etc.)
+#   col 28 = Mar 2026
+#
+# The rule: anything from BEFORE the current calendar year is HISTORIC and must not be
+# in deployed artifacts. Anything from the current year (Jan onwards) was published by
+# official agencies in arrears and is publicly available — OK to expose.
+#
+# When the calendar year rolls over (Jan 2027), update this to col 38 (= last Dec 2026).
+HISTORIC_END_COL = 25  # last historic col = Dec 2025; cols 26+ are current/public
+
 # Allowlist: values that legitimately appear in public sources
 # Add any 5+ digit number here that's both in bev.xlsx AND a public press release
 PUBLIC_ALLOWLIST = {
@@ -73,7 +87,11 @@ PUBLIC_ALLOWLIST = {
 }
 
 def extract_private_unit_volumes():
-    """Extract historical 5+ digit unit volumes from bev.xlsx Table 1 only."""
+    """Extract HISTORIC 5+ digit unit volumes from bev.xlsx Table 1.
+
+    Only scans cols 2 through HISTORIC_END_COL (proprietary BNEF data).
+    Cols beyond that are current scraped data we collect ourselves and are OK to publish.
+    """
     private = set()
     path = SITE / "bev.xlsx"
     if not path.exists():
@@ -86,16 +104,13 @@ def extract_private_unit_volumes():
         print(f"ERROR: cannot open bev.xlsx: {e}", file=sys.stderr)
         sys.exit(2)
 
-    # Find the EVSales_Filtered sheet (or first sheet)
     sheet_name = "EVSales_Filtered" if "EVSales_Filtered" in wb.sheetnames else wb.sheetnames[0]
     ws = wb[sheet_name]
 
-    # Table 1: rows 4-20 (countries) — first 17 rows of data
-    # Skip last 3 columns (most recent period — may match public sources)
-    max_col = ws.max_column
-    historical_max_col = max(2, max_col - 3)
-
-    for row_cells in ws.iter_rows(min_row=4, max_row=20, max_col=historical_max_col, values_only=True):
+    # Table 1: rows 4-20 (countries), cols 2 through HISTORIC_END_COL = proprietary historic data
+    for row_cells in ws.iter_rows(min_row=4, max_row=20,
+                                  min_col=2, max_col=HISTORIC_END_COL,
+                                  values_only=True):
         for v in row_cells:
             if v is None:
                 continue
