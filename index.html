@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>March 2026 EV Sales</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 22px 0 18px;
+      border-bottom: 3px solid #c00000;
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .header-sub { font-size: 12px; color: #888; }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 48px; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: #888; margin: 28px 0 12px;
+    }
+
+    /* ── STATUS TABLE ── */
+    .status-wrap {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .status-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .status-wrap thead th {
+      background: #1a1a2e; color: #aab; padding: 9px 12px;
+      text-align: left; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .status-wrap tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.12s; }
+    .status-wrap tbody tr:last-child { border-bottom: none; }
+    .status-wrap tbody tr.has-card { cursor: pointer; }
+    .status-wrap tbody tr.has-card:hover { background: #f5f8fc; }
+    .status-wrap td { padding: 9px 12px; vertical-align: middle; }
+    .status-wrap td:first-child { font-weight: 600; white-space: nowrap; }
+
+    .pill {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap;
+    }
+    .pill-ok      { background: #d5f0e0; color: #1a6e38; }
+    .pill-partial { background: #e8f0fe; color: #2f5496; }
+    .pill-pending { background: #f0f0f0; color: #888; }
+
+    .swing-icon { font-size: 14px; text-align: center; }
+    .swing-up   { color: #1a8a3a; }
+    .swing-down { color: #c00000; }
+    .swing-watch { color: #d4a017; }
+
+    .dcard.flagged { border: 2px solid #1a8a3a; box-shadow: 0 2px 8px rgba(26,138,58,0.15); }
+    .dcard.flagged-down { border: 2px solid #c00000; box-shadow: 0 2px 8px rgba(192,0,0,0.15); }
+    .dcard.flagged-watch { border: 2px solid #d4a017; box-shadow: 0 2px 8px rgba(212,160,23,0.12); }
+
+    .swing-banner {
+      background: #edf7ed; border-left: 3px solid #1a8a3a;
+      padding: 8px 12px; margin-bottom: 14px; border-radius: 0 4px 4px 0;
+      font-size: 12px; color: #1a5c2a; line-height: 1.5;
+    }
+    .swing-banner.down {
+      background: #fef0f0; border-left-color: #c00000;
+      color: #7a1a1a;
+    }
+    .swing-banner.watch {
+      background: #fdf8e8; border-left-color: #d4a017;
+      color: #6b5a10;
+    }
+    .swing-banner.trend {
+      background: #f5f5f5; border-left-color: #aaa;
+      color: #555;
+    }
+    .swing-banner strong { font-weight: 700; }
+
+    .metric-tag {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      padding: 2px 7px; border-radius: 3px; white-space: nowrap;
+    }
+    .metric-tag.nev  { background: #e8f0fe; color: #2f5496; }
+    .metric-tag.bev  { background: #d5f0e0; color: #1a6e38; }
+
+    .yoy-pos { color: #1a8a3a; font-weight: 700; }
+    .yoy-neg { color: #c00000; font-weight: 700; }
+    .yoy-na  { color: #bbb; }
+
+    /* ── DETAIL CARDS ── */
+    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    .dcard {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .dcard-head {
+      padding: 13px 16px 11px; border-bottom: 1px solid #f0f0f0;
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 10px;
+    }
+    .dcard-country { display: flex; align-items: center; gap: 9px; }
+    .flag { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    .dcard-name { font-size: 15px; font-weight: 700; }
+    .dcard-source-line { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .dcard-metric { margin-top: 4px; }
+    .dcard-body { padding: 14px 16px; }
+
+    .stat-row { display: grid; gap: 0; margin-bottom: 14px; }
+    .stat-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .stat-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 8px 10px 8px 0; border-right: 1px solid #f0f0f0; }
+    .stat:last-child { border-right: none; }
+    .stat-val { font-size: 20px; font-weight: 800; line-height: 1.1; color: #1a1a2e; }
+    .stat-val.green { color: #1a8a3a; }
+    .stat-val.red   { color: #c00000; }
+    .stat-val.gold  { color: #b36000; }
+    .stat-lbl { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 3px; }
+
+    .drivers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .driver-box { border-radius: 6px; padding: 10px 12px; }
+    .driver-box.cyclic     { background: #fff8f0; border: 1px solid #f5d9b0; }
+    .driver-box.structural { background: #f0f5ff; border: 1px solid #c0d0f0; }
+    .driver-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+    .driver-box.cyclic .driver-title     { color: #b36000; }
+    .driver-box.structural .driver-title { color: #2f5496; }
+    .driver-items { list-style: none; }
+    .driver-items li { font-size: 12px; color: #333; padding: 2px 0; line-height: 1.45; }
+    .driver-items li::before { content: "·"; margin-right: 5px; color: #bbb; }
+
+    .dcard-caveat { margin-top: 10px; font-size: 11px; color: #888; line-height: 1.5; }
+    .dcard-caveat strong { color: #555; }
+
+    .sources-section { margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+    .sources-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #bbb; margin-bottom: 6px; }
+    .sources-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .sources-table tr { border-bottom: 1px solid #f5f5f5; }
+    .sources-table tr:last-child { border-bottom: none; }
+    .sources-table td { padding: 4px 6px 4px 0; vertical-align: top; color: #555; }
+    .sources-table td:first-child { white-space: nowrap; color: #bbb; width: 76px; }
+    .sources-table td:nth-child(2) { width: 140px; }
+    .sources-table a { color: #2f5496; text-decoration: none; }
+    .sources-table a:hover { text-decoration: underline; }
+
+    /* ── PENDING TABLE ── */
+    .pending-wrap {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .pending-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .pending-wrap thead th {
+      background: #f7f7f7; color: #999; padding: 8px 12px;
+      text-align: left; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #eee;
+    }
+    .pending-wrap td { padding: 9px 12px; border-bottom: 1px solid #f5f5f5; vertical-align: top; }
+    .pending-wrap tr:last-child td { border-bottom: none; }
+    .pending-wrap td:first-child { font-weight: 600; white-space: nowrap; }
+    .latest-note { font-size: 11px; color: #999; margin-top: 2px; }
+
+    /* ── NEWS FEED ── */
+    .news-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .filter-group { display: flex; align-items: center; gap: 6px; }
+    .filter-group label { font-size: 12px; font-weight: 500; color: #666; }
+    .filter-group select {
+      padding: 5px 26px 5px 9px; border: 1px solid #ddd; border-radius: 4px;
+      font-size: 12px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 8px center;
+      -webkit-appearance: none;
+    }
+    #news-count { font-size: 11px; color: #aaa; margin-left: auto; }
+    .news-wrap { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+    #news-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    #news-table thead th {
+      background: #f7f7f7; color: #999; padding: 8px 10px;
+      text-align: left; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #eee;
+    }
+    #news-table td { padding: 7px 10px; border-bottom: 1px solid #f5f5f5; vertical-align: top; }
+    #news-table tr:last-child td { border-bottom: none; }
+    #news-table tr:hover { background: #fafbfd; }
+    #news-table td:nth-child(1) { white-space: nowrap; width: 76px; color: #999; font-size: 11px; }
+    #news-table td:nth-child(2) { width: 90px; white-space: nowrap; font-weight: 600; }
+    #news-table td:nth-child(3) { width: 90px; }
+    #news-table td:nth-child(4) { width: 34%; }
+    #news-table td:nth-child(5) { width: 28%; color: #555; }
+    #news-table td:nth-child(6) { width: 80px; white-space: nowrap; }
+
+    .cat-badge {
+      display: inline-block; padding: 2px 7px; border-radius: 3px;
+      font-size: 10px; font-weight: 600; white-space: nowrap;
+    }
+    .cat-official   { background: #e8daef; color: #6c3483; }
+    .cat-oem        { background: #d6e4f0; color: #2f5496; }
+    .cat-milestone  { background: #d5f0e0; color: #1a6e38; }
+    .cat-quarterly  { background: #fff2cc; color: #7d6608; }
+    .cat-trend      { background: #fce4d6; color: #a04000; }
+    .cat-sales      { background: #f2f2f2; color: #555; }
+
+    #news-table thead th.sortable {
+      cursor: pointer; user-select: none; position: relative;
+    }
+    #news-table thead th.sortable:hover { color: #fff; }
+    #news-table thead th.sortable::after {
+      content: "↕"; margin-left: 4px; font-size: 9px; opacity: 0.5;
+    }
+    #news-table thead th.sort-asc::after { content: "↑"; opacity: 1; }
+    #news-table thead th.sort-desc::after { content: "↓"; opacity: 1; }
+    #news-table a { color: #2f5496; text-decoration: none; }
+    #news-table a:hover { text-decoration: underline; }
+
+    footer { text-align: center; padding: 20px; font-size: 11px; color: #aaa; border-top: 1px solid #e0e6ef; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .drivers { grid-template-columns: 1fr; }
+      .stat-row.cols-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 17px; }
+      main { padding: 14px 14px 32px; }
+      .news-controls { flex-direction: column; align-items: stretch; gap: 8px; }
+      .filter-group { width: 100%; }
+      .filter-group select { flex: 1; }
+      #news-count { margin-left: 0; }
+      #news-table thead { display: none; }
+      #news-table, #news-table tbody, #news-table tr, #news-table td { display: block; width: 100%; }
+      #news-table tr { padding: 10px 14px; border-bottom: 1px solid #eee; }
+      #news-table td { padding: 2px 0; border: none; }
+      #news-table td:nth-child(1) { float: left; width: auto; padding-right: 8px; white-space: nowrap; }
+      #news-table td:nth-child(2) { width: auto; color: #2f5496; white-space: nowrap; }
+      #news-table td:nth-child(3) { clear: both; padding-top: 4px; width: auto; }
+      #news-table td:nth-child(4) { font-size: 13px; font-weight: 500; padding-top: 4px; width: 100%; }
+      #news-table td:nth-child(5) { font-size: 12px; padding-top: 2px; min-width: 0; color: #555; }
+      #news-table td:nth-child(6) { padding-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Monthly EV sales tracker: March 2026</h1>
+    <div class="header-sub">Data collected April 7, 2026</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-label">Data availability</div>
+  <div class="status-wrap">
+    <table>
+      <thead><tr>
+        <th>Country</th><th>Status</th><th>Metric</th>
+        <th>March Sales</th><th>EV Share</th><th>YoY</th><th>Flag</th><th>Source</th>
+      </tr></thead>
+      <tbody id="status-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Detail — countries with March data</div>
+  <div class="card-grid" id="card-grid"></div>
+
+  <div class="section-label" style="margin-top:28px;">Pending — no March data yet</div>
+  <div class="pending-wrap">
+    <table>
+      <thead><tr>
+        <th>Country</th><th>Source</th><th>Expected</th><th>Latest available</th>
+      </tr></thead>
+      <tbody id="pending-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-label" style="margin-top:28px;">Newsfeed</div>
+  <div class="news-controls">
+    <div class="filter-group">
+      <label>Country:</label>
+      <select id="country-filter"><option value="all">All</option></select>
+    </div>
+    <div class="filter-group">
+      <label>Category:</label>
+      <select id="cat-filter"><option value="all">All</option></select>
+    </div>
+    <span id="news-count"></span>
+  </div>
+  <div class="news-wrap">
+    <table id="news-table">
+      <thead><tr>
+        <th class="sortable" data-col="date">Date</th>
+        <th class="sortable" data-col="country">Country</th>
+        <th class="sortable" data-col="subcategory">Category</th>
+        <th>Headline</th>
+        <th>Key Data Point</th>
+        <th class="sortable" data-col="source_name">Source</th>
+      </tr></thead>
+      <tbody id="news-body"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Monthly EV Sales Tracker &nbsp;·&nbsp; Updated April 6, 2026</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// STATUS TABLE DATA
+// ─────────────────────────────────────────────────────────────────────────────
+// Key countries
+const STATUS = [
+  { flag:"🇺🇸", country:"US",           status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Argonne / Cox EV Monitor",      id:null        },
+  { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"watch" },
+  { flag:"🇪🇺", country:"EU / Europe",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ACEA",                          id:null        },
+  { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"24.0% (BEV)", yoy:"+66.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"watch" },
+  { flag:"🇬🇧", country:"UK",           status:"published", metric:"EV (BEV+PHEV)", sales:"135,791", share:"35.6% (EV)",  yoy:"+31.7%", yoyDir:"pos", source:"SMMT",                     id:"uk"        },
+  { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.0% (BEV)", yoy:"+69%",   yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"up" },
+  { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"n/a¹",   yoyDir:"na",  source:"OFV",                      id:"norway"    },
+  { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+30%",   yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up" },
+  { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+42.6%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
+  { flag:"🇪🇸", country:"Spain",        status:"published", metric:"EV (BEV+PHEV)", sales:"26,720", share:"20.5% (EV)", yoy:"+48.8%", yoyDir:"pos", source:"ANFAC",                       id:"spain"     },
+  { flag:"🇮🇹", country:"Italy",        status:"published", metric:"EV (BEV+PHEV)", sales:"33,135", share:"17.7% (EV)", yoy:"+89.0%", yoyDir:"pos", source:"UNRAE",                       id:"italy"     },
+  { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
+  { flag:"🇰🇷", country:"S. Korea",     status:"published", metric:"BEV",      sales:"~37K+",      share:"—",     yoy:"+105%~",  yoyDir:"pos", source:"KAIDA + Hyundai/Kia",          id:"korea"     },
+  { flag:"🇯🇵", country:"Japan",        status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"JADA / JAMA",                   id:null        },
+  { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"14.6% (BEV)", yoy:"+94.7%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up" },
+  { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"n/a²",  yoyDir:"na",  source:"Vahan / FADA",             id:"india"     },
+  // Emerging markets
+  { flag:"🇹🇭", country:"Thailand",     status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"TAI / EVAT",                    id:null        },
+  { flag:"🇧🇷", country:"Brazil",       status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ABVE / ANFAVEA",                id:null        },
+  { flag:"🇲🇽", country:"Mexico",       status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"AMIA",                          id:null        },
+  { flag:"🇻🇳", country:"Vietnam",      status:"pending",   metric:"—",        sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"VAMA (no EV breakdown)",        id:null        },
+  { flag:"🇵🇭", country:"Philippines",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"CAMPI",                         id:null        },
+  { flag:"🇮🇩", country:"Indonesia",    status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"GAIKINDO",                      id:null        },
+  { flag:"🇳🇿", country:"New Zealand",  status:"published", metric:"BEV+PHEV", sales:"~2,422",      share:"~10.6% (BEV)", yoy:"+278%", yoyDir:"pos", source:"MIA / EVDB NZ",           id:null        },
+  { flag:"🇸🇬", country:"Singapore",    status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"LTA",                           id:null        },
+  { flag:"🇪🇹", country:"Ethiopia",     status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"—",                             id:null        },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DETAIL CARDS
+// ─────────────────────────────────────────────────────────────────────────────
+const DETAIL = [
+  {
+    id:"germany", flag:"🇩🇪", name:"Germany", metric:"BEV", metricCls:"bev",
+    swing:"watch",
+    swingSummary:"YoY growth of +66% is headline-grabbing, but Germany has been running above +40% for most of the last year. EV market share this month is in line with the recent trailing average — this is a continuation of strong momentum, not a new inflection.",
+    sourceLabel:"KBA — published Apr 7",
+    stats:[
+      { val:"70,663", lbl:"March BEV" },
+      { val:"+66.2%", lbl:"YoY", cls:"green" },
+      { val:"24.0%",  lbl:"BEV share" },
+      { val:"29,996", lbl:"March PHEV" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel prices rising on Middle East conflict (Super E10 over €2.10/L, +11.1% since Feb 28)",
+      "Tesla 'spectacular return' — end-of-quarter delivery push",
+    ],
+    structural:[
+      "MILESTONE: BEVs (70,663) outsold gasoline registrations (66,959) for first time in a March",
+      "Umweltbonus ended Dec 2023 — current growth is market/mandate-driven, not subsidy-driven",
+      "EU CO2 fleet emission targets for 2025 pushing manufacturers to incentivise BEV sales",
+      "Company car tax (Dienstwagensteuer) at 0.25% for BEV vs 1% for ICE — strong fleet pull",
+    ],
+    caveat:"Total market 294,161 (+16.0% YoY). PHEV 29,996 (+13.0% YoY, 10.2% share). Total hybrid (incl. PHEV): 117,846 (40.1%).",
+    sources:[
+      { date:"2026-04-07", name:"KBA", url:"https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html", note:"Official monthly registrations" },
+      { date:"2026-04-07", name:"ecomento.de", url:"https://ecomento.de/2026/04/07/elektroauto-hybridauto-neuzulassungen-maerz-2026/", note:"BEV + hybrid breakdown" },
+      { date:"2026-04-07", name:"Elektroauto News", url:"https://www.elektroauto-news.net/news/eautos-kba-zahlen-maerz-plus-66-prozent", note:"+66% detail" },
+    ],
+  },
+  {
+    id:"uk", flag:"🇬🇧", name:"United Kingdom", metric:"EV (BEV+PHEV)", metricCls:"nev",
+    swing:"trend",
+    swingSummary:"UK YoY growth has ranged between high single digits and high thirties over the past year. March at +24.2% sits squarely in the middle. March is always the UK's biggest sales month — buyers wait for the new registration plate prefix (26-plate in 2026) so their car appears newer at resale. Seasonal spike, not a demand shift.",
+    sourceLabel:"SMMT — published Apr 7",
+    stats:[
+      { val:"135,791", lbl:"March EV (BEV+PHEV)" },
+      { val:"+31.7%", lbl:"EV YoY", cls:"green" },
+      { val:"35.6%",  lbl:"EV share" },
+      { val:"86,120", lbl:"BEV (+24.2% YoY)" },
+    ], statCols:4,
+    cyclic:[
+      "March is the UK's biggest registration month (26-plate change) — seasonal spike amplifies EV numbers",
+      "Fuel prices rising — petrol up 12.9% since Feb 28",
+    ],
+    structural:[
+      "ZEV Mandate target is 33% for 2026 — actual BEV share at 22.4% means manufacturers face fines or heavy discounting",
+      "Manufacturer incentives/discounting to meet ZEV mandate driving volume up despite soft underlying demand",
+      "PHEV surge (+46.9% YoY, 13.0% share) — manufacturers using PHEV to offset ZEV Mandate shortfall",
+      "ALL-TIME RECORD month for BEV registrations — best March since 2019 for total market (380,627 units, +6.6%)",
+    ],
+    caveat:"EV share 35.6% (BEV 22.6% + PHEV 13.0%) — still below 33% ZEV Mandate BEV-only target. Petrol down -6.1%, diesel -11.4%. Top selling car: JAECOO 7 PHEV.",
+    sources:[
+      { date:"2026-04-07", name:"SMMT", url:"https://www.smmt.co.uk/best-month-ever-for-new-ev-registrations-as-market-grows-in-all-important-plate-change-march/", note:"Official press release" },
+      { date:"2026-04-07", name:"SMMT EV data", url:"https://www.smmt.co.uk/vehicle-data/electric-vehicle-registrations/", note:"Registration data hub" },
+      { date:"2026-04-07", name:"Transport & Energy", url:"https://transportandenergy.com/2026/04/07/battery-electric-vehicles-hit-new-registrations-record/", note:"Analysis" },
+    ],
+  },
+  {
+    id:"france", flag:"🇫🇷", name:"France", metric:"BEV", metricCls:"bev",
+    swing:"up",
+    swingSummary:"After more than a year of negative or flat YoY growth, France posted its strongest month in the dataset — a sharp reversal driven by new leasing policy and company car tax reform taking effect.",
+    sourceLabel:"AVEM / Ministère de l'Écologie — Apr 4",
+    stats:[
+      { val:"49,406", lbl:"March BEV" },
+      { val:"+69%",   lbl:"YoY", cls:"green" },
+      { val:"28.0%",  lbl:"Share" },
+      { val:"20,140", lbl:"Used BEV (record)" },
+    ], statCols:4,
+    cyclic:[
+      "Pump price +15.2% (Mar 2→Mar 30); Brent crude +60% since Feb 28",
+      "End-of-quarter Tesla push: Model Y 7,023 units (up from 3,034 in Feb)",
+    ],
+    structural:[
+      "Leasing social scheme (leasing social) renewed — low-income household access",
+      "Company car benefit-in-kind reform (avantage en nature) from Jan '26 favours EV — over 40% of new corporate car registrations in March were electric",
+      "Corporate fleets now the key growth engine for the French market, after long lagging (Lucien Mathieu / T&E)",
+      "Renault 5 E-Tech volume ramp — affordable domestic model",
+    ],
+    caveat: null,
+    sources:[
+      { date:"2026-04-04", name:"AVEM", url:"https://www.avem.fr/2026/04/04/porte-par-les-immatriculations-de-vehicules-electriques-le-marche-automobile-repart-a-la-hausse-en-mars/", note:"March market overview" },
+      { date:"2026-04-04", name:"Ministère de l'Écologie", url:"https://www.statistiques.developpement-durable.gouv.fr/motorisations-des-vehicules-legers-neufs-emissions-de-co2-et-bonus-ecologique-mars-2026", note:"Official registrations" },
+      { date:"2026-04-04", name:"Journal de l'Auto", url:"https://journalauto.com/constructeurs/les-10-points-marquants-du-marche-automobile-en-mars-2026-larbre-qui-cache-la-foret/", note:"Model breakdown" },
+    ],
+  },
+  {
+    id:"norway", flag:"🇳🇴", name:"Norway", metric:"BEV", metricCls:"bev",
+    swing:"trend",
+    swingSummary:"Norway's EV transition is essentially complete — BEV share has been above 93% for over a year. Monthly variations at this level are noise, not signal. YoY comparisons are not meaningful when fewer than 300 non-EV cars are sold.",
+    sourceLabel:"OFV — Apr 1",
+    stats:[
+      { val:"~17,400", lbl:"March BEV" },
+      { val:"98.4%",   lbl:"BEV share (record)", cls:"green" },
+      { val:"22",      lbl:"Petrol cars sold" },
+      { val:"97.9%",   lbl:"Q1 BEV share" },
+    ], statCols:4,
+    cyclic:[
+      "Tesla end-of-quarter push: +178% YoY, 34.8% of total market in March",
+      "Fuel prices rising on Middle East conflict (marginal effect at 98%+ share)",
+    ],
+    structural:[
+      "VAT exemption on EV purchase and annual registration tax advantage — unchanged",
+      "1 million cumulative EVs milestone passed in March 2026",
+      "Market near steady-state — no major policy change this month",
+    ],
+    caveat:"¹ YoY not meaningful at 98%+ share. Tesla +178% YoY is brand-level, not total market.",
+    sources:[
+      { date:"2026-04-01", name:"OFV", url:"https://ofv.no/bilsalget/bilsalget-i-mars-2026", note:"Official monthly registrations" },
+      { date:"2026-04-01", name:"electrive.com", url:"https://www.electrive.com/2026/04/01/norway-registers-17400-new-battery-electric-cars-in-march/", note:"Summary + model breakdown" },
+    ],
+  },
+  {
+    id:"sweden", flag:"🇸🇪", name:"Sweden", metric:"BEV", metricCls:"bev",
+    swing:"up",
+    swingSummary:"YoY growth had been in the low single digits for over six months. March's +30% is a clear departure — notable because Sweden has no active EV purchase subsidy, making this a pure market signal.",
+    sourceLabel:"Mobility Sweden — Apr 2026",
+    stats:[
+      { val:"~10,897", lbl:"March BEV" },
+      { val:"+30%",    lbl:"BEV vol. YoY", cls:"green" },
+      { val:"41.0%",   lbl:"BEV share", cls:"green" },
+      { val:"65%",     lbl:"BEV+PHEV share" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel price rise (Brent +60% since Feb 28) supporting consumer shift to BEV",
+      "Strong Q1: BEV share up from 33% (Q1 2025) to 41% (Q1 2026)",
+    ],
+    structural:[
+      "Klimatbonusen (green car rebate) was removed Nov 2022 — growth is market-driven, not subsidy-driven",
+      "Company car tax rules (förmånsbeskattning) continue to strongly favour BEV",
+      "High baseline adoption and infrastructure — self-reinforcing market",
+    ],
+    caveat:"BEV unit count (~10,897) estimated from 41% of 26,578 total registrations. Mobility Sweden publishes share; unit breakdown to be confirmed.",
+    sources:[
+      { date:"2026-04-02", name:"Mobility Sweden", url:"https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/stark-marsmanad-lyfter-kvartalet-elfordon-okar-i-samtliga-segment", note:"March + Q1 2026 data" },
+    ],
+  },
+  {
+    id:"denmark", flag:"🇩🇰", name:"Denmark", metric:"BEV", metricCls:"bev",
+    swing:"watch",
+    swingSummary:"Denmark's +42.6% YoY sits comfortably within its recent range — growth has been between +20% and +60% for over a year. EV market share is tracking the established upward curve, not breaking away from it.",
+    sourceLabel:"Mobility Denmark / meremobil.dk — Apr 2026",
+    stats:[
+      { val:"14,616", lbl:"March BEV" },
+      { val:"+42.6%", lbl:"Q1 BEV YoY", cls:"green" },
+      { val:"77.0%",  lbl:"March BEV share", cls:"green" },
+      { val:"18,968", lbl:"March total market" },
+    ], statCols:4,
+    cyclic:[
+      "Total market +26.6% YoY in March — broad market recovery amplifying EV numbers",
+      "Fuel crisis (Brent +60%) accelerating transition in already high-share market",
+    ],
+    structural:[
+      "Registration tax exemption/reduction for EVs — long-standing structural advantage",
+      "Fleet and leasing buyers dominate Danish market; company EV policies pull forward demand",
+      "Skoda Elroq top seller in March at 1,134 units — affordable volume models available",
+      "Fleet exceeds 596,953 EVs — 1 in 5 cars on Danish roads now electric",
+    ],
+    caveat:"Q1 2026 BEV share 80% per Mobility Denmark. March-specific share 77% from meremobil.dk.",
+    sources:[
+      { date:"2026-04-02", name:"Mobility Denmark", url:"https://mobility.dk/nyheder/elbiler-bag-vaekst-i-bilsalget-i-foerste-kvartal/", note:"Q1 2026 overview" },
+      { date:"2026-04-03", name:"meremobil.dk", url:"https://meremobil.dk/2026/04/disse-biler-koebte-danskerne-i-marts-2026/", note:"March model breakdown" },
+    ],
+  },
+  {
+    id:"italy", flag:"🇮🇹", name:"Italy", metric:"EV (BEV+PHEV)", metricCls:"nev",
+    swing:"up",
+    swingSummary:"March 2025 was a sharply negative month for Italy's EV market — coming off that low base, March 2026 swung to +89% YoY, well above any recent trailing average. Both BEV (+72%) and PHEV (+114%) accelerated together, suggesting a genuine demand shift rather than channel noise.",
+    sourceLabel:"UNRAE — published Apr 1",
+    stats:[
+      { val:"33,135", lbl:"March EV (BEV+PHEV)" },
+      { val:"+89.0%", lbl:"EV YoY", cls:"green" },
+      { val:"17.7%",  lbl:"EV share" },
+      { val:"185,367", lbl:"Total market (+7.6%)" },
+    ], statCols:4,
+    cyclic:[
+      "March had one extra working day vs March 2025 — a small base-effect tailwind",
+      "Surge of dealer self-registrations in the last three days of the month — channel push",
+      "Residual BEV incentive tail from late 2025 still feeding into early 2026 deliveries",
+    ],
+    structural:[
+      "Italy was the laggard of the major EU markets; March marks a meaningful catch-up",
+      "Q1 2026 EV sales: 38,000+ units, +65% — sustained acceleration, not a one-month spike",
+      "Top BEV: Fiat Panda; Leapmotor T03 also breaking into top sellers",
+      "PHEV growing faster than BEV (+114% vs +72%) — suggests buyers using PHEV as transition step",
+    ],
+    caveat:"BEV 16,137 (+71.7%, 8.6% share) + PHEV 16,998 (+114.5%, 9.1% share). Total electrified incl. hybrids: 32.4%. Working-day adjustment and dealer self-registrations partially inflate March numbers.",
+    sources:[
+      { date:"2026-04-01", name:"UNRAE statistics", url:"https://unrae.it/dati-statistici/immatricolazioni/tag/elettrico", note:"Official monthly data" },
+      { date:"2026-04-01", name:"Auto361", url:"https://www.auto361.it/immatricolazioni-auto-italia-marzo-2026-dati-analisi/", note:"Analysis with breakdown" },
+      { date:"2026-04-04", name:"CityNext", url:"https://citynext.it/2026/04/04/italia-le-immatricolazioni-auto-crescono-anche-a-marzo-il-merito-e-sempre-delle-ibride-ed-elettriche-i-numeri/", note:"Market commentary" },
+    ],
+  },
+  {
+    id:"spain", flag:"🇪🇸", name:"Spain", metric:"EV (BEV+PHEV)", metricCls:"nev",
+    swing:"watch",
+    swingSummary:"+48.8% YoY looks dramatic but Spain's March 2025 was a soft base. EV market share at 20.5% is actually slightly below the recent 3-month average — this is a continuation of an established climbing trajectory, not a breakthrough month. New Auto+ scheme replacing MOVES III likely supportive but hasn't yet broken the trend ceiling.",
+    sourceLabel:"ANFAC — published Apr 1",
+    stats:[
+      { val:"26,720", lbl:"March EV (BEV+PHEV)" },
+      { val:"+48.8%", lbl:"EV YoY", cls:"green" },
+      { val:"20.5%",  lbl:"EV share" },
+      { val:"+62.2%", lbl:"BEV+PHEV vol YoY", cls:"green" },
+    ], statCols:4,
+    cyclic:[
+      "Spanish pump prices up since Feb 28 — modest support for EV switching",
+      "Fiscal incentive tail from old MOVES III scheme still flowing into early-2026 deliveries",
+    ],
+    structural:[
+      "MOVES III incentive program ended; new Auto+ scheme launched under Auto 2030 Plan",
+      "Spain is on track to surpass 1 million cumulative electrified vehicles in 2026",
+      "Q1 2026 BEV+PHEV: 62,916 units (+58.3% YoY), 20.9% share",
+      "BEV share climb has been steady through 2025-26 — no policy break or pull-forward",
+    ],
+    caveat:"BEV 11,861 (+46.4%, 9.1% share) + PHEV 14,859 (+77.5%, 11.4% share). Q1 2026 total electrified: 62,916 units, +58.3% YoY.",
+    sources:[
+      { date:"2026-04-01", name:"ANFAC", url:"https://anfac.com/matriculaciones-vehiculos-electricos-e-hibridos-ccaa-marzo-2026/", note:"Official March release" },
+      { date:"2026-04-02", name:"Autovista24", url:"https://autovista24.autovistagroup.com/news/spain-sees-high-new-car-market-growth/", note:"Market analysis" },
+    ],
+  },
+  {
+    id:"netherlands", flag:"🇳🇱", name:"Netherlands", metric:"BEV", metricCls:"bev",
+    swing:"trend",
+    swingSummary:"Netherlands EV share fell sharply in early 2026 after the private lease subsidy (SEPP) was exhausted and company car tax advantages were reduced. This contraction is a known structural shift from policy withdrawal, not a new development this month.",
+    sourceLabel:"BOVAG / RDW — partial brand-level data",
+    stats:[
+      { val:"1,819",  lbl:"Tesla (confirmed)" },
+      { val:"~21%",   lbl:"Jan–Feb BEV share" },
+      { val:"−35%",   lbl:"Jan BEV YoY", cls:"red" },
+    ], statCols:3,
+    cyclic:[
+      "Fuel price rise providing some offset to recent EV demand weakness",
+      "Tesla Q1 2026: 2,662 units vs. 3,446 in Q1 2025 — still declining YoY",
+    ],
+    structural:[
+      "Private lease subsidy (SEPP) budget exhausted in 2025 — removal is primary driver of YoY decline",
+      "Company car bijtelling (benefit-in-kind) advantage for BEV reduced from Jan 2026",
+      "Dutch EV share fell sharply from ~35% in 2025 to ~21% in Jan–Feb 2026 — policy-driven contraction",
+    ],
+    caveat:"March 2026 aggregate total not yet confirmed. BOVAG/RDW full data pending. BEV share based on Jan–Feb 2026 trend.",
+    sources:[
+      { date:"2026-04-03", name:"eletric-vehicles.com", url:"https://eletric-vehicles.com/tesla/tesla-dutch-sales-jump-in-march-ahead-of-local-fsd-approval/", note:"Tesla NL March data" },
+      { date:"2026-02-01", name:"NL Times (Jan context)", url:"https://nltimes.nl/2026/02/01/dutch-new-car-sales-fall-13-january-electric-vehicle-registrations-plunge-35", note:"Jan '26 BEV −35% YoY" },
+    ],
+  },
+  {
+    id:"china", flag:"🇨🇳", name:"China", metric:"NEV (BEV+PHEV)", metricCls:"nev",
+    swing:"watch",
+    swingSummary:"The −21% retail YoY looks alarming but is a calendar artifact — Chinese New Year timing shifted the base. Wholesale was flat YoY, and the 47.3% penetration rate is consistent with the recent trajectory. No structural change this month.",
+    sourceLabel:"CPCA preliminary — Apr 2–3 (final CAAM due mid-April)",
+    stats:[
+      { val:"784K",   lbl:"Retail NEV" },
+      { val:"47.3%",  lbl:"Penetration", cls:"green" },
+      { val:"−21%*",  lbl:"Retail YoY", cls:"gold" },
+      { val:"1.12M",  lbl:"Wholesale NEV" },
+    ], statCols:4,
+    cyclic:[
+      "−21% retail YoY is a calendar artifact: CNY fell late Feb '26 vs early Feb '25 — March '25 base abnormally high",
+      "MoM: +69% retail, +55% wholesale — underlying demand healthy post-holiday",
+    ],
+    structural:[
+      "NEV mandate: automaker compliance pressure accelerating model launches",
+      "BYD dominance: 295,693 wholesale (~26% of NEV market); aggressive price competition",
+      "Battery cost decline enabling sub-100K RMB BEV mainstream; Tesla China 85,670 (+46% YoY)",
+      "No major subsidy change in Mar '26 — purchase subsidies ended Dec '22; trade-in support ongoing",
+    ],
+    caveat:"* Retail −21% YoY is calendar noise. Wholesale flat YoY is the cleaner signal.",
+    sources:[
+      { date:"2026-04-03", name:"CnEVPost (retail)", url:"https://cnevpost.com/2026/04/03/china-mar-nev-retail-sales-cpca-preliminary/", note:"CPCA retail prelim." },
+      { date:"2026-04-02", name:"CnEVPost (wholesale)", url:"https://cnevpost.com/2026/04/02/china-mar-nev-wholesale-cpca-estimates/", note:"CPCA wholesale est." },
+      { date:"2026-04-04", name:"Basenor (Tesla)", url:"https://www.basenor.com/blogs/news/tesla-china-march-2026-85-670-wholesale-deliveries-up-46", note:"Tesla China wholesale" },
+    ],
+  },
+  {
+    id:"korea", flag:"🇰🇷", name:"South Korea", metric:"BEV", metricCls:"bev",
+    swing:"up",
+    swingSummary:"Hyundai+Kia EV sales alone surged +144% YoY in March, the biggest single-month jump on record. Combined with surging imports (Tesla +330%, BYD entry), total Korea BEV market is roughly double last March's level. Aggressive price cuts (Kia ₩2.8M off EV5, ₩3M off EV6) the dominant short-term catalyst.",
+    sourceLabel:"KAIDA + Hyundai/Kia disclosures — published Apr 1–6",
+    stats:[
+      { val:"24,444", lbl:"Hyundai+Kia EV (+144% YoY)", cls:"green" },
+      { val:"11,130", lbl:"Tesla imports (+330% YoY)" },
+      { val:"~37K+",  lbl:"Approx total BEV", cls:"green" },
+      { val:"1,664",  lbl:"BYD imports (vs 10 a yr ago)" },
+    ], statCols:4,
+    cyclic:[
+      "Aggressive Hyundai/Kia price cuts (₩2.8M off EV5 LR, ₩3M off EV6, up to ₩6.1M benefits on Ioniq 5/6)",
+      "Tesla end-of-quarter delivery push — first time any imported brand exceeded 10,000 units in a month",
+      "Fuel price rise (₩1,819/L, +7.6% since Feb 28)",
+    ],
+    structural:[
+      "EV subsidy restructured to favour domestic content — Hyundai/Kia benefit; imports relatively penalised",
+      "BYD market entry formalised: 1,664 units in March vs. 10 a year ago — distribution operational",
+      "Top sellers: Kia PV5 (3,967), Kia EV3 (3,469), Hyundai Ioniq 5 (3,227)",
+      "March is normally a quarter-end push month; combined with price cuts created the surge",
+    ],
+    caveat:"Combined estimate ~37K BEV is approximate — adds Hyundai+Kia 24,444 + KAIDA imports ~16K. Full KAMA total (incl. Genesis, Renault Korea, GM Korea) pending. Note: total Hyundai+Kia domestic auto sales were down 13.7% YoY due to fewer business days.",
+    sources:[
+      { date:"2026-04-03", name:"Korea Times (KAIDA)", url:"https://www.koreatimes.co.kr/economy/20260403/imported-car-sales-jump-346-in-march-on-strong-ev-demand", note:"Imported car totals" },
+      { date:"2026-04-01", name:"OurAutoWorld (Hyundai+Kia)", url:"https://www.ourautoworld.com/archives/21859", note:"Hyundai+Kia EV +144% YoY" },
+      { date:"2026-04-06", name:"YourNews (Tesla)", url:"https://www.yournews.com/2026/04/06/tesla-korea-registrations-surge-330-yoy/", note:"Tesla +330% YoY" },
+    ],
+  },
+  {
+    id:"australia", flag:"🇦🇺", name:"Australia", metric:"BEV", metricCls:"bev",
+    swing:"up",
+    swingSummary:"Both YoY growth and market share hit levels well above any trailing benchmark — share nearly doubled vs. the same month last year. The fuel crisis is the dominant catalyst, with no structural policy change this month.",
+    sourceLabel:"FCAI VFACTS — published Apr 7",
+    stats:[
+      { val:"15,839", lbl:"March BEV (record)" },
+      { val:"+94.7%", lbl:"YoY", cls:"green" },
+      { val:"14.6%",  lbl:"BEV share (record)", cls:"green" },
+      { val:"8,215",  lbl:"March PHEV" },
+    ], statCols:4,
+    cyclic:[
+      "Petrol up ~42.9% since Feb 28 — diesel past A$3.00/L, 91-octane past A$2.50/L",
+      "EVs are the sole growth segment — total market down 3.3% YoY while BEV up 88.9%",
+    ],
+    structural:[
+      "NVES (New Vehicle Efficiency Standard) effective Jan 2025 — forces manufacturers to supply more EVs or pay penalties",
+      "Fringe Benefits Tax (FBT) exemption for employer-provided EVs still in place",
+      "BYD and Kia entered overall top 3 brands — affordable BEV model range expanding",
+      "Combined BEV+PHEV share: 22.9% of total market",
+    ],
+    caveat:"Total market 105,058 (-3.3% YoY). PHEV 8,215 (+18.5% YoY). Tesla 3,485 units (Model Y 2,818). BEV +94.7% YoY. Previous BEV share record was 7.5% (Mar 2025).",
+    sources:[
+      { date:"2026-04-07", name:"FCAI", url:"https://www.fcai.com.au/evs-surge-as-buyers-respond-to-fuel-uncertainty/", note:"Official VFACTS release" },
+      { date:"2026-04-07", name:"CarExpert", url:"https://www.carexpert.com.au/car-news/vfacts-march-2026-market-down-but-ev-sales-jump-kia-and-byd-enter-top-three", note:"Analysis + brand ranking" },
+      { date:"2026-04-07", name:"The Driven", url:"https://thedriven.io/2026/04/07/australian-electric-vehicle-sales-by-month-in-2026-by-model-and-by-brand/", note:"EV breakdown by model" },
+      { date:"2026-04-07", name:"WhichCar", url:"https://www.whichcar.com.au/news/vfacts-march-2026-ev-sales-surge-record-market-share-demand-accelerates", note:"Record share detail" },
+    ],
+  },
+  {
+    id:"india", flag:"🇮🇳", name:"India", metric:"BEV (e4W)", metricCls:"bev",
+    swing:"trend",
+    swingSummary:"India's EV share has been climbing steadily for over a year, roughly doubling from low-single-digit levels. March at 5.1% continues this trajectory — amplified by the fiscal year-end rush (FY2026 closes Mar 31). Fuel prices are not a factor here as the government held pump prices flat.",
+    sourceLabel:"Vahan / FADA — Apr 1–3",
+    stats:[
+      { val:"22,315",  lbl:"March e4W (cars)" },
+      { val:"5.1%",    lbl:"e4W share" },
+      { val:"+51.7%",  lbl:"MoM (Feb→Mar)", cls:"green" },
+      { val:"191,067", lbl:"March e2W" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel prices NOT a driver — govt held pump prices flat via ₹10/L excise cut (Mar 27)",
+      "March is fiscal year-end (FY2026 closes Mar 31) — dealers clear stock, consumers pull forward",
+    ],
+    structural:[
+      "PLI scheme beneficiaries (Tata, Mahindra) ramping production volume",
+      "FY2026 full-year e4W surpassed prior year by 91.3% — structural shift underway",
+      "No YoY March comparison available; MoM only (+51.7%)",
+    ],
+    caveat:"² March YoY not reported. Total EVs all types = 279,530. FY2026 total: 2.45M across all segments.",
+    sources:[
+      { date:"2026-04-02", name:"EVreporter", url:"https://evreporter.com/indias-electric-vehicle-sales-trend-march-2026/", note:"Monthly sales trend" },
+      { date:"2026-04-02", name:"e-vehicleinfo", url:"https://e-vehicleinfo.com/electric-car-sales-march-2026/", note:"e4W model breakdown" },
+      { date:"2026-04-03", name:"Autocar Pro (FADA)", url:"https://autocarpro.in/analysis-sales/ev-sales-in-india-surpass-245-million-units-in-fy2026-all-4-segments-register-double-digit-growth-131974", note:"FY2026 full-year" },
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PENDING TABLE
+// ─────────────────────────────────────────────────────────────────────────────
+const PENDING = [
+  // Key countries
+  { flag:"🇺🇸", country:"US",          source:"Argonne / Cox EV Monitor",   expected:"Mid-April",         latest:"Q1 2026: 212,600 BEV (−28% YoY, ~5.8% share) — post-incentive expiry. March-specific not yet released." },
+  { flag:"🇪🇺", country:"EU / Europe", source:"ACEA",                       expected:"Mid-to-late April", latest:"Jan–Feb YTD: 312,369 BEV (18.8% share, +23.7% YoY)" },
+  { flag:"🇨🇦", country:"Canada",      source:"Electric Autonomy / S&P",    expected:"~June 2026 (quarterly)", latest:"Q4 2025: ZEV 12.1% share, BEV 8.0%. New EVAP ($5K) launched Mar '26" },
+  { flag:"🇯🇵", country:"Japan",       source:"JADA / JAMA",                expected:"Mid-April",         latest:"FY2025: ~93,584 BEV (−7.7% YoY, ~3.1% share). Strongly HEV-dominant" },
+  // Emerging markets
+  { flag:"🇹🇭", country:"Thailand",    source:"TAI / EVAT",                 expected:"~Apr 20",           latest:"Feb '26: 6,168 BEV (−18.6% YoY) — EV3.0 subsidy expired. Jan anomaly: ~44K (deadline rush)" },
+  { flag:"🇧🇷", country:"Brazil",      source:"ABVE / ANFAVEA",             expected:"~Mid-April",        latest:"Jan '26: BEV 8,262 (5.1%, +122% YoY) | PHEV 8,260 (5.1%)" },
+  { flag:"🇲🇽", country:"Mexico",      source:"AMIA",                       expected:"~Apr 14",           latest:"FY2025: BEV 43,358 (+39%), PHEV 52,851 (+38%). BEV share ~1.6%" },
+  { flag:"🇻🇳", country:"Vietnam",     source:"VAMA (no EV breakdown)",     expected:"No EV data from VAMA", latest:"Jan '26 total: 58,919. VinFast ~27% share (non-VAMA member)" },
+  { flag:"🇵🇭", country:"Philippines", source:"CAMPI",                      expected:"~Apr 21",           latest:"Jan–Feb YTD: BEV 594 (+77%), PHEV 556 (+1,083%)" },
+  { flag:"🇮🇩", country:"Indonesia",   source:"GAIKINDO",                   expected:"~Apr 20",           latest:"Feb '26: 5,334 BEV wholesale. FY2025: 103,931 BEV (+141%)" },
+  { flag:"🇸🇬", country:"Singapore",   source:"LTA",                        expected:"~Apr 15",           latest:"2025 BEV share ~20%. COE system makes EVs cost-competitive" },
+  { flag:"🇪🇹", country:"Ethiopia",    source:"—",                          expected:"No standardized source", latest:"~40% of new car imports are EVs (Chinese BEV). No official monthly tracker" },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────────────────────
+function renderStatus() {
+  const pillMap = { published:'pill-ok', partial:'pill-partial', pending:'pill-pending' };
+  const pillLabel = { published:'Published', partial:'Partial', pending:'Pending' };
+  document.getElementById('status-tbody').innerHTML = STATUS.map(r => {
+    const yoyHtml = r.yoyDir==='pos' ? `<span class="yoy-pos">${r.yoy}</span>`
+                  : r.yoyDir==='neg' ? `<span class="yoy-neg">${r.yoy}</span>`
+                  : `<span class="yoy-na">${r.yoy}</span>`;
+    const mCls = r.metric.startsWith('NEV') ? 'nev' : r.metric.includes('+') ? 'nev' : r.metric==='BEV' || r.metric.startsWith('BEV') ? 'bev' : '';
+    const swingHtml = r.swing === 'up' ? '<span class="swing-icon swing-up">▲</span>'
+                    : r.swing === 'down' ? '<span class="swing-icon swing-down">▼</span>'
+                    : r.swing === 'watch' ? '<span class="swing-icon swing-watch">●</span>'
+                    : '';
+    return `<tr class="${r.id ? 'has-card' : ''}" ${r.id ? `onclick="scrollToCard('${r.id}')" title="Click for detail"` : ''}>
+      <td>${r.flag} ${r.country}</td>
+      <td><span class="pill ${pillMap[r.status]}">${pillLabel[r.status]}</span></td>
+      <td>${r.metric !== '—' ? `<span class="metric-tag ${mCls}">${r.metric}</span>` : '<span style="color:#bbb">—</span>'}</td>
+      <td>${r.sales}</td>
+      <td>${r.share}</td>
+      <td>${yoyHtml}</td>
+      <td>${swingHtml}</td>
+      <td style="color:#aaa;font-size:11px">${r.source}</td>
+    </tr>`;
+  }).join('');
+}
+
+function scrollToCard(id) {
+  const el = document.getElementById('card-' + id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function renderCards() {
+  document.getElementById('card-grid').innerHTML = DETAIL.map(d => {
+    const statsHtml = `<div class="stat-row cols-${d.statCols}">${d.stats.map(s =>
+      `<div class="stat"><div class="stat-val ${s.cls||''}">${s.val}</div><div class="stat-lbl">${s.lbl}</div></div>`
+    ).join('')}</div>`;
+    const sourcesHtml = d.sources.length ? `
+      <div class="sources-section">
+        <div class="sources-label">Sources</div>
+        <table class="sources-table">${d.sources.map(s =>
+          `<tr><td>${s.date}</td><td><a href="${s.url}" target="_blank" rel="noopener">${s.name}</a></td><td>${s.note}</td></tr>`
+        ).join('')}</table>
+      </div>` : '';
+    const flaggedCls = d.swing === 'up' ? ' flagged' : d.swing === 'down' ? ' flagged-down' : d.swing === 'watch' ? ' flagged-watch' : '';
+    const swingLabel = d.swing === 'up' ? '▲ Notable swing' : d.swing === 'down' ? '▼ Notable drop' : d.swing === 'watch' ? '● Monitoring' : d.swing === 'trend' ? 'Trend context' : '';
+    const swingCls = d.swing === 'down' ? ' down' : d.swing === 'watch' ? ' watch' : d.swing === 'trend' ? ' trend' : '';
+    const swingBanner = d.swingSummary
+      ? `<div class="swing-banner${swingCls}"><strong>${swingLabel}:</strong> ${d.swingSummary}</div>`
+      : '';
+    return `
+      <div class="dcard${flaggedCls}" id="card-${d.id}">
+        <div class="dcard-head">
+          <div class="dcard-country">
+            <span class="flag">${d.flag}</span>
+            <div>
+              <div class="dcard-name">${d.name}</div>
+              <div class="dcard-source-line">${d.sourceLabel}</div>
+              <div class="dcard-metric"><span class="metric-tag ${d.metricCls}">${d.metric}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="dcard-body">
+          ${swingBanner}
+          ${statsHtml}
+          <div class="drivers">
+            <div class="driver-box cyclic">
+              <div class="driver-title">Short-term factors</div>
+              <ul class="driver-items">${d.cyclic.map(t=>`<li>${t}</li>`).join('')}</ul>
+            </div>
+            <div class="driver-box structural">
+              <div class="driver-title">Structural changes</div>
+              <ul class="driver-items">${d.structural.map(t=>`<li>${t}</li>`).join('')}</ul>
+            </div>
+          </div>
+          ${d.caveat ? `<div class="dcard-caveat">${d.caveat}</div>` : ''}
+          ${sourcesHtml}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderPending() {
+  document.getElementById('pending-tbody').innerHTML = PENDING.map(p => `
+    <tr>
+      <td>${p.flag} ${p.country}</td>
+      <td style="color:#aaa;font-size:12px">${p.source}</td>
+      <td style="font-size:12px">${p.expected}</td>
+      <td style="font-size:12px">${p.latest}</td>
+    </tr>`).join('');
+}
+
+// ── NEWS FEED ─────────────────────────────────────────────────────────────────
+let allNews = [];
+let sortCol = 'date';
+let sortDir = 'desc';
+
+const catCls = c => ({
+  'Official Data':'cat-official','OEM Report':'cat-oem','Milestone':'cat-milestone',
+  'Quarterly':'cat-quarterly','Market Trend':'cat-trend','Sales Data':'cat-sales'
+}[c] || 'cat-sales');
+
+async function loadNews() {
+  try {
+    const r = await fetch('news.json');
+    allNews = await r.json();
+    allNews.forEach(n => { if (!n.subcategory) n.subcategory = 'Sales Data'; });
+
+    // Populate country filter
+    const countries = [...new Set(allNews.map(n=>n.country))].sort();
+    const cf = document.getElementById('country-filter');
+    countries.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; cf.appendChild(o); });
+
+    // Populate category filter
+    const cats = [...new Set(allNews.map(n=>n.subcategory))].sort();
+    const catf = document.getElementById('cat-filter');
+    cats.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; catf.appendChild(o); });
+
+    cf.addEventListener('change', renderNews);
+    catf.addEventListener('change', renderNews);
+
+    // Sortable headers
+    document.querySelectorAll('#news-table th.sortable').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.col;
+        if (sortCol === col) { sortDir = sortDir === 'desc' ? 'asc' : 'desc'; }
+        else { sortCol = col; sortDir = col === 'date' ? 'desc' : 'asc'; }
+        document.querySelectorAll('#news-table th.sortable').forEach(h => h.classList.remove('sort-asc','sort-desc'));
+        th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        renderNews();
+      });
+    });
+    // Set initial sort indicator
+    document.querySelector('#news-table th[data-col="date"]').classList.add('sort-desc');
+
+    renderNews();
+  } catch(e) {
+    document.getElementById('news-body').innerHTML='<tr><td colspan="6" style="padding:16px;color:#aaa;text-align:center">News feed unavailable.</td></tr>';
+  }
+}
+
+function renderNews() {
+  const cf = document.getElementById('country-filter').value;
+  const catf = document.getElementById('cat-filter').value;
+  let items = [...allNews];
+  if (cf !== 'all') items = items.filter(n => n.country === cf);
+  if (catf !== 'all') items = items.filter(n => n.subcategory === catf);
+
+  // Sort
+  items.sort((a, b) => {
+    const va = (a[sortCol] || '').toLowerCase();
+    const vb = (b[sortCol] || '').toLowerCase();
+    const cmp = va < vb ? -1 : va > vb ? 1 : 0;
+    return sortDir === 'asc' ? cmp : -cmp;
+  });
+
+  document.getElementById('news-count').textContent = `${items.length} article${items.length !== 1 ? 's' : ''}`;
+  const tbody = document.getElementById('news-body');
+  if (!items.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;color:#aaa;text-align:center">No results.</td></tr>'; return; }
+  tbody.innerHTML = items.map(n => {
+    const sub = n.subcategory || 'Sales Data';
+    return `<tr>
+      <td>${n.date}</td>
+      <td>${n.country}</td>
+      <td><span class="cat-badge ${catCls(sub)}">${sub}</span></td>
+      <td>${n.headline}</td>
+      <td>${n.data_point || ''}</td>
+      <td>${n.source_url ? `<a href="${n.source_url}" target="_blank" rel="noopener">${n.source_name}</a>` : n.source_name}</td>
+    </tr>`;
+  }).join('');
+}
+
+renderStatus();
+renderCards();
+renderPending();
+loadNews();
+</script>
+</body>
+</html>

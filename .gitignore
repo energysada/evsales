@@ -1,0 +1,13 @@
+# Mac
+.DS_Store
+
+# Editor / R
+.Rhistory
+~$*.xlsx
+
+# Wrangler local cache
+.wrangler/
+
+# Working data — these are NOT for public exposure
+# yoy.xlsx is proprietary BNEF benchmark data
+*.xlsx
