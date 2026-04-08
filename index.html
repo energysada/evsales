@@ -385,7 +385,8 @@
 // DAILY UPDATES — first appearance of each country's March BEV data
 // ─────────────────────────────────────────────────────────────────────────────
 const DAILY = [
-  { date: "2026-04-08", country: "🇦🇺🇳🇿 AU/NZ", isNew: true,  summary: "Australia + NZ bulletproof as dark-green: Tesla's cheaper Model Y/3 Standard versions confirmed NOT coming to AU/NZ (CarExpert). Rules out the European Tesla-recovery confounder. Combined with fuel +43% (AU) and +30% petrol / +74% diesel (NZ), both are clean fuel-shock pops.", source: "CarExpert", url: "https://www.carexpert.com.au/car-news/2026-tesla-model-y-standard-cut-price-electric-suv-and-cheaper-model-3-revealed" },
+  { date: "2026-04-08", country: "🌏 APAC add",  isNew: true,  summary: "Added 4 APAC markets to tracker: Malaysia (BEV 4,717 +58.5%, orange/decel — Q1 was +113%), Taiwan (Tesla Model Y #1 in whole market at 4,540, yellow — Tesla recovery story), Hong Kong (pending, ~152K cumulative EVs), Nepal (partial, Middle East crisis driving imports).", source: "JPJ / DigiTimes", url: "https://soyacincau.com/2026/04/04/malaysia-jpj-ev-registration-march-2026/" },
+  { date: "2026-04-08", country: "🇦🇺🇳🇿 AU/NZ", isNew: true,  summary: "Australia reclassified light-green: Tesla AU DID cut prices ($4-5K off Model Y/3 base + trade-in bonuses). NZ stays dark green — petrol share collapsed 16pp (44.3%→28.1%) even as total market grew 20%, proving direct ICE→EV substitution (the fuel-shock signature).", source: "CarExpert / NZTA", url: "https://www.carexpert.com.au/car-news/tesla-cuts-australian-prices-by-up-to-3400" },
   { date: "2026-04-08", country: "🇺🇸 US",       isNew: true,  summary: "First US estimate added — derived from Cox Automotive's published Q1 2026 BEV total (212,600). Implies March BEV YoY around −27%, slightly improving from the recent trend. Stabilizing in a post-incentive range. Argonne official monthly still pending.", source: "Cox Automotive", url: "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/" },
   { date: "2026-04-08", country: "🇰🇷 S. Korea", isNew: false, summary: "Earlier-attributed Hyundai+Kia data corrected — that was Feb 2026, not March. Korea March still partial: only KAIDA imports confirmed.", source: "(correction)", url: null },
   { date: "2026-04-07", country: "🇩🇪 Germany",  isNew: false, summary: "KBA: BEV 70,663 (+63.2% YoY), 24.0% share. PHEV 29,996. First green flag.", source: "KBA", url: "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html" },
@@ -426,6 +427,10 @@ const STATUS = [
   { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up2" },
   { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"+43.6%",  yoyDir:"pos", source:"Vahan / FADA",             id:"india", swing:"decel" },
   // Emerging markets
+  { flag:"🇲🇾", country:"Malaysia",     status:"published", metric:"BEV",      sales:"4,717",       share:"6.95%", yoy:"+58.5%", yoyDir:"pos", source:"JPJ / MAA",                    id:"malaysia", swing:"decel" },
+  { flag:"🇹🇼", country:"Taiwan",       status:"partial",   metric:"BEV",      sales:"~3,500 est",  share:"~9%",   yoy:"+123%",  yoyDir:"pos", source:"MOTC (Tesla-led)",             id:"taiwan", swing:"watch" },
+  { flag:"🇭🇰", country:"Hong Kong",    status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Transport Dept",                id:null        },
+  { flag:"🇳🇵", country:"Nepal",        status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Dept of Customs",               id:null        },
   { flag:"🇹🇭", country:"Thailand",     status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"TAI / EVAT",                    id:null        },
   { flag:"🇧🇷", country:"Brazil",       status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ABVE / ANFAVEA",                id:null        },
   { flag:"🇲🇽", country:"Mexico",       status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"AMIA",                          id:null        },
@@ -829,6 +834,60 @@ const DETAIL = [
     ],
   },
   {
+    id:"malaysia", flag:"🇲🇾", name:"Malaysia", metric:"BEV", metricCls:"bev",
+    swing:"decel",
+    swingSummary:"BEV +58.5% YoY in March — strong in absolute terms but a clear deceleration from Q1 2026 +113.7% and from Malaysia's 2025 full-year +109% pace. The CBU tax holiday for EVs ended late 2025, and Malaysia's explosive 2024-25 growth was driven by that incentive. Orange: still positive, but the post-tax-holiday normalization is the story, not a new surge.",
+    sourceLabel:"JPJ / MAA — published Apr 4",
+    stats:[
+      { val:"4,717",  lbl:"March BEV" },
+      { val:"+58.5%", lbl:"BEV YoY", cls:"gold" },
+      { val:"6.95%",  lbl:"BEV share" },
+      { val:"14,591", lbl:"Q1 2026 (+113.7%)" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel prices rising on Middle East conflict — modest support but Malaysia subsidizes fuel (RON95 still at RM2.05)",
+      "Total market −12% YoY in March (67,846 units) — so BEV growth is real demand not market-wide lift",
+    ],
+    structural:[
+      "CBU tax holiday for EVs ENDED late 2025 — Malaysia's explosive 2024-25 growth (+109% full year) was largely incentive-driven; Q1 2026 still +114% but decelerating",
+      "Proton e.MAS 5 is the #1 BEV (6,701 Q1 units) — affordable domestic launch drove 2026 momentum",
+      "BYD Atto 3 #2, Proton e.MAS 7 #3 — price-competitive models driving broader adoption",
+      "Government continues to push EV infrastructure; local assembly incentives remain",
+    ],
+    caveat:"Total market 67,846 (−12% YoY). Malaysia subsidizes pump prices so fuel-crisis contagion is muted vs AU/NZ. The deceleration from +113.7% Q1 to +58.5% March suggests the pull-forward from the tax holiday extension expiry is working through.",
+    sources:[
+      { date:"2026-04-04", name:"soyacincau (JPJ data)", url:"https://soyacincau.com/2026/04/04/malaysia-jpj-ev-registration-march-2026/", note:"JPJ March 2026 registration breakdown" },
+      { date:"2026-01-20", name:"paultan.org (MAA 2025)", url:"https://paultan.org/2026/01/20/maa-ev-and-hybrid-sales-2025/", note:"2025 full-year MAA data (+109% YoY)" },
+    ],
+  },
+  {
+    id:"taiwan", flag:"🇹🇼", name:"Taiwan", metric:"BEV", metricCls:"bev",
+    swing:"watch",
+    swingSummary:"Tesla Model Y alone was the top-selling vehicle in Taiwan in March (4,540 units), with Tesla growing +123% YTD YoY. This is a Tesla-recovery story driven by the updated Model Y and Q1 delivery push — not a fuel-shock or broad-based EV surge. Taiwan overall EV share still ~9% (low base). Yellow: structural Tesla recovery, not fuel-attributable.",
+    sourceLabel:"MOTC / DigiTimes / TeslaNorth — published Apr 2",
+    stats:[
+      { val:"4,540",  lbl:"Tesla Model Y", cls:"green" },
+      { val:"+123%",  lbl:"Tesla YTD YoY", cls:"green" },
+      { val:"~9%",    lbl:"EV share (low base)" },
+      { val:"39,318", lbl:"Total market (+78% MoM)" },
+    ], statCols:4,
+    cyclic:[
+      "Total market +78% MoM — end-of-quarter Tesla delivery push lifted the whole market",
+      "Fuel prices stable — Taiwan subsidizes CPC fuel, so no meaningful fuel-crisis contagion",
+    ],
+    structural:[
+      "Tesla rolled out updated Model Y globally in late 2025 — Taiwan is riding that recovery",
+      "Tesla captured 58.1% of Taiwan's EV market in March — overwhelming single-brand concentration",
+      "Luxgen n7 (domestic BEV) is the main local challenger but small volumes vs Tesla",
+      "Low overall EV penetration (~9%) means Taiwan is early-stage, not saturated",
+    ],
+    caveat:"Taiwan data is Tesla-centric — Model Y numbers are confirmed, broader BEV total is estimated at ~3,500+ (Tesla alone + smaller players). Full MOTC monthly breakdown not in English-language sources.",
+    sources:[
+      { date:"2026-04-02", name:"DigiTimes", url:"https://www.digitimes.com/news/a20260402PD209/taiwan-market-tesla-2026-sales.html", note:"Taiwan market March + Tesla surge" },
+      { date:"2026-04-02", name:"TeslaNorth", url:"https://teslanorth.com/2026/04/02/tesla-model-y-dominates-taiwan-market-as-top-selling-vehicle-for-march/", note:"Model Y top of overall Taiwan market" },
+    ],
+  },
+  {
     id:"nz", flag:"🇳🇿", name:"New Zealand", metric:"BEV+PHEV", metricCls:"nev",
     swing:"up",
     swingSummary:"Smoking-gun fuel-shock case: petrol share DROPPED 16.2pp (44.3% → 28.1%) in a single month while BEV+PHEV jumped 23.3pp — direct demand substitution from ICE to EV. Absolute petrol units fell ~900 even as the total passenger market grew 20%. Chinese brand entry (Dongfeng, Leapmotor, Omoda, Zeekr) explained the supply side, but the petrol collapse proves the demand shift. Combined with petrol +30% / diesel +74% at the pump, this is the cleanest fuel-shock signal in the tracker.",
@@ -877,6 +936,8 @@ const PENDING = [
   { flag:"🇻🇳", country:"Vietnam",     source:"VAMA (no EV breakdown)",     expected:"No EV data from VAMA", latest:"Jan '26 total: 58,919. VinFast ~27% share (non-VAMA member)" },
   { flag:"🇵🇭", country:"Philippines", source:"CAMPI",                      expected:"~Apr 21",           latest:"Jan–Feb YTD: BEV 594 (+77%), PHEV 556 (+1,083%)" },
   { flag:"🇮🇩", country:"Indonesia",   source:"GAIKINDO",                   expected:"~Apr 20",           latest:"Feb '26: 5,334 BEV wholesale. FY2025: 103,931 BEV (+141%)" },
+  { flag:"🇭🇰", country:"Hong Kong",   source:"Transport Department",       expected:"~Apr 15",           latest:"Jan '26 cumulative: ~152K EVs (16.8% of fleet). H1 2025: ~64% of new private cars were EV" },
+  { flag:"🇳🇵", country:"Nepal",       source:"Dept of Customs",            expected:"Monthly via customs data", latest:"Jul 25–Mar 26 imports: 16,701 EVs vs 22,907 fossil fuel. #2 globally in new EV car sales share. Middle East crisis accelerating demand" },
   { flag:"🇸🇬", country:"Singapore",   source:"LTA",                        expected:"~Apr 15",           latest:"2025 BEV share ~20%. COE system makes EVs cost-competitive" },
   { flag:"🇪🇹", country:"Ethiopia",    source:"—",                          expected:"No standardized source", latest:"~40% of new car imports are EVs (Chinese BEV). No official monthly tracker" },
 ];

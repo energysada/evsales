@@ -168,6 +168,18 @@
     "key_country": true
   },
   {
+    "date": "2026-04-06",
+    "region": "Asia-Pacific",
+    "country": "Nepal",
+    "category": "Market Data",
+    "subcategory": "Market Trend",
+    "headline": "Kathmandu Post: Nepal EV imports surge on Middle East fuel crisis — 16,701 EVs vs 22,907 fossil fuel vehicles",
+    "data_point": "Jul 2025–Mar 2026 imports: 16,701 EVs (Rs 41.23B) vs 22,907 ICE (Rs 50.88B) | Nepal #2 globally in new EV car sales share | Middle East crisis reshaping market",
+    "source_name": "Kathmandu Post",
+    "source_url": "https://kathmandupost.com/money/2026/04/06/ev-demand-in-nepal-is-growing-but-so-is-cost",
+    "key_country": false
+  },
+  {
     "date": "2026-04-05",
     "region": "Asia-Pacific",
     "country": "Australia",
@@ -286,6 +298,18 @@
     "source_name": "Basenor (Tesla)",
     "source_url": "https://www.basenor.com/blogs/news/tesla-china-march-2026-85-670-wholesale-deliveries-up-46",
     "key_country": true
+  },
+  {
+    "date": "2026-04-04",
+    "region": "Asia-Pacific",
+    "country": "Malaysia",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "JPJ/MAA: Malaysia March 2026 BEV 4,717 (+58.5% YoY), 6.95% share — Q1 +113.7%",
+    "data_point": "March BEV 4,717 (+58.5% YoY, 6.95% share) | Total market 67,846 (−12% YoY) | Q1 BEV 14,591 (+113.7%) | Proton e.MAS 5 top (6,701 Q1)",
+    "source_name": "soyacincau (JPJ data)",
+    "source_url": "https://soyacincau.com/2026/04/04/malaysia-jpj-ev-registration-march-2026/",
+    "key_country": false
   },
   {
     "date": "2026-04-03",
@@ -538,6 +562,18 @@
     "source_name": "e-vehicleinfo",
     "source_url": "https://e-vehicleinfo.com/electric-car-sales-march-2026/",
     "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Asia-Pacific",
+    "country": "Taiwan",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "Taiwan: Tesla Model Y top-selling vehicle in March 2026 — 4,540 units, Tesla +123% YTD YoY",
+    "data_point": "Tesla Model Y 4,540 (overall #1) | Total market 39,318 (+78% MoM) | EV ~9% share | Tesla 58.1% of EV market",
+    "source_name": "DigiTimes",
+    "source_url": "https://www.digitimes.com/news/a20260402PD209/taiwan-market-tesla-2026-sales.html",
+    "key_country": false
   },
   {
     "date": "2026-04-01",
