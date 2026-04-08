@@ -768,6 +768,18 @@
     "key_country": true
   },
   {
+    "date": "2026-04-01",
+    "region": "Asia-Pacific",
+    "country": "New Zealand",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "MIA CEO Aimee Wiley: 'Demand for EVs has increased rapidly as rising fuel costs are influencing purchasing decisions'",
+    "data_point": "MIA official attribution of NZ EV surge to fuel-cost shock. March BEV 2,303 (+286% YoY), PHEV 1,107 (+273%), plug-in share 10.6% to 33.9%. Petrol share collapsed 16.2pp.",
+    "source_name": "EVs & Beyond NZ",
+    "source_url": "https://evsandbeyond.co.nz/ev-demand-surges-as-fuel-costs-drive-buyer-shift/",
+    "key_country": true
+  },
+  {
     "date": "2026-03-31",
     "region": "North America",
     "country": "US",
