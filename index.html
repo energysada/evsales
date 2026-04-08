@@ -92,6 +92,36 @@
       background: #f5f5f5; border-left-color: #aaa;
       color: #555;
     }
+
+    /* Daily updates feed */
+    .daily-feed {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .daily-feed table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .daily-feed thead th {
+      background: #1a1a2e; color: #aab;
+      padding: 9px 12px; text-align: left;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .daily-feed td {
+      padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top;
+    }
+    .daily-feed tr:last-child td { border-bottom: none; }
+    .daily-feed tr:hover { background: #fafbfd; }
+    .daily-feed td.feed-date { white-space: nowrap; width: 95px; color: #666; font-weight: 600; }
+    .daily-feed td.feed-country { width: 130px; font-weight: 600; }
+    .daily-feed td.feed-summary { color: #444; font-size: 12px; line-height: 1.5; }
+    .daily-feed td.feed-source { width: 140px; }
+    .daily-feed td.feed-source a { color: #2f5496; text-decoration: none; font-size: 11px; }
+    .daily-feed td.feed-source a:hover { text-decoration: underline; }
+    .daily-feed .new-badge {
+      display: inline-block; font-size: 9px; font-weight: 700;
+      background: #c00000; color: #fff; padding: 1px 5px;
+      border-radius: 3px; margin-left: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px; vertical-align: middle;
+    }
     .swing-banner strong { font-weight: 700; }
 
     .metric-tag {
@@ -265,7 +295,17 @@
 
 <main>
 
-  <div class="section-label">Data availability</div>
+  <div class="section-label">Daily updates — first BEV data drops</div>
+  <div class="daily-feed">
+    <table>
+      <thead><tr>
+        <th>Date</th><th>Country</th><th>What dropped</th><th>Source</th>
+      </tr></thead>
+      <tbody id="daily-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-label" style="margin-top:28px;">Data availability</div>
   <div class="status-wrap">
     <table>
       <thead><tr>
@@ -321,6 +361,25 @@
 
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
+// DAILY UPDATES — first appearance of each country's March BEV data
+// ─────────────────────────────────────────────────────────────────────────────
+const DAILY = [
+  { date: "2026-04-08", country: "🇰🇷 S. Korea", isNew: false, summary: "Earlier-attributed Hyundai+Kia data corrected — that was Feb 2026, not March. Korea March still partial: only KAIDA imports confirmed.", source: "(correction)", url: null },
+  { date: "2026-04-07", country: "🇩🇪 Germany",  isNew: false, summary: "KBA: BEV 70,663 (+63.2% YoY), 24.0% share. PHEV 29,996. First green flag.", source: "KBA", url: "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html" },
+  { date: "2026-04-07", country: "🇬🇧 UK",       isNew: false, summary: "SMMT: BEV 86,120 (+23.2% YoY), 22.6% share. All-time monthly BEV record.", source: "SMMT", url: "https://www.smmt.co.uk/best-month-ever-for-new-ev-registrations-as-market-grows-in-all-important-plate-change-march/" },
+  { date: "2026-04-07", country: "🇦🇺 Australia", isNew: false, summary: "FCAI VFACTS: BEV 15,839 (+115.4% YoY), 15.1% share. Record share, fuel crisis catalyst.", source: "FCAI", url: "https://www.fcai.com.au/evs-surge-as-buyers-respond-to-fuel-uncertainty/" },
+  { date: "2026-04-04", country: "🇫🇷 France",   isNew: false, summary: "AVEM/Min. de l'Écologie: BEV 49,406 (+65.4% YoY), 28.5% share. Fleet/leasing reform driving.", source: "AVEM", url: "https://www.avem.fr/2026/04/04/porte-par-les-immatriculations-de-vehicules-electriques-le-marche-automobile-repart-a-la-hausse-en-mars/" },
+  { date: "2026-04-03", country: "🇩🇰 Denmark",  isNew: false, summary: "Mobility Denmark: BEV 14,616 (+57.3% YoY), 77% share. Skoda Elroq top seller.", source: "meremobil.dk", url: "https://meremobil.dk/2026/04/disse-biler-koebte-danskerne-i-marts-2026/" },
+  { date: "2026-04-03", country: "🇨🇳 China",    isNew: false, summary: "CPCA preliminary: NEV retail 784K (−21% YoY*), wholesale 1.12M, 47.3% NEV penetration. Calendar artifact + sustained slowdown.", source: "CnEVPost", url: "https://cnevpost.com/2026/04/03/china-mar-nev-retail-sales-cpca-preliminary/" },
+  { date: "2026-04-02", country: "🇰🇷 S. Korea (imports)", isNew: false, summary: "KAIDA imports: Tesla 11,130 (+330% YoY), BYD 1,664 (vs 10 a year ago). Domestic KAMA still pending.", source: "Korea Times", url: "https://www.koreatimes.co.kr/economy/20260403/imported-car-sales-jump-346-in-march-on-strong-ev-demand" },
+  { date: "2026-04-02", country: "🇮🇹 Italy",    isNew: false, summary: "UNRAE: BEV 16,137 (+71.7% YoY), 8.6% share. PHEV 16,998 (+114.5%, 9.1% share).", source: "Auto361", url: "https://www.auto361.it/immatricolazioni-auto-italia-marzo-2026-dati-analisi/" },
+  { date: "2026-04-02", country: "🇮🇳 India",    isNew: false, summary: "Vahan/FADA: BEV (e4W) 22,315 (+43.6% YoY), 5.1% share. Decelerating from 2025's +84% pace.", source: "EVreporter", url: "https://evreporter.com/indias-electric-vehicle-sales-trend-march-2026/" },
+  { date: "2026-04-02", country: "🇸🇪 Sweden",   isNew: false, summary: "Mobility Sweden: BEV ~10,897 (+26.7% YoY), 41% share. Strong vs flat trailing trend.", source: "Mobility Sweden", url: "https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/stark-marsmanad-lyfter-kvartalet-elfordon-okar-i-samtliga-segment" },
+  { date: "2026-04-01", country: "🇪🇸 Spain",    isNew: false, summary: "ANFAC: BEV 11,861 (+40.6% YoY), 9.1% share. PHEV 14,859 (+77.5%). Decelerating from 2025 base.", source: "ANFAC", url: "https://anfac.com/matriculaciones-vehiculos-electricos-e-hibridos-ccaa-marzo-2026/" },
+  { date: "2026-04-01", country: "🇳🇴 Norway",   isNew: false, summary: "OFV: BEV ~17,400 (+55.7% YoY), 98.4% share — record. Only 22 petrol cars sold.", source: "electrive", url: "https://www.electrive.com/2026/04/01/norway-registers-17400-new-battery-electric-cars-in-march/" },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
 // STATUS TABLE DATA
 // ─────────────────────────────────────────────────────────────────────────────
 // Key countries
@@ -338,7 +397,7 @@ const STATUS = [
   { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
   { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
-  { flag:"🇰🇷", country:"S. Korea",     status:"published", metric:"BEV",      sales:"~37K+",      share:"—",     yoy:"+120%",  yoyDir:"pos", source:"KAIDA + Hyundai/Kia",          id:"korea", swing:"decel" },
+  { flag:"🇰🇷", country:"S. Korea",     status:"partial",   metric:"BEV",      sales:"~13K (imports)", share:"—", yoy:"—", yoyDir:"na",  source:"KAIDA (imports only)",          id:"korea"     },
   { flag:"🇯🇵", country:"Japan",        status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"JADA / JAMA",                   id:null        },
   { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up" },
   { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"+43.6%",  yoyDir:"pos", source:"Vahan / FADA",             id:"india", swing:"decel" },
@@ -630,28 +689,25 @@ const DETAIL = [
     ],
   },
   {
-    id:"korea", flag:"🇰🇷", name:"South Korea", metric:"BEV", metricCls:"bev",
-    swing:"decel",
-    swingSummary:"+120% YoY looks massive but is actually a deceleration from Korea's trailing trend — recent 3-month YoY averaged above +200%, driven by subsidy pull-forward and aggressive price cuts. March is still strong but the pace is moderating. Watch closely for continued normalization.",
-    sourceLabel:"KAIDA + Hyundai/Kia disclosures — published Apr 1–6",
+    id:"korea", flag:"🇰🇷", name:"South Korea", metric:"BEV (imports)", metricCls:"bev",
+    swing:"trend",
+    swingSummary:"Only KAIDA imports data published. Tesla 11,130 (+330% YoY) and BYD 1,664 (vs 10 a year ago) confirmed for March. Domestic Hyundai/Kia/Genesis data from KAMA still pending — typically released mid-to-late April.",
+    sourceLabel:"KAIDA — Apr 3 (imports only; KAMA domestic pending)",
     stats:[
-      { val:"~37K+",  lbl:"March BEV (est)", cls:"green" },
-      { val:"+120%",  lbl:"BEV YoY (est)", cls:"gold" },
-      { val:"24,444", lbl:"Hyundai+Kia (+144%)" },
-      { val:"11,130", lbl:"Tesla imports (+330%)" },
+      { val:"11,130", lbl:"Tesla imports" },
+      { val:"+330%",  lbl:"Tesla YoY", cls:"green" },
+      { val:"1,664",  lbl:"BYD imports" },
+      { val:"~13K",   lbl:"Total imports BEV" },
     ], statCols:4,
     cyclic:[
-      "Aggressive Hyundai/Kia price cuts (₩2.8M off EV5 LR, ₩3M off EV6, up to ₩6.1M benefits on Ioniq 5/6)",
       "Tesla end-of-quarter delivery push — first time any imported brand exceeded 10,000 units in a month",
       "Fuel price rise (₩1,819/L, +7.6% since Feb 28)",
     ],
     structural:[
-      "EV subsidy restructured to favour domestic content — Hyundai/Kia benefit; imports relatively penalised",
       "BYD market entry formalised: 1,664 units in March vs. 10 a year ago — distribution operational",
-      "Top sellers: Kia PV5 (3,967), Kia EV3 (3,469), Hyundai Ioniq 5 (3,227)",
-      "March is normally a quarter-end push month; combined with price cuts created the surge",
+      "EV subsidy restructured to favour domestic content (Hyundai/Kia benefit; imports relatively penalised)",
     ],
-    caveat:"Combined estimate ~37K BEV is approximate — adds Hyundai+Kia 24,444 + KAIDA imports ~16K. Full KAMA total (incl. Genesis, Renault Korea, GM Korea) pending. Note: total Hyundai+Kia domestic auto sales were down 13.7% YoY due to fewer business days.",
+    caveat:"KAIDA covers imported brands only. Domestic Hyundai/Kia/Genesis EV data tracked by KAMA — not yet published for March. Korea total BEV cannot be flagged until KAMA releases.",
     sources:[
       { date:"2026-04-03", name:"Korea Times (KAIDA)", url:"https://www.koreatimes.co.kr/economy/20260403/imported-car-sales-jump-346-in-march-on-strong-ev-demand", note:"Imported car totals" },
       { date:"2026-04-01", name:"OurAutoWorld (Hyundai+Kia)", url:"https://www.ourautoworld.com/archives/21859", note:"Hyundai+Kia EV +144% YoY" },
@@ -910,6 +966,20 @@ function renderNews() {
   }).join('');
 }
 
+function renderDaily() {
+  const tbody = document.getElementById('daily-tbody');
+  // Sort by date desc; preserve order within same date as defined in array
+  const sorted = [...DAILY].sort((a,b) => b.date.localeCompare(a.date));
+  tbody.innerHTML = sorted.map(d => `
+    <tr>
+      <td class="feed-date">${d.date}</td>
+      <td class="feed-country">${d.country}</td>
+      <td class="feed-summary">${d.summary}</td>
+      <td class="feed-source">${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">${d.source}</a>` : `<span style="color:#aaa">${d.source}</span>`}</td>
+    </tr>`).join('');
+}
+
+renderDaily();
 renderStatus();
 renderCards();
 renderPending();

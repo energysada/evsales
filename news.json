@@ -1,65 +1,5 @@
 [
   {
-    "date": "2026-04-08",
-    "region": "Europe",
-    "country": "Italy",
-    "category": "Market Data",
-    "subcategory": "Official Data",
-    "headline": "UNRAE: Italy March 2026 BEV +71.7% to 16,137 (8.6% share); PHEV +114.5% to 16,998 (9.1%)",
-    "data_point": "BEV 16,137 (+71.7% YoY, 8.6% share) | PHEV 16,998 (+114.5% YoY, 9.1% share) | Total market 185,367 (+7.6%)",
-    "source_name": "UNRAE / Auto361",
-    "source_url": "https://www.auto361.it/immatricolazioni-auto-italia-marzo-2026-dati-analisi/",
-    "key_country": true
-  },
-  {
-    "date": "2026-04-08",
-    "region": "Europe",
-    "country": "Spain",
-    "category": "Market Data",
-    "subcategory": "Official Data",
-    "headline": "ANFAC: Spain March 2026 BEV 11,861 (+46.4% YoY, 9.1% share); PHEV 14,859 (+77.5%, 11.4%)",
-    "data_point": "BEV 11,861 (+46.4% YoY, 9.1% share) | PHEV 14,859 (+77.5%, 11.4%) | Combined electrified 26,720 (+62.2%, 20.5%)",
-    "source_name": "ANFAC",
-    "source_url": "https://anfac.com/matriculaciones-vehiculos-electricos-e-hibridos-ccaa-marzo-2026/",
-    "key_country": true
-  },
-  {
-    "date": "2026-04-08",
-    "region": "Asia",
-    "country": "South Korea",
-    "category": "Market Data",
-    "subcategory": "OEM Report",
-    "headline": "Hyundai+Kia EV sales surge 144% YoY to 24,444 in March on aggressive price cuts",
-    "data_point": "Hyundai+Kia EV 24,444 (+144% YoY) | Kia PV5 3,967 | Kia EV3 3,469 | Hyundai Ioniq 5 3,227 | Discounts up to ₩6.1M",
-    "source_name": "OurAutoWorld",
-    "source_url": "https://www.ourautoworld.com/archives/21859",
-    "key_country": true
-  },
-  {
-    "date": "2026-04-08",
-    "region": "Europe",
-    "country": "Italy",
-    "category": "Market Data",
-    "subcategory": "Quarterly",
-    "headline": "Italy Q1 2026: total auto market +9.2% to 484,802 units; Q1 EV sales +65% to ~38,000",
-    "data_point": "Q1 total: 484,802 (+9.2%) | Q1 EV: ~38,000 (+65% YoY) | March alone +7.6%",
-    "source_name": "Virgilio Motori",
-    "source_url": "https://www.virgilio.it/motori/dati-statistiche/mercato-auto-italia-primo-trimestre-2026/324380/",
-    "key_country": true
-  },
-  {
-    "date": "2026-04-08",
-    "region": "Europe",
-    "country": "Spain",
-    "category": "Market Data",
-    "subcategory": "Quarterly",
-    "headline": "Spain Q1 2026: BEV+PHEV up 58.3% to 62,916 units (20.9% share); on track for 1M cumulative EVs",
-    "data_point": "Q1 BEV+PHEV: 62,916 (+58.3% YoY, 20.9% share) | Q1 BEV: 27,273 (+41.6%, 9.1%) | Auto+ scheme replacing MOVES III",
-    "source_name": "Autovista24",
-    "source_url": "https://autovista24.autovistagroup.com/news/spain-sees-high-new-car-market-growth/",
-    "key_country": true
-  },
-  {
     "date": "2026-04-07",
     "region": "Europe",
     "country": "UK",
@@ -217,6 +157,42 @@
   },
   {
     "date": "2026-04-02",
+    "region": "Europe",
+    "country": "Italy",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "UNRAE: Italy March 2026 BEV +71.7% to 16,137 (8.6% share); PHEV +114.5% to 16,998 (9.1%)",
+    "data_point": "BEV 16,137 (+71.7% YoY, 8.6% share) | PHEV 16,998 (+114.5% YoY, 9.1% share) | Total market 185,367 (+7.6%)",
+    "source_name": "UNRAE / Auto361",
+    "source_url": "https://www.auto361.it/immatricolazioni-auto-italia-marzo-2026-dati-analisi/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Europe",
+    "country": "Italy",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Italy Q1 2026: total auto market +9.2% to 484,802 units; Q1 EV sales +65% to ~38,000",
+    "data_point": "Q1 total: 484,802 (+9.2%) | Q1 EV: ~38,000 (+65% YoY) | March alone +7.6%",
+    "source_name": "Virgilio Motori",
+    "source_url": "https://www.virgilio.it/motori/dati-statistiche/mercato-auto-italia-primo-trimestre-2026/324380/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
+    "region": "Europe",
+    "country": "Spain",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Spain Q1 2026: BEV+PHEV up 58.3% to 62,916 units (20.9% share); on track for 1M cumulative EVs",
+    "data_point": "Q1 BEV+PHEV: 62,916 (+58.3% YoY, 20.9% share) | Q1 BEV: 27,273 (+41.6%, 9.1%) | Auto+ scheme replacing MOVES III",
+    "source_name": "Autovista24",
+    "source_url": "https://autovista24.autovistagroup.com/news/spain-sees-high-new-car-market-growth/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-02",
     "region": "Asia",
     "country": "China",
     "category": "Market Data",
@@ -286,6 +262,18 @@
     "source_url": "https://electrek.co/2026/04/02/toyota-sold-more-evs-in-the-us-than-ford-q1-one-suv/",
     "key_country": true,
     "subcategory": "Milestone"
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Europe",
+    "country": "Spain",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "ANFAC: Spain March 2026 BEV 11,861 (+46.4% YoY, 9.1% share); PHEV 14,859 (+77.5%, 11.4%)",
+    "data_point": "BEV 11,861 (+46.4% YoY, 9.1% share) | PHEV 14,859 (+77.5%, 11.4%) | Combined electrified 26,720 (+62.2%, 20.5%)",
+    "source_name": "ANFAC",
+    "source_url": "https://anfac.com/matriculaciones-vehiculos-electricos-e-hibridos-ccaa-marzo-2026/",
+    "key_country": true
   },
   {
     "date": "2026-04-01",
