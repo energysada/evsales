@@ -369,7 +369,7 @@
 // DAILY UPDATES — first appearance of each country's March BEV data
 // ─────────────────────────────────────────────────────────────────────────────
 const DAILY = [
-  { date: "2026-04-08", country: "🇺🇸 US",       isNew: true,  summary: "Cox-implied March BEV ~84,841 (Q1 212,600 − actual Jan 64,316 − Feb 63,443). YoY −26.5%, slightly better than recent ~−30% trend. Stabilizing post-incentive at 60–85K monthly range.", source: "Cox Automotive", url: "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/" },
+  { date: "2026-04-08", country: "🇺🇸 US",       isNew: true,  summary: "First US estimate added — derived from Cox Automotive's published Q1 2026 BEV total (212,600). Implies March BEV YoY around −27%, slightly improving from the recent trend. Stabilizing in a post-incentive range. Argonne official monthly still pending.", source: "Cox Automotive", url: "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/" },
   { date: "2026-04-08", country: "🇰🇷 S. Korea", isNew: false, summary: "Earlier-attributed Hyundai+Kia data corrected — that was Feb 2026, not March. Korea March still partial: only KAIDA imports confirmed.", source: "(correction)", url: null },
   { date: "2026-04-07", country: "🇩🇪 Germany",  isNew: false, summary: "KBA: BEV 70,663 (+63.2% YoY), 24.0% share. PHEV 29,996. First green flag.", source: "KBA", url: "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html" },
   { date: "2026-04-07", country: "🇬🇧 UK",       isNew: false, summary: "SMMT: BEV 86,120 (+23.2% YoY), 22.6% share. All-time monthly BEV record.", source: "SMMT", url: "https://www.smmt.co.uk/best-month-ever-for-new-ev-registrations-as-market-grows-in-all-important-plate-change-march/" },
@@ -390,7 +390,7 @@ const DAILY = [
 // ─────────────────────────────────────────────────────────────────────────────
 // Key countries
 const STATUS = [
-  { flag:"🇺🇸", country:"US",           status:"partial",   metric:"BEV",      sales:"~84.8K (est)", share:"~6.1% (est)", yoy:"−26.5%", yoyDir:"neg", source:"Cox Q1 (implied)",            id:"us", swing:"down" },
+  { flag:"🇺🇸", country:"US",           status:"partial",   metric:"BEV",      sales:"—",           share:"~6%",   yoy:"−27%",   yoyDir:"neg", source:"Cox Q1 (implied)",              id:"us", swing:"down" },
   { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"down" },
   { flag:"🇪🇺", country:"EU / Europe",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ACEA",                          id:null        },
   { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"19.7% (BEV)", yoy:"+63.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"up" },
@@ -669,27 +669,27 @@ const DETAIL = [
   {
     id:"us", flag:"🇺🇸", name:"United States", metric:"BEV", metricCls:"bev",
     swing:"down",
-    swingSummary:"BEV YoY of −26.5% is the steepest decline among major markets, but actually a slight improvement from the recent 3-month trend (~−30%). Post-incentive demand has stabilized in the 60–85K monthly range, well below 2025's pre-expiry pace of 100–160K. Tesla quarter-end push likely lifted March vs Feb's 63K.",
+    swingSummary:"BEV YoY around −27% remains the steepest decline among major markets but appears to be stabilizing — March is a slight improvement from the recent monthly trend. Tesla quarter-end push lifted volumes month-over-month. Post-incentive demand has settled into a clearly lower range than 2025's pre-expiry pace.",
     sourceLabel:"Cox Automotive Q1 (March implied) — Argonne final pending",
     stats:[
-      { val:"~84.8K", lbl:"March BEV (Cox-implied)" },
-      { val:"−26.5%", lbl:"BEV YoY", cls:"red" },
-      { val:"~6.1%",  lbl:"BEV share (est)" },
+      { val:"−27%",   lbl:"BEV YoY (est)", cls:"red" },
+      { val:"~6%",    lbl:"BEV share (est)" },
       { val:"212,600", lbl:"Q1 2026 BEV (Cox)" },
+      { val:"−28%",   lbl:"Q1 YoY", cls:"red" },
     ], statCols:4,
     cyclic:[
-      "Tesla quarter-end delivery push lifted March BEV ~33% MoM from Feb's 63K trough",
+      "Tesla quarter-end delivery push lifted March BEV month-over-month",
       "Fuel prices rising on Middle East conflict ($4.31/gal, +28% since Feb 28) — modest support",
-      "Used EV market remains strong: Q1 2026 used EV sales up 12% YoY (~93,500 units)",
+      "Used EV market remains strong: Q1 2026 used EV sales up 12% YoY",
     ],
     structural:[
       "$7,500 federal EV tax credit expired Sep 30, 2025 — first full quarter without it shows ~28% Q1 contraction",
-      "Post-expiry monthly BEV settled into 60–90K range vs. 100–160K pre-expiry pace",
-      "Used EV avg price now $34,821 — within $1,300 of comparable used ICE; price parity driving substitution",
+      "Post-expiry BEV demand sits in a clearly lower range than 2025's pre-expiry pace",
+      "Used EV average price now within ~$1,300 of comparable used ICE; price parity in used market driving substitution",
       "Tesla Q1 ~122K (−4.6% YoY) — outperforming the broader BEV market collapse",
-      "Toyota Q1 EV (~14K bZ SUV) surpassed entire Ford EV lineup (~6.9K)",
+      "Toyota Q1 EV surpassed entire Ford EV lineup — bZ SUV alone outpaced Mach-E + F-150 Lightning combined",
     ],
-    caveat:"March BEV figure is Cox-implied: Q1 2026 (212,600 per Cox) minus actual Jan (64,316) and Feb (63,443) = ~84,841. Argonne National Lab official monthly figure not yet released. Share estimated using ~1.4M total US sales for March.",
+    caveat:"March figure is derived from Cox Automotive's published Q1 2026 BEV total (212,600) — Argonne National Lab official monthly figure not yet released. Cox EV Market Monitor typically publishes mid-month. Treat as estimate.",
     sources:[
       { date:"2026-03-25", name:"Cox Automotive (Q1)", url:"https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/", note:"Q1 forecast 212,600 BEV" },
       { date:"2026-03-27", name:"Electrek", url:"https://electrek.co/2026/03/27/used-ev-sales-boom-new-ev-sales-drop-28-percent-q1-2026/", note:"Q1 −28% analysis" },
