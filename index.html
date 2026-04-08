@@ -396,6 +396,7 @@ const DAILY = [
   { date: "2026-04-02", country: "🇮🇳 India",    isNew: false, summary: "Vahan/FADA: BEV (e4W) 22,315 (+43.6% YoY), 5.1% share. Decelerating from 2025's +84% pace.", source: "EVreporter", url: "https://evreporter.com/indias-electric-vehicle-sales-trend-march-2026/" },
   { date: "2026-04-02", country: "🇸🇪 Sweden",   isNew: false, summary: "Mobility Sweden: BEV ~10,897 (+26.7% YoY), 41% share. Strong vs flat trailing trend.", source: "Mobility Sweden", url: "https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/stark-marsmanad-lyfter-kvartalet-elfordon-okar-i-samtliga-segment" },
   { date: "2026-04-01", country: "🇪🇸 Spain",    isNew: false, summary: "ANFAC: BEV 11,861 (+40.6% YoY), 9.1% share. PHEV 14,859 (+77.5%). Decelerating from 2025 base.", source: "ANFAC", url: "https://anfac.com/matriculaciones-vehiculos-electricos-e-hibridos-ccaa-marzo-2026/" },
+  { date: "2026-04-01", country: "🌍 Tesla EU",   isNew: false, summary: "Reuters: Tesla March surged across Europe — France +203%, Norway +178%, Sweden +144%, Denmark +96%. Driver: cheaper Model Y/3 versions launched late 2025. BNP Paribas economist: fuel-crisis impact on March 'still marginal' (order-book lag).", source: "Reuters", url: "https://www.reuters.com/business/autos-transportation/tesla-march-car-registrations-soar-key-european-markets-showing-changing-trend-2026-04-01/" },
   { date: "2026-04-01", country: "🇳🇴 Norway",   isNew: false, summary: "OFV: BEV ~17,400 (+55.7% YoY), 98.4% share — record. Only 22 petrol cars sold.", source: "electrive", url: "https://www.electrive.com/2026/04/01/norway-registers-17400-new-battery-electric-cars-in-march/" },
 ];
 
@@ -412,7 +413,7 @@ const STATUS = [
   { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"watch" },
   { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"watch" },
   { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
-  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up2" },
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"watch" },
   { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
   { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
@@ -450,15 +451,16 @@ const DETAIL = [
     ], statCols:4,
     cyclic:[
       "Fuel prices rising on Middle East conflict (Super E10 over €2.10/L, +11.1% since Feb 28)",
-      "Tesla 'spectacular return' — end-of-quarter delivery push",
+      "Tesla quarter-end delivery push (Tesla skews registrations toward end of each quarter)",
     ],
     structural:[
       "MILESTONE: BEVs (70,663) outsold gasoline registrations (66,959) for first time in a March",
+      "Tesla recovery: cheaper Model Y/3 versions launched late 2025 driving European sales rebound after Tesla lost half its EU share in 2025",
       "Umweltbonus ended Dec 2023 — current growth is market/mandate-driven, not subsidy-driven",
       "EU CO2 fleet emission targets for 2025 pushing manufacturers to incentivise BEV sales",
       "Company car tax (Dienstwagensteuer) at 0.25% for BEV vs 1% for ICE — strong fleet pull",
     ],
-    caveat:"Total market 294,161 (+16.0% YoY). PHEV 29,996 (+13.0% YoY, 10.2% share). Total hybrid (incl. PHEV): 117,846 (40.1%).",
+    caveat:"Total market 294,161 (+16.0% YoY). PHEV 29,996 (+13.0% YoY, 10.2% share). Total hybrid (incl. PHEV): 117,846 (40.1%). Per BNP Paribas economist (Reuters): fuel-crisis impact on March registrations 'still marginal' due to order-book lag.",
     sources:[
       { date:"2026-04-07", name:"KBA", url:"https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html", note:"Official monthly registrations" },
       { date:"2026-04-07", name:"ecomento.de", url:"https://ecomento.de/2026/04/07/elektroauto-hybridauto-neuzulassungen-maerz-2026/", note:"BEV + hybrid breakdown" },
@@ -496,25 +498,26 @@ const DETAIL = [
   {
     id:"france", flag:"🇫🇷", name:"France", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV YoY of +65% is dramatically above the trailing trend, but the cause is structural — new leasing social scheme + company car benefit-in-kind reform from Jan 2026 driving fleet electrification. Yellow because the catalyst is policy, not a fuel-price shock.",
+    swingSummary:"BEV YoY of +65% is dramatically above trend, driven by TWO structural catalysts: (1) Tesla recovery — Tesla France registrations tripled to 9,569 in March (+203% YoY), near all-time high, on cheaper Model Y/3 versions launched late 2025; (2) leasing social scheme + company car benefit-in-kind reform from Jan 2026 driving fleet electrification. Yellow because both are structural, not fuel-shock.",
     sourceLabel:"AVEM / Ministère de l'Écologie — Apr 4",
     stats:[
       { val:"49,406", lbl:"March BEV" },
       { val:"+65.4%", lbl:"BEV YoY", cls:"green" },
       { val:"28.5%",  lbl:"BEV share" },
-      { val:"20,140", lbl:"Used BEV (record)" },
+      { val:"9,569",  lbl:"Tesla (+203% YoY)" },
     ], statCols:4,
     cyclic:[
-      "Pump price +15.2% (Mar 2→Mar 30); Brent crude +60% since Feb 28",
-      "End-of-quarter Tesla push: Model Y 7,023 units (up from 3,034 in Feb)",
+      "Pump price +15.2% (Mar 2→Mar 30); Brent crude +60% since Feb 28 — but per BNP Paribas economist, fuel impact on March 'still marginal' (order-book lag)",
+      "Tesla quarter-end push: 9,569 March registrations near all-time monthly high (Dec 2023 record was 9,572)",
     ],
     structural:[
+      "Tesla recovery: cheaper Model Y/3 versions launched late 2025 driving 203% YoY surge (Reuters/PFA)",
       "Leasing social scheme (leasing social) renewed — low-income household access",
       "Company car benefit-in-kind reform (avantage en nature) from Jan '26 favours EV — over 40% of new corporate car registrations in March were electric",
       "Corporate fleets now the key growth engine for the French market, after long lagging (Lucien Mathieu / T&E)",
       "Renault 5 E-Tech volume ramp — affordable domestic model",
     ],
-    caveat: null,
+    caveat:"Used BEV: 20,140 — French record. Tesla alone (+203%) accounts for a major share of the headline +65%. Tesla Model Y was 7,023 units of the 9,569 total Tesla.",
     sources:[
       { date:"2026-04-04", name:"AVEM", url:"https://www.avem.fr/2026/04/04/porte-par-les-immatriculations-de-vehicules-electriques-le-marche-automobile-repart-a-la-hausse-en-mars/", note:"March market overview" },
       { date:"2026-04-04", name:"Ministère de l'Écologie", url:"https://www.statistiques.developpement-durable.gouv.fr/motorisations-des-vehicules-legers-neufs-emissions-de-co2-et-bonus-ecologique-mars-2026", note:"Official registrations" },
@@ -524,7 +527,7 @@ const DETAIL = [
   {
     id:"norway", flag:"🇳🇴", name:"Norway", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV volume +56% YoY and share at record 98.4%, but Norway's market is essentially fully electric — month-to-month variation is mostly Tesla's quarterly delivery pattern, not a fuel-shock signal. Yellow because the swing is structural/saturation-driven, not a one-month energy crisis pop.",
+    swingSummary:"BEV volume +56% YoY and share at record 98.4% — but the move is dominated by Tesla, whose Norway registrations were +178% YoY (6,150 units) on the back of cheaper Model Y/3 versions launched late 2025. Norway is already 98%+ electric so this is brand-mix shift, not a fuel-shock signal.",
     sourceLabel:"OFV — Apr 1",
     stats:[
       { val:"~17,400", lbl:"March BEV" },
@@ -549,8 +552,8 @@ const DETAIL = [
   },
   {
     id:"sweden", flag:"🇸🇪", name:"Sweden", metric:"BEV", metricCls:"bev",
-    swing:"up2",
-    swingSummary:"BEV YoY of +27% is dramatically above the trailing trend of low single digits — a 4-5x jump in growth rate. Sweden has NO active EV subsidy (klimatbonusen ended Nov 2022), so this isn't a structural-policy story. The energy crisis is the most plausible catalyst, but Swedish pump prices only rose ~7-8%, modest vs Australia's +43%. Light green = likely fuel-shock-related but with confounders (could also be Tesla price cuts, model launches).",
+    swing:"watch",
+    swingSummary:"BEV YoY of +27% is dramatically above the trailing trend, but Reuters/Mobility Sweden confirmed Tesla alone surged +144% YoY in March (1,447 units) on the back of cheaper Model Y/3 versions launched late 2025. Tesla recovery + brand-level price cuts is the structural driver, not the fuel crisis. Yellow because it's a vendor-led structural lift, not a one-month energy shock.",
     sourceLabel:"Mobility Sweden — Apr 2026",
     stats:[
       { val:"~10,897", lbl:"March BEV" },
@@ -602,7 +605,7 @@ const DETAIL = [
   {
     id:"italy", flag:"🇮🇹", name:"Italy", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV YoY of +68% looks dramatic but is roughly in line with Italy's trailing trend (recent months have averaged similar growth rates). The PHEV +114% is the bigger acceleration story — but on BEV alone, this is continuation, not a new break. Working-day adjustment and dealer self-registrations also inflate the print.",
+    swingSummary:"BEV YoY of +68% looks dramatic but is roughly in line with Italy's trailing trend. PHEV +114% is the bigger acceleration story. Tesla Italy contributed (+32% YoY to 2,920 units per Reuters) but is a smaller share of Italy's BEV total than in northern markets. Working-day adjustment and dealer self-registrations also inflate the print.",
     sourceLabel:"UNRAE — published Apr 1",
     stats:[
       { val:"16,137", lbl:"March BEV" },
@@ -631,7 +634,7 @@ const DETAIL = [
   {
     id:"spain", flag:"🇪🇸", name:"Spain", metric:"BEV", metricCls:"bev",
     swing:"decel",
-    swingSummary:"BEV YoY of +41% sounds strong but is meaningfully below Spain's own trailing trend — recent 6-month average was ~50% and last March's YoY was much higher. BEV share is also slightly below the recent average. Spain is decelerating, not accelerating, despite the headline number.",
+    swingSummary:"BEV YoY of +41% sounds strong but is meaningfully below Spain's own trailing trend — recent 6-month average was ~50% and last March's YoY was much higher. Tesla Spain only +25% YoY (2,477 units), one of the weakest Tesla-recovery markets in Europe. Spain is decelerating, not accelerating.",
     sourceLabel:"ANFAC — published Apr 1",
     stats:[
       { val:"11,861", lbl:"March BEV" },

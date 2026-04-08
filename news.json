@@ -384,6 +384,18 @@
     "subcategory": "OEM Report"
   },
   {
+    "date": "2026-04-01",
+    "region": "Europe",
+    "country": "Global",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "Reuters: Tesla March car registrations soar in key European markets — France +203%, Norway +178%, Sweden +144%",
+    "data_point": "France 9,569 (+203%); Norway 6,150 (+178%); Sweden 1,447 (+144%); Denmark 1,784 (+96%); Belgium 1,806 (+89%); NL 1,819 (+72%); Italy 2,920 (+32%); Spain 2,477 (+25%) | Driver: cheaper Model Y/3 versions launched late 2025, NOT fuel crisis (BNP Paribas economist: 'impact on March still marginal')",
+    "source_name": "Reuters",
+    "source_url": "https://www.reuters.com/business/autos-transportation/tesla-march-car-registrations-soar-key-european-markets-showing-changing-trend-2026-04-01/",
+    "key_country": true
+  },
+  {
     "date": "2026-03-31",
     "region": "North America",
     "country": "US",
