@@ -310,7 +310,14 @@
     </table>
   </div>
 
-  <div class="section-label" style="margin-top:28px;">Data availability</div>
+  <div class="section-label" style="margin-top:28px;">Data availability
+    <span style="float:right; font-weight:400; text-transform:none; letter-spacing:0; font-size:11px; color:#666;">
+      <span style="color:#1a8a3a">▲</span> fuel-shock pop &nbsp;·&nbsp;
+      <span style="color:#d4a017">▲</span> in line / structural &nbsp;·&nbsp;
+      <span style="color:#e67e22">▼</span> expected drop &nbsp;·&nbsp;
+      <span style="color:#c00000">▼</span> beyond trajectory
+    </span>
+  </div>
   <div class="status-wrap">
     <table>
       <thead><tr>
@@ -390,16 +397,16 @@ const DAILY = [
 // ─────────────────────────────────────────────────────────────────────────────
 // Key countries
 const STATUS = [
-  { flag:"🇺🇸", country:"US",           status:"partial",   metric:"BEV",      sales:"—",           share:"~6%",   yoy:"−27%",   yoyDir:"neg", source:"Cox Q1 (implied)",              id:"us", swing:"down" },
-  { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"down" },
+  { flag:"🇺🇸", country:"US",           status:"partial",   metric:"BEV",      sales:"—",           share:"~6%",   yoy:"−27%",   yoyDir:"neg", source:"Cox Q1 (implied)",              id:"us", swing:"decel" },
+  { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"decel" },
   { flag:"🇪🇺", country:"EU / Europe",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ACEA",                          id:null        },
-  { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"19.7% (BEV)", yoy:"+63.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"up" },
+  { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"24.0% (BEV)", yoy:"+63.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"watch" },
   { flag:"🇬🇧", country:"UK",           status:"published", metric:"BEV",      sales:"86,120",      share:"22.6% (BEV)", yoy:"+23.2%", yoyDir:"pos", source:"SMMT",                          id:"uk", swing:"watch" },
-  { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"up" },
-  { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"up" },
+  { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"watch" },
+  { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"watch" },
   { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
-  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up" },
-  { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"up" },
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"watch" },
+  { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
   { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
   { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
@@ -425,8 +432,8 @@ const STATUS = [
 const DETAIL = [
   {
     id:"germany", flag:"🇩🇪", name:"Germany", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"BEV YoY of +63% is well above the trailing average (~35%) and significantly above last March's growth rate. BEV share also broke its same-month-prior-year benchmark. Both signals confirm a real demand acceleration, not a continuation of trend.",
+    swing:"watch",
+    swingSummary:"BEV YoY of +63% is above the trailing trend, but Germany has been growing strongly all year on its own structural momentum (CO2 fleet targets, company car tax favouring BEV). Not a fuel-shock spike — more a continuation of an accelerating trajectory. Yellow rather than green.",
     sourceLabel:"KBA — published Apr 7",
     stats:[
       { val:"70,663", lbl:"March BEV" },
@@ -481,8 +488,8 @@ const DETAIL = [
   },
   {
     id:"france", flag:"🇫🇷", name:"France", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"After more than a year of negative or flat YoY growth, France posted its strongest month in the dataset — a sharp reversal driven by new leasing policy and company car tax reform taking effect.",
+    swing:"watch",
+    swingSummary:"BEV YoY of +65% is dramatically above the trailing trend, but the cause is structural — new leasing social scheme + company car benefit-in-kind reform from Jan 2026 driving fleet electrification. Yellow because the catalyst is policy, not a fuel-price shock.",
     sourceLabel:"AVEM / Ministère de l'Écologie — Apr 4",
     stats:[
       { val:"49,406", lbl:"March BEV" },
@@ -509,8 +516,8 @@ const DETAIL = [
   },
   {
     id:"norway", flag:"🇳🇴", name:"Norway", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"Even at 98%+ share, the absolute YoY growth of +56% is well above recent trailing averages, and BEV share itself hit a record this month — over 14pp above the same month last year. Tesla quarterly delivery push amplifies but doesn't fully explain the swing.",
+    swing:"watch",
+    swingSummary:"BEV volume +56% YoY and share at record 98.4%, but Norway's market is essentially fully electric — month-to-month variation is mostly Tesla's quarterly delivery pattern, not a fuel-shock signal. Yellow because the swing is structural/saturation-driven, not a one-month energy crisis pop.",
     sourceLabel:"OFV — Apr 1",
     stats:[
       { val:"~17,400", lbl:"March BEV" },
@@ -535,8 +542,8 @@ const DETAIL = [
   },
   {
     id:"sweden", flag:"🇸🇪", name:"Sweden", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"YoY growth had been in the low single digits for over six months. March's +30% is a clear departure — notable because Sweden has no active EV purchase subsidy, making this a pure market signal.",
+    swing:"watch",
+    swingSummary:"BEV YoY of +27% is well above the trailing trend (low single digits for months). Sweden has no active EV subsidy, so this is a pure market signal — but the +20pp acceleration isn't directly attributable to a fuel-price shock (Swedish fuel only +7-8%). Yellow because the catalyst isn't clearly the energy crisis.",
     sourceLabel:"Mobility Sweden — Apr 2026",
     stats:[
       { val:"~10,897", lbl:"March BEV" },
@@ -560,8 +567,8 @@ const DETAIL = [
   },
   {
     id:"denmark", flag:"🇩🇰", name:"Denmark", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"BEV YoY of +57% is meaningfully above the trailing 3-month average (~39%) and ~32pp above last March. BEV share is also significantly above same-month-prior-year. Both signals confirm real acceleration in an already high-share market.",
+    swing:"watch",
+    swingSummary:"BEV YoY of +57% is above the trailing trend, but Denmark has been on a steady upward trajectory all year (registration tax exemption + fleet/leasing policy). Yellow because this is structural acceleration, not a fuel-shock pop.",
     sourceLabel:"Mobility Denmark / meremobil.dk — Apr 2026",
     stats:[
       { val:"14,616", lbl:"March BEV" },
@@ -668,8 +675,8 @@ const DETAIL = [
   },
   {
     id:"us", flag:"🇺🇸", name:"United States", metric:"BEV", metricCls:"bev",
-    swing:"down",
-    swingSummary:"BEV YoY around −27% remains the steepest decline among major markets but appears to be stabilizing — March is a slight improvement from the recent monthly trend. Tesla quarter-end push lifted volumes month-over-month. Post-incentive demand has settled into a clearly lower range than 2025's pre-expiry pace.",
+    swing:"decel",
+    swingSummary:"BEV YoY around −27% — the steepest decline among major markets, but in line with the post-incentive trajectory of recent months. March is actually slightly less negative than the trailing trend, suggesting stabilization within the lower regime. Orange (expected drop), not red — no new shock, just continuation of the post-tax-credit reality.",
     sourceLabel:"Cox Automotive Q1 (March implied) — Argonne final pending",
     stats:[
       { val:"−27%",   lbl:"BEV YoY (est)", cls:"red" },
@@ -699,8 +706,8 @@ const DETAIL = [
   },
   {
     id:"china", flag:"🇨🇳", name:"China", metric:"NEV (BEV+PHEV)", metricCls:"nev",
-    swing:"down",
-    swingSummary:"−21% retail YoY is partially a calendar artifact (CNY timing) but the deceleration is also real — recent months have shown clearly weakening momentum. Wholesale flat YoY and the recent 3-month YoY trend is sharply negative. This is a sustained slowdown, not a one-month blip.",
+    swing:"decel",
+    swingSummary:"NEV retail −21% YoY is in line with the recent declining trajectory (3-month avg also negative) and partially explained by calendar shift (Chinese New Year timing). Orange because this is continuation of an already-weakening trend, not a fresh negative shock — structural slowdown post-subsidy/anti-involution policy.",
     sourceLabel:"CPCA preliminary — Apr 2–3 (final CAAM due mid-April)",
     stats:[
       { val:"784K",   lbl:"Retail NEV" },
@@ -841,8 +848,8 @@ function renderStatus() {
     const mCls = r.metric.startsWith('NEV') ? 'nev' : r.metric.includes('+') ? 'nev' : r.metric==='BEV' || r.metric.startsWith('BEV') ? 'bev' : '';
     const swingHtml = r.swing === 'up' ? '<span class="swing-icon swing-up">▲</span>'
                     : r.swing === 'down' ? '<span class="swing-icon swing-down">▼</span>'
-                    : r.swing === 'watch' ? '<span class="swing-icon swing-watch">●</span>'
-                    : r.swing === 'decel' ? '<span class="swing-icon swing-decel">●</span>'
+                    : r.swing === 'watch' ? '<span class="swing-icon swing-watch">▲</span>'
+                    : r.swing === 'decel' ? '<span class="swing-icon swing-decel">▼</span>'
                     : '';
     return `<tr class="${r.id ? 'has-card' : ''}" ${r.id ? `onclick="scrollToCard('${r.id}')" title="Click for detail"` : ''}>
       <td>${r.flag} ${r.country}</td>

@@ -30,6 +30,46 @@ NO forecasts, NO estimates, NO projections. Only published actual sales/registra
     -   **Short-term factors**: gas price spike (include magnitude, e.g. "+42.9% since Feb 28"), end-of-quarter delivery push, calendar effects (CNY timing), fiscal year-end rush
     -   **Structural changes**: new/removed subsidy (name it), VAT/tax discount changes, emission mandates changes (NVES, ZEV, NEV mandate), company car tax rules, registration tax exemptions changes
 
+## Flag classification system
+
+Each country gets one of four flags based on how its current month compares to its **own historical trajectory**, plus what's driving the move.
+
+| Flag | Icon | Meaning |
+|---|---|---|
+| **Green** | 🟢 ▲ | Above-trajectory growth driven specifically by **fuel/energy crisis shock** — a one-month pop attributable to the energy environment |
+| **Yellow** | 🟡 ▲ | Growth in line with the existing trajectory, OR above-trajectory growth from a structural cause (new subsidy, fleet/tax policy, etc.) — not a fuel-shock spike |
+| **Orange** | 🟠 ▼ | Drop in line with the existing trajectory — expected slowdown, decelerating from own trend, normalization. Not a new shock. |
+| **Red** | 🔴 ▼ | Drop **beyond** trajectory — meaningfully worse than the trailing trend would predict. Signals a structural break or a one-month negative shock to investigate. |
+
+### How to think about it
+
+The trajectory is what we expected based on the trailing 3-6 months. Two questions:
+1. **Is it above or below trajectory?** (above → green or yellow; below → orange or red)
+2. **What's the cause?** Fuel shock vs structural vs trajectory continuation
+
+### Decision tree
+
+- **Growth ABOVE trajectory + driven by fuel/energy crisis** → 🟢 **Green** (fuel-shock pop)
+- **Growth ABOVE trajectory + driven by structural change** (new subsidy, tax reform, policy) → 🟡 **Yellow** (structural lift)
+- **Growth IN LINE with trajectory** → 🟡 **Yellow** (continuation)
+- **Drop IN LINE with trajectory** (continuing slowdown, decel from own pace) → 🟠 **Orange** (expected drop)
+- **Drop BEYOND trajectory** (worse than expected, structural break, negative shock) → 🔴 **Red** (investigate)
+- **Insufficient data, partial month, or saturated market** → no flag (trend context only)
+
+### Important: green is RARE
+
+Green is reserved for fuel-price-shock-driven monthly spikes only. If a country's growth surge is explained by a new subsidy, leasing reform, fleet tax change, model launches, or normal trajectory continuation, it's yellow — even if YoY is dramatic. The whole point of flagging is to surface what's driven by the energy environment vs what's just policy/momentum.
+
+### Examples (March 2026)
+
+- 🟢 **Australia**: BEV +115% YoY, +20pp above trailing trend, fuel +43% — clear fuel-shock pop
+- 🟡 **France**: BEV +65% YoY but driven by leasing reform + company car tax change (structural, not fuel)
+- 🟡 **Germany**: BEV +63% above trailing but mostly trajectory acceleration — not directly fuel-attributable
+- 🟠 **US**: BEV ~−27% YoY but in line with the post-incentive ~−30% recent trajectory — expected drop
+- 🟠 **China**: NEV −21% YoY in line with recent declining trajectory — calendar effect + sustained slowdown
+- 🟠 **Spain**: BEV +41% YoY but trailing was +50%+ — decelerating from own trajectory
+- 🔴 (none in March 2026): would require a worse-than-expected drop, e.g. a sudden shock
+
 ## Sources
 
 Each country has its own official source (KBA, SMMT, CPCA, FADA, etc.). Multiple sources per country — list each as a separate row with date, linked name, and note. Add new sources as they publish.

@@ -8,6 +8,9 @@
 # Wrangler local cache
 .wrangler/
 
+# Local Claude Code settings (hooks etc.) — personal, not for the team
+.claude/settings.local.json
+
 # Working data — these are NOT for public exposure
 # yoy.xlsx is proprietary BNEF benchmark data
 *.xlsx
