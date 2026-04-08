@@ -110,6 +110,11 @@
     }
     .daily-feed tr:last-child td { border-bottom: none; }
     .daily-feed tr:hover { background: #fafbfd; }
+    .daily-feed tr.date-break td { border-top: 2px solid #d0d6e0; }
+    /* Visible separator line when the date changes */
+    .daily-feed tr.date-break td {
+      border-top: 2px solid #c0c0c0;
+    }
     .daily-feed td.feed-date { white-space: nowrap; width: 95px; color: #666; font-weight: 600; }
     .daily-feed td.feed-country { width: 130px; font-weight: 600; }
     .daily-feed td.feed-summary { color: #444; font-size: 12px; line-height: 1.5; }
@@ -968,15 +973,21 @@ function renderNews() {
 
 function renderDaily() {
   const tbody = document.getElementById('daily-tbody');
-  // Sort by date desc; preserve order within same date as defined in array
   const sorted = [...DAILY].sort((a,b) => b.date.localeCompare(a.date));
-  tbody.innerHTML = sorted.map(d => `
-    <tr>
-      <td class="feed-date">${d.date}</td>
+  let lastDate = null;
+  tbody.innerHTML = sorted.map(d => {
+    const isFirstOfDate = d.date !== lastDate;
+    const cls = isFirstOfDate && lastDate !== null ? ' class="date-break"' : '';
+    const dateCell = isFirstOfDate ? d.date : '';
+    lastDate = d.date;
+    return `
+    <tr${cls}>
+      <td class="feed-date">${dateCell}</td>
       <td class="feed-country">${d.country}</td>
       <td class="feed-summary">${d.summary}</td>
       <td class="feed-source">${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">${d.source}</a>` : `<span style="color:#aaa">${d.source}</span>`}</td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 renderDaily();
