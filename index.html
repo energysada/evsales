@@ -64,10 +64,12 @@
     .swing-up   { color: #1a8a3a; }
     .swing-down { color: #c00000; }
     .swing-watch { color: #d4a017; }
+    .swing-decel { color: #e67e22; }
 
     .dcard.flagged { border: 2px solid #1a8a3a; box-shadow: 0 2px 8px rgba(26,138,58,0.15); }
     .dcard.flagged-down { border: 2px solid #c00000; box-shadow: 0 2px 8px rgba(192,0,0,0.15); }
     .dcard.flagged-watch { border: 2px solid #d4a017; box-shadow: 0 2px 8px rgba(212,160,23,0.12); }
+    .dcard.flagged-decel { border: 2px solid #e67e22; box-shadow: 0 2px 8px rgba(230,126,34,0.12); }
 
     .swing-banner {
       background: #edf7ed; border-left: 3px solid #1a8a3a;
@@ -81,6 +83,10 @@
     .swing-banner.watch {
       background: #fdf8e8; border-left-color: #d4a017;
       color: #6b5a10;
+    }
+    .swing-banner.decel {
+      background: #fdf2e6; border-left-color: #e67e22;
+      color: #7a3f00;
     }
     .swing-banner.trend {
       background: #f5f5f5; border-left-color: #aaa;
@@ -253,7 +259,7 @@
 <header>
   <div class="header-inner">
     <h1>Monthly EV sales tracker: March 2026</h1>
-    <div class="header-sub">Data collected April 7, 2026</div>
+    <div class="header-sub">Data collected April 8, 2026</div>
   </div>
 </header>
 
@@ -311,7 +317,7 @@
 
 </main>
 
-<footer>Monthly EV Sales Tracker &nbsp;·&nbsp; Updated April 6, 2026</footer>
+<footer>Monthly EV Sales Tracker &nbsp;·&nbsp; Updated April 8, 2026</footer>
 
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
@@ -320,22 +326,22 @@
 // Key countries
 const STATUS = [
   { flag:"🇺🇸", country:"US",           status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Argonne / Cox EV Monitor",      id:null        },
-  { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"watch" },
+  { flag:"🇨🇳", country:"China",        status:"published", metric:"NEV (BEV+PHEV)", sales:"784K retail / 1.12M whl.", share:"47.3%", yoy:"−21%*", yoyDir:"neg", source:"CPCA (prelim.)", id:"china", swing:"down" },
   { flag:"🇪🇺", country:"EU / Europe",  status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ACEA",                          id:null        },
-  { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"24.0% (BEV)", yoy:"+66.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"watch" },
-  { flag:"🇬🇧", country:"UK",           status:"published", metric:"EV (BEV+PHEV)", sales:"135,791", share:"35.6% (EV)",  yoy:"+31.7%", yoyDir:"pos", source:"SMMT",                     id:"uk"        },
-  { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.0% (BEV)", yoy:"+69%",   yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"up" },
-  { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"n/a¹",   yoyDir:"na",  source:"OFV",                      id:"norway"    },
+  { flag:"🇩🇪", country:"Germany",      status:"published", metric:"BEV",      sales:"70,663",      share:"19.7% (BEV)", yoy:"+63.2%", yoyDir:"pos", source:"KBA",                      id:"germany", swing:"up" },
+  { flag:"🇬🇧", country:"UK",           status:"published", metric:"BEV",      sales:"86,120",      share:"22.6% (BEV)", yoy:"+23.2%", yoyDir:"pos", source:"SMMT",                          id:"uk", swing:"watch" },
+  { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"up" },
+  { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"up" },
   { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
-  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+30%",   yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up" },
-  { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+42.6%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
-  { flag:"🇪🇸", country:"Spain",        status:"published", metric:"EV (BEV+PHEV)", sales:"26,720", share:"20.5% (EV)", yoy:"+48.8%", yoyDir:"pos", source:"ANFAC",                       id:"spain"     },
-  { flag:"🇮🇹", country:"Italy",        status:"published", metric:"EV (BEV+PHEV)", sales:"33,135", share:"17.7% (EV)", yoy:"+89.0%", yoyDir:"pos", source:"UNRAE",                       id:"italy"     },
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up" },
+  { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"up" },
+  { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
+  { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
   { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
-  { flag:"🇰🇷", country:"S. Korea",     status:"published", metric:"BEV",      sales:"~37K+",      share:"—",     yoy:"+105%~",  yoyDir:"pos", source:"KAIDA + Hyundai/Kia",          id:"korea"     },
+  { flag:"🇰🇷", country:"S. Korea",     status:"published", metric:"BEV",      sales:"~37K+",      share:"—",     yoy:"+120%",  yoyDir:"pos", source:"KAIDA + Hyundai/Kia",          id:"korea", swing:"decel" },
   { flag:"🇯🇵", country:"Japan",        status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"JADA / JAMA",                   id:null        },
-  { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"14.6% (BEV)", yoy:"+94.7%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up" },
-  { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"n/a²",  yoyDir:"na",  source:"Vahan / FADA",             id:"india"     },
+  { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up" },
+  { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"+43.6%",  yoyDir:"pos", source:"Vahan / FADA",             id:"india", swing:"decel" },
   // Emerging markets
   { flag:"🇹🇭", country:"Thailand",     status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"TAI / EVAT",                    id:null        },
   { flag:"🇧🇷", country:"Brazil",       status:"pending",   metric:"BEV+PHEV", sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"ABVE / ANFAVEA",                id:null        },
@@ -354,12 +360,12 @@ const STATUS = [
 const DETAIL = [
   {
     id:"germany", flag:"🇩🇪", name:"Germany", metric:"BEV", metricCls:"bev",
-    swing:"watch",
-    swingSummary:"YoY growth of +66% is headline-grabbing, but Germany has been running above +40% for most of the last year. EV market share this month is in line with the recent trailing average — this is a continuation of strong momentum, not a new inflection.",
+    swing:"up",
+    swingSummary:"BEV YoY of +63% is well above the trailing average (~35%) and significantly above last March's growth rate. BEV share also broke its same-month-prior-year benchmark. Both signals confirm a real demand acceleration, not a continuation of trend.",
     sourceLabel:"KBA — published Apr 7",
     stats:[
       { val:"70,663", lbl:"March BEV" },
-      { val:"+66.2%", lbl:"YoY", cls:"green" },
+      { val:"+63.2%", lbl:"BEV YoY", cls:"green" },
       { val:"24.0%",  lbl:"BEV share" },
       { val:"29,996", lbl:"March PHEV" },
     ], statCols:4,
@@ -381,15 +387,15 @@ const DETAIL = [
     ],
   },
   {
-    id:"uk", flag:"🇬🇧", name:"United Kingdom", metric:"EV (BEV+PHEV)", metricCls:"nev",
-    swing:"trend",
-    swingSummary:"UK YoY growth has ranged between high single digits and high thirties over the past year. March at +24.2% sits squarely in the middle. March is always the UK's biggest sales month — buyers wait for the new registration plate prefix (26-plate in 2026) so their car appears newer at resale. Seasonal spike, not a demand shift.",
+    id:"uk", flag:"🇬🇧", name:"United Kingdom", metric:"BEV", metricCls:"bev",
+    swing:"watch",
+    swingSummary:"BEV YoY of +23% is slightly above recent trailing average but BEV market share is below the 3-month average. The big absolute volume number (86,120, all-time record) is partly the seasonal 26-plate change spike — March is always the UK's biggest sales month. Real demand growth, but not a structural break.",
     sourceLabel:"SMMT — published Apr 7",
     stats:[
-      { val:"135,791", lbl:"March EV (BEV+PHEV)" },
-      { val:"+31.7%", lbl:"EV YoY", cls:"green" },
-      { val:"35.6%",  lbl:"EV share" },
-      { val:"86,120", lbl:"BEV (+24.2% YoY)" },
+      { val:"86,120", lbl:"March BEV (record)" },
+      { val:"+23.2%", lbl:"BEV YoY", cls:"green" },
+      { val:"22.6%",  lbl:"BEV share" },
+      { val:"49,671", lbl:"PHEV (+46.9%)" },
     ], statCols:4,
     cyclic:[
       "March is the UK's biggest registration month (26-plate change) — seasonal spike amplifies EV numbers",
@@ -415,8 +421,8 @@ const DETAIL = [
     sourceLabel:"AVEM / Ministère de l'Écologie — Apr 4",
     stats:[
       { val:"49,406", lbl:"March BEV" },
-      { val:"+69%",   lbl:"YoY", cls:"green" },
-      { val:"28.0%",  lbl:"Share" },
+      { val:"+65.4%", lbl:"BEV YoY", cls:"green" },
+      { val:"28.5%",  lbl:"BEV share" },
       { val:"20,140", lbl:"Used BEV (record)" },
     ], statCols:4,
     cyclic:[
@@ -438,14 +444,14 @@ const DETAIL = [
   },
   {
     id:"norway", flag:"🇳🇴", name:"Norway", metric:"BEV", metricCls:"bev",
-    swing:"trend",
-    swingSummary:"Norway's EV transition is essentially complete — BEV share has been above 93% for over a year. Monthly variations at this level are noise, not signal. YoY comparisons are not meaningful when fewer than 300 non-EV cars are sold.",
+    swing:"up",
+    swingSummary:"Even at 98%+ share, the absolute YoY growth of +56% is well above recent trailing averages, and BEV share itself hit a record this month — over 14pp above the same month last year. Tesla quarterly delivery push amplifies but doesn't fully explain the swing.",
     sourceLabel:"OFV — Apr 1",
     stats:[
       { val:"~17,400", lbl:"March BEV" },
+      { val:"+55.7%",  lbl:"BEV YoY", cls:"green" },
       { val:"98.4%",   lbl:"BEV share (record)", cls:"green" },
       { val:"22",      lbl:"Petrol cars sold" },
-      { val:"97.9%",   lbl:"Q1 BEV share" },
     ], statCols:4,
     cyclic:[
       "Tesla end-of-quarter push: +178% YoY, 34.8% of total market in March",
@@ -469,7 +475,7 @@ const DETAIL = [
     sourceLabel:"Mobility Sweden — Apr 2026",
     stats:[
       { val:"~10,897", lbl:"March BEV" },
-      { val:"+30%",    lbl:"BEV vol. YoY", cls:"green" },
+      { val:"+26.7%",  lbl:"BEV YoY", cls:"green" },
       { val:"41.0%",   lbl:"BEV share", cls:"green" },
       { val:"65%",     lbl:"BEV+PHEV share" },
     ], statCols:4,
@@ -489,14 +495,14 @@ const DETAIL = [
   },
   {
     id:"denmark", flag:"🇩🇰", name:"Denmark", metric:"BEV", metricCls:"bev",
-    swing:"watch",
-    swingSummary:"Denmark's +42.6% YoY sits comfortably within its recent range — growth has been between +20% and +60% for over a year. EV market share is tracking the established upward curve, not breaking away from it.",
+    swing:"up",
+    swingSummary:"BEV YoY of +57% is meaningfully above the trailing 3-month average (~39%) and ~32pp above last March. BEV share is also significantly above same-month-prior-year. Both signals confirm real acceleration in an already high-share market.",
     sourceLabel:"Mobility Denmark / meremobil.dk — Apr 2026",
     stats:[
       { val:"14,616", lbl:"March BEV" },
-      { val:"+42.6%", lbl:"Q1 BEV YoY", cls:"green" },
-      { val:"77.0%",  lbl:"March BEV share", cls:"green" },
-      { val:"18,968", lbl:"March total market" },
+      { val:"+57.3%", lbl:"BEV YoY", cls:"green" },
+      { val:"77.0%",  lbl:"BEV share", cls:"green" },
+      { val:"18,968", lbl:"Total market" },
     ], statCols:4,
     cyclic:[
       "Total market +26.6% YoY in March — broad market recovery amplifying EV numbers",
@@ -515,15 +521,15 @@ const DETAIL = [
     ],
   },
   {
-    id:"italy", flag:"🇮🇹", name:"Italy", metric:"EV (BEV+PHEV)", metricCls:"nev",
-    swing:"up",
-    swingSummary:"March 2025 was a sharply negative month for Italy's EV market — coming off that low base, March 2026 swung to +89% YoY, well above any recent trailing average. Both BEV (+72%) and PHEV (+114%) accelerated together, suggesting a genuine demand shift rather than channel noise.",
+    id:"italy", flag:"🇮🇹", name:"Italy", metric:"BEV", metricCls:"bev",
+    swing:"watch",
+    swingSummary:"BEV YoY of +68% looks dramatic but is roughly in line with Italy's trailing trend (recent months have averaged similar growth rates). The PHEV +114% is the bigger acceleration story — but on BEV alone, this is continuation, not a new break. Working-day adjustment and dealer self-registrations also inflate the print.",
     sourceLabel:"UNRAE — published Apr 1",
     stats:[
-      { val:"33,135", lbl:"March EV (BEV+PHEV)" },
-      { val:"+89.0%", lbl:"EV YoY", cls:"green" },
-      { val:"17.7%",  lbl:"EV share" },
-      { val:"185,367", lbl:"Total market (+7.6%)" },
+      { val:"16,137", lbl:"March BEV" },
+      { val:"+68.4%", lbl:"BEV YoY", cls:"green" },
+      { val:"8.7%",   lbl:"BEV share" },
+      { val:"16,998", lbl:"PHEV (+114%)" },
     ], statCols:4,
     cyclic:[
       "March had one extra working day vs March 2025 — a small base-effect tailwind",
@@ -544,15 +550,15 @@ const DETAIL = [
     ],
   },
   {
-    id:"spain", flag:"🇪🇸", name:"Spain", metric:"EV (BEV+PHEV)", metricCls:"nev",
-    swing:"watch",
-    swingSummary:"+48.8% YoY looks dramatic but Spain's March 2025 was a soft base. EV market share at 20.5% is actually slightly below the recent 3-month average — this is a continuation of an established climbing trajectory, not a breakthrough month. New Auto+ scheme replacing MOVES III likely supportive but hasn't yet broken the trend ceiling.",
+    id:"spain", flag:"🇪🇸", name:"Spain", metric:"BEV", metricCls:"bev",
+    swing:"decel",
+    swingSummary:"BEV YoY of +41% sounds strong but is meaningfully below Spain's own trailing trend — recent 6-month average was ~50% and last March's YoY was much higher. BEV share is also slightly below the recent average. Spain is decelerating, not accelerating, despite the headline number.",
     sourceLabel:"ANFAC — published Apr 1",
     stats:[
-      { val:"26,720", lbl:"March EV (BEV+PHEV)" },
-      { val:"+48.8%", lbl:"EV YoY", cls:"green" },
-      { val:"20.5%",  lbl:"EV share" },
-      { val:"+62.2%", lbl:"BEV+PHEV vol YoY", cls:"green" },
+      { val:"11,861", lbl:"March BEV" },
+      { val:"+40.6%", lbl:"BEV YoY", cls:"gold" },
+      { val:"9.1%",   lbl:"BEV share" },
+      { val:"14,859", lbl:"PHEV (+77.5%)" },
     ], statCols:4,
     cyclic:[
       "Spanish pump prices up since Feb 28 — modest support for EV switching",
@@ -597,13 +603,13 @@ const DETAIL = [
   },
   {
     id:"china", flag:"🇨🇳", name:"China", metric:"NEV (BEV+PHEV)", metricCls:"nev",
-    swing:"watch",
-    swingSummary:"The −21% retail YoY looks alarming but is a calendar artifact — Chinese New Year timing shifted the base. Wholesale was flat YoY, and the 47.3% penetration rate is consistent with the recent trajectory. No structural change this month.",
+    swing:"down",
+    swingSummary:"−21% retail YoY is partially a calendar artifact (CNY timing) but the deceleration is also real — recent months have shown clearly weakening momentum. Wholesale flat YoY and the recent 3-month YoY trend is sharply negative. This is a sustained slowdown, not a one-month blip.",
     sourceLabel:"CPCA preliminary — Apr 2–3 (final CAAM due mid-April)",
     stats:[
       { val:"784K",   lbl:"Retail NEV" },
-      { val:"47.3%",  lbl:"Penetration", cls:"green" },
-      { val:"−21%*",  lbl:"Retail YoY", cls:"gold" },
+      { val:"−21%",   lbl:"NEV YoY*", cls:"red" },
+      { val:"47.3%",  lbl:"NEV penetration" },
       { val:"1.12M",  lbl:"Wholesale NEV" },
     ], statCols:4,
     cyclic:[
@@ -625,14 +631,14 @@ const DETAIL = [
   },
   {
     id:"korea", flag:"🇰🇷", name:"South Korea", metric:"BEV", metricCls:"bev",
-    swing:"up",
-    swingSummary:"Hyundai+Kia EV sales alone surged +144% YoY in March, the biggest single-month jump on record. Combined with surging imports (Tesla +330%, BYD entry), total Korea BEV market is roughly double last March's level. Aggressive price cuts (Kia ₩2.8M off EV5, ₩3M off EV6) the dominant short-term catalyst.",
+    swing:"decel",
+    swingSummary:"+120% YoY looks massive but is actually a deceleration from Korea's trailing trend — recent 3-month YoY averaged above +200%, driven by subsidy pull-forward and aggressive price cuts. March is still strong but the pace is moderating. Watch closely for continued normalization.",
     sourceLabel:"KAIDA + Hyundai/Kia disclosures — published Apr 1–6",
     stats:[
-      { val:"24,444", lbl:"Hyundai+Kia EV (+144% YoY)", cls:"green" },
-      { val:"11,130", lbl:"Tesla imports (+330% YoY)" },
-      { val:"~37K+",  lbl:"Approx total BEV", cls:"green" },
-      { val:"1,664",  lbl:"BYD imports (vs 10 a yr ago)" },
+      { val:"~37K+",  lbl:"March BEV (est)", cls:"green" },
+      { val:"+120%",  lbl:"BEV YoY (est)", cls:"gold" },
+      { val:"24,444", lbl:"Hyundai+Kia (+144%)" },
+      { val:"11,130", lbl:"Tesla imports (+330%)" },
     ], statCols:4,
     cyclic:[
       "Aggressive Hyundai/Kia price cuts (₩2.8M off EV5 LR, ₩3M off EV6, up to ₩6.1M benefits on Ioniq 5/6)",
@@ -659,8 +665,8 @@ const DETAIL = [
     sourceLabel:"FCAI VFACTS — published Apr 7",
     stats:[
       { val:"15,839", lbl:"March BEV (record)" },
-      { val:"+94.7%", lbl:"YoY", cls:"green" },
-      { val:"14.6%",  lbl:"BEV share (record)", cls:"green" },
+      { val:"+115.4%", lbl:"BEV YoY", cls:"green" },
+      { val:"15.1%",  lbl:"BEV share (record)", cls:"green" },
       { val:"8,215",  lbl:"March PHEV" },
     ], statCols:4,
     cyclic:[
@@ -683,13 +689,13 @@ const DETAIL = [
   },
   {
     id:"india", flag:"🇮🇳", name:"India", metric:"BEV (e4W)", metricCls:"bev",
-    swing:"trend",
-    swingSummary:"India's EV share has been climbing steadily for over a year, roughly doubling from low-single-digit levels. March at 5.1% continues this trajectory — amplified by the fiscal year-end rush (FY2026 closes Mar 31). Fuel prices are not a factor here as the government held pump prices flat.",
+    swing:"decel",
+    swingSummary:"+44% YoY is solid but materially below India's recent trailing average of ~84%. Even amplified by the FY2026 year-end rush (March 31 fiscal close), growth has cooled from the explosive 2025 pace. Still positive — just decelerating. Watch FY2027 trajectory carefully.",
     sourceLabel:"Vahan / FADA — Apr 1–3",
     stats:[
-      { val:"22,315",  lbl:"March e4W (cars)" },
-      { val:"5.1%",    lbl:"e4W share" },
-      { val:"+51.7%",  lbl:"MoM (Feb→Mar)", cls:"green" },
+      { val:"22,315",  lbl:"March BEV (e4W)" },
+      { val:"+43.6%",  lbl:"BEV YoY", cls:"gold" },
+      { val:"5.1%",    lbl:"BEV share" },
       { val:"191,067", lbl:"March e2W" },
     ], statCols:4,
     cyclic:[
@@ -744,6 +750,7 @@ function renderStatus() {
     const swingHtml = r.swing === 'up' ? '<span class="swing-icon swing-up">▲</span>'
                     : r.swing === 'down' ? '<span class="swing-icon swing-down">▼</span>'
                     : r.swing === 'watch' ? '<span class="swing-icon swing-watch">●</span>'
+                    : r.swing === 'decel' ? '<span class="swing-icon swing-decel">●</span>'
                     : '';
     return `<tr class="${r.id ? 'has-card' : ''}" ${r.id ? `onclick="scrollToCard('${r.id}')" title="Click for detail"` : ''}>
       <td>${r.flag} ${r.country}</td>
@@ -775,9 +782,9 @@ function renderCards() {
           `<tr><td>${s.date}</td><td><a href="${s.url}" target="_blank" rel="noopener">${s.name}</a></td><td>${s.note}</td></tr>`
         ).join('')}</table>
       </div>` : '';
-    const flaggedCls = d.swing === 'up' ? ' flagged' : d.swing === 'down' ? ' flagged-down' : d.swing === 'watch' ? ' flagged-watch' : '';
-    const swingLabel = d.swing === 'up' ? '▲ Notable swing' : d.swing === 'down' ? '▼ Notable drop' : d.swing === 'watch' ? '● Monitoring' : d.swing === 'trend' ? 'Trend context' : '';
-    const swingCls = d.swing === 'down' ? ' down' : d.swing === 'watch' ? ' watch' : d.swing === 'trend' ? ' trend' : '';
+    const flaggedCls = d.swing === 'up' ? ' flagged' : d.swing === 'down' ? ' flagged-down' : d.swing === 'watch' ? ' flagged-watch' : d.swing === 'decel' ? ' flagged-decel' : '';
+    const swingLabel = d.swing === 'up' ? '▲ Notable swing' : d.swing === 'down' ? '▼ Notable drop' : d.swing === 'watch' ? '● Monitoring (growing)' : d.swing === 'decel' ? '● Monitoring (decelerating)' : d.swing === 'trend' ? 'Trend context' : '';
+    const swingCls = d.swing === 'down' ? ' down' : d.swing === 'watch' ? ' watch' : d.swing === 'decel' ? ' decel' : d.swing === 'trend' ? ' trend' : '';
     const swingBanner = d.swingSummary
       ? `<div class="swing-banner${swingCls}"><strong>${swingLabel}:</strong> ${d.swingSummary}</div>`
       : '';
