@@ -423,7 +423,7 @@ const STATUS = [
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
   { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
   { flag:"🇰🇷", country:"S. Korea",     status:"partial",   metric:"BEV",      sales:"~13K (imports)", share:"—", yoy:"—", yoyDir:"na",  source:"KAIDA (imports only)",          id:"korea"     },
-  { flag:"🇯🇵", country:"Japan",        status:"pending",   metric:"BEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"JADA / JAMA",                   id:null        },
+  { flag:"🇯🇵", country:"Japan",        status:"partial",   metric:"BEV",      sales:"—",           share:"~2%",   yoy:"—",      yoyDir:"na",  source:"JADA / JAMA (pending)",         id:"japan", swing:"decel" },
   { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up2" },
   { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"+43.6%",  yoyDir:"pos", source:"Vahan / FADA",             id:"india", swing:"decel" },
   // Emerging markets
@@ -834,6 +834,37 @@ const DETAIL = [
     ],
   },
   {
+    id:"japan", flag:"🇯🇵", name:"Japan", metric:"BEV", metricCls:"bev",
+    swing:"decel",
+    swingSummary:"Japan remains the BEV outlier — share stuck at just ~1.9% of new car sales, among the lowest of any developed market. The Iran-driven fuel shock doesn't appear to be moving the needle so far. Q4 2025 brought a notable structural shift though: Toyota overtook Nissan as Japan's top EV brand for the first time (bZ4X launch), while Nissan EV sales collapsed −56% YoY. March-specific March 2026 data not yet published.",
+    sourceLabel:"JADA / JAMA — March 2026 pending",
+    stats:[
+      { val:"~1.9%", lbl:"BEV share (2026 YTD)", cls:"red" },
+      { val:"−7.1%", lbl:"Total market YTD (Jan-Feb)" },
+      { val:"−56%",  lbl:"Nissan EV Q4 2025 YoY", cls:"red" },
+      { val:"3,684", lbl:"Toyota EV Q4 2025" },
+    ], statCols:4,
+    cyclic:[
+      "Fuel prices rising on Middle East conflict — but Japanese consumers historically respond to fuel price changes with MORE hybrid purchases, not BEV",
+      "Total Japan auto market down 7.1% YTD through Feb — overall weakness, not just EV segment",
+      "Q1 delivery pattern typically doesn't show large month-over-month BEV swings in Japan",
+    ],
+    structural:[
+      "Japan is the global HEV stronghold — Toyota, Honda, Nissan all prioritized hybrids over pure BEV development, and Japanese consumers followed",
+      "Q4 2025 inflection: Toyota took the BEV lead from Nissan for the first time (bZ4X launch) — 3,684 units vs Nissan's 2,857 (−56% YoY)",
+      "Nissan's new Leaf launching mid-2026 — could be the real catalyst to watch; current Leaf is aging",
+      "BYD Japan: 3,870 total for full-year 2025 — small but steady Chinese-brand beachhead",
+      "EV subsidies reduced in FY2025; government focus shifted to hydrogen fuel-cell vehicles",
+      "Mitsubishi currently leads 2026 YTD EV sales with ~54% share (low absolute volume)",
+    ],
+    caveat:"March 2026 monthly data not yet published — JADA/JAMA typically mid-April. Japan is the lowest-confidence panel in the tracker given absence of March-specific numbers. Orange flag reflects sustained structural weakness: BEV share has been 1.9–3.1% for years with no inflection signal in the pre-March data.",
+    sources:[
+      { date:"2026-01-20", name:"Carscoops (Q4 2025)", url:"https://www.carscoops.com/2026/01/nissan-lost-its-ev-sales-lead-in-japan-for-the-first-time-in-q4/", note:"Toyota overtakes Nissan; Q4 Japan EV breakdown" },
+      { date:"2026-03-15", name:"Focus2move", url:"https://www.focus2move.com/japan-auto-market/", note:"Jan-Feb 2026 YTD total market -7.1%" },
+      { date:"2026-01-08", name:"JAIA (via 36Kr)", url:"https://eu.36kr.com/en/p/3631583879922694", note:"2025 imported EV sales: 30,513 (+26%); BYD Japan 3,870" },
+    ],
+  },
+  {
     id:"malaysia", flag:"🇲🇾", name:"Malaysia", metric:"BEV", metricCls:"bev",
     swing:"decel",
     swingSummary:"BEV +58.5% YoY in March — strong in absolute terms but a clear deceleration from Q1 2026 +113.7% and from Malaysia's 2025 full-year +109% pace. The CBU tax holiday for EVs ended late 2025, and Malaysia's explosive 2024-25 growth was driven by that incentive. Orange: still positive, but the post-tax-holiday normalization is the story, not a new surge.",
@@ -929,7 +960,6 @@ const PENDING = [
   // Key countries
   { flag:"🇪🇺", country:"EU / Europe", source:"ACEA",                       expected:"Mid-to-late April", latest:"Jan–Feb YTD: 312,369 BEV (18.8% share, +23.7% YoY)" },
   { flag:"🇨🇦", country:"Canada",      source:"Electric Autonomy / S&P",    expected:"~June 2026 (quarterly)", latest:"Q4 2025: ZEV 12.1% share, BEV 8.0%. New EVAP ($5K) launched Mar '26" },
-  { flag:"🇯🇵", country:"Japan",       source:"JADA / JAMA",                expected:"Mid-April",         latest:"FY2025: ~93,584 BEV (−7.7% YoY, ~3.1% share). Strongly HEV-dominant" },
   // Emerging markets
   { flag:"🇹🇭", country:"Thailand",    source:"TAI / EVAT",                 expected:"~Apr 20",           latest:"Feb '26: 6,168 BEV (−18.6% YoY) — EV3.0 subsidy expired. Jan anomaly: ~44K (deadline rush)" },
   { flag:"🇧🇷", country:"Brazil",      source:"ABVE / ANFAVEA",             expected:"~Mid-April",        latest:"Jan '26: BEV 8,262 (5.1%, +122% YoY) | PHEV 8,260 (5.1%)" },
