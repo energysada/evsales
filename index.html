@@ -975,10 +975,30 @@ const PENDING = [
 // ─────────────────────────────────────────────────────────────────────────────
 // RENDER
 // ─────────────────────────────────────────────────────────────────────────────
+// Sort key: primary = flag priority, secondary = sales (descending)
+const FLAG_PRIORITY = { up: 1, up2: 2, down: 3, decel: 4, watch: 5, trend: 6 };
+function flagRank(swing) { return FLAG_PRIORITY[swing] ?? 99; }
+function parseSales(s) {
+  if (!s || s === '—') return 0;
+  // Extract first number, handle K/M suffix, commas, tilde, "est"
+  const m = s.match(/(\d[\d,.]*)\s*([KkMm])?/);
+  if (!m) return 0;
+  let n = parseFloat(m[1].replace(/,/g, ''));
+  if (m[2] && /[Kk]/.test(m[2])) n *= 1000;
+  if (m[2] && /[Mm]/.test(m[2])) n *= 1000000;
+  return n;
+}
+function sortByFlagThenSales(a, b) {
+  const fa = flagRank(a.swing), fb = flagRank(b.swing);
+  if (fa !== fb) return fa - fb;
+  return parseSales(b.sales) - parseSales(a.sales);
+}
+
 function renderStatus() {
   const pillMap = { published:'pill-ok', partial:'pill-partial', pending:'pill-pending' };
   const pillLabel = { published:'Published', partial:'Partial', pending:'Pending' };
-  document.getElementById('status-tbody').innerHTML = STATUS.map(r => {
+  const sorted = [...STATUS].sort(sortByFlagThenSales);
+  document.getElementById('status-tbody').innerHTML = sorted.map(r => {
     const yoyHtml = r.yoyDir==='pos' ? `<span class="yoy-pos">${r.yoy}</span>`
                   : r.yoyDir==='neg' ? `<span class="yoy-neg">${r.yoy}</span>`
                   : `<span class="yoy-na">${r.yoy}</span>`;
@@ -1008,7 +1028,16 @@ function scrollToCard(id) {
 }
 
 function renderCards() {
-  document.getElementById('card-grid').innerHTML = DETAIL.map(d => {
+  // Sort cards using the same flag/sales rule as the status table
+  const statusById = Object.fromEntries(STATUS.filter(s => s.id).map(s => [s.id, s]));
+  const sorted = [...DETAIL].sort((a, b) => {
+    const sa = statusById[a.id] || {};
+    const sb = statusById[b.id] || {};
+    const fa = flagRank(a.swing || sa.swing), fb = flagRank(b.swing || sb.swing);
+    if (fa !== fb) return fa - fb;
+    return parseSales(sb.sales) - parseSales(sa.sales);
+  });
+  document.getElementById('card-grid').innerHTML = sorted.map(d => {
     const statsHtml = `<div class="stat-row cols-${d.statCols}">${d.stats.map(s =>
       `<div class="stat"><div class="stat-val ${s.cls||''}">${s.val}</div><div class="stat-lbl">${s.lbl}</div></div>`
     ).join('')}</div>`;
