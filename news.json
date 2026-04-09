@@ -576,6 +576,18 @@
     "key_country": false
   },
   {
+    "date": "2026-04-02",
+    "region": "Asia-Pacific",
+    "country": "Taiwan",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "TeslaNorth: Model Y top of overall Taiwan market",
+    "data_point": "",
+    "source_name": "TeslaNorth",
+    "source_url": "https://teslanorth.com/2026/04/02/tesla-model-y-dominates-taiwan-market-as-top-selling-vehicle-for-march/",
+    "key_country": true
+  },
+  {
     "date": "2026-04-01",
     "region": "Europe",
     "country": "Spain",
@@ -852,6 +864,18 @@
     "subcategory": "Official Data"
   },
   {
+    "date": "2026-03-15",
+    "region": "Asia",
+    "country": "Japan",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Focus2move: Jan-Feb 2026 YTD total market -7.1%",
+    "data_point": "",
+    "source_name": "Focus2move",
+    "source_url": "https://www.focus2move.com/japan-auto-market/",
+    "key_country": true
+  },
+  {
     "date": "2026-03-13",
     "region": "Asia",
     "country": "China",
@@ -945,6 +969,42 @@
     "data_point": "",
     "source_name": "NL Times (Jan context)",
     "source_url": "https://nltimes.nl/2026/02/01/dutch-new-car-sales-fall-13-january-electric-vehicle-registrations-plunge-35",
+    "key_country": true
+  },
+  {
+    "date": "2026-01-20",
+    "region": "Asia",
+    "country": "Japan",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Carscoops (Q4 2025): Toyota overtakes Nissan; Q4 Japan EV breakdown",
+    "data_point": "",
+    "source_name": "Carscoops (Q4 2025)",
+    "source_url": "https://www.carscoops.com/2026/01/nissan-lost-its-ev-sales-lead-in-japan-for-the-first-time-in-q4/",
+    "key_country": true
+  },
+  {
+    "date": "2026-01-20",
+    "region": "Asia-Pacific",
+    "country": "Malaysia",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "paultan.org (MAA 2025): 2025 full-year MAA data (+109% YoY)",
+    "data_point": "",
+    "source_name": "paultan.org (MAA 2025)",
+    "source_url": "https://paultan.org/2026/01/20/maa-ev-and-hybrid-sales-2025/",
+    "key_country": true
+  },
+  {
+    "date": "2026-01-08",
+    "region": "Asia",
+    "country": "Japan",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "JAIA (via 36Kr): 2025 imported EV sales: 30,513 (+26%); BYD Japan 3,870",
+    "data_point": "",
+    "source_name": "JAIA (via 36Kr)",
+    "source_url": "https://eu.36kr.com/en/p/3631583879922694",
     "key_country": true
   }
 ]
