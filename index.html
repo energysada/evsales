@@ -417,14 +417,14 @@ const STATUS = [
   { flag:"🇫🇷", country:"France",       status:"published", metric:"BEV",      sales:"49,406",      share:"28.5% (BEV)", yoy:"+65.4%", yoyDir:"pos", source:"AVEM / Min. Écologie",     id:"france", swing:"watch" },
   { flag:"🇳🇴", country:"Norway",       status:"published", metric:"BEV",      sales:"~17,400",     share:"98.4% (BEV)", yoy:"+55.7%", yoyDir:"pos", source:"OFV",                      id:"norway", swing:"watch" },
   { flag:"🇳🇱", country:"Netherlands",  status:"partial",   metric:"BEV",      sales:"partial",     share:"~21% (BEV)",  yoy:"—",      yoyDir:"na",  source:"BOVAG / RDW",              id:"netherlands"},
-  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"watch" },
+  { flag:"🇸🇪", country:"Sweden",       status:"published", metric:"BEV",      sales:"~10,897",     share:"41% (BEV)",   yoy:"+26.7%", yoyDir:"pos", source:"Mobility Sweden",          id:"sweden", swing:"up2" },
   { flag:"🇩🇰", country:"Denmark",      status:"published", metric:"BEV",      sales:"14,616",      share:"77% (BEV)",   yoy:"+57.3%", yoyDir:"pos", source:"Mobility Denmark",         id:"denmark", swing:"watch" },
   { flag:"🇪🇸", country:"Spain",        status:"published", metric:"BEV",      sales:"11,861",      share:"9.1% (BEV)",  yoy:"+40.6%", yoyDir:"pos", source:"ANFAC",                       id:"spain", swing:"decel" },
   { flag:"🇮🇹", country:"Italy",        status:"published", metric:"BEV",      sales:"16,137",      share:"8.7% (BEV)",  yoy:"+68.4%", yoyDir:"pos", source:"UNRAE",                       id:"italy", swing:"watch" },
   { flag:"🇨🇦", country:"Canada",       status:"pending",   metric:"ZEV",      sales:"—",           share:"—",     yoy:"—",      yoyDir:"na",  source:"Electric Autonomy / S&P",       id:null        },
   { flag:"🇰🇷", country:"S. Korea",     status:"partial",   metric:"BEV",      sales:"~13K (imports)", share:"—", yoy:"—", yoyDir:"na",  source:"KAIDA (imports only)",          id:"korea"     },
   { flag:"🇯🇵", country:"Japan",        status:"partial",   metric:"BEV",      sales:"—",           share:"~2%",   yoy:"—",      yoyDir:"na",  source:"JADA / JAMA (pending)",         id:"japan", swing:"decel" },
-  { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up2" },
+  { flag:"🇦🇺", country:"Australia",    status:"published", metric:"BEV",      sales:"15,839",      share:"15.1% (BEV)", yoy:"+115.4%", yoyDir:"pos", source:"FCAI VFACTS",             id:"australia", swing:"up" },
   { flag:"🇮🇳", country:"India",        status:"published", metric:"BEV",      sales:"22,315 (e4W)", share:"5.1% (BEV)",  yoy:"+43.6%",  yoyDir:"pos", source:"Vahan / FADA",             id:"india", swing:"decel" },
   // Emerging markets
   { flag:"🇲🇾", country:"Malaysia",     status:"published", metric:"BEV",      sales:"4,717",       share:"6.95%", yoy:"+58.5%", yoyDir:"pos", source:"JPJ / MAA",                    id:"malaysia", swing:"decel" },
@@ -506,7 +506,7 @@ const DETAIL = [
   {
     id:"france", flag:"🇫🇷", name:"France", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV YoY of +65% is dramatically above trend, driven by TWO structural catalysts: (1) Tesla recovery — Tesla France registrations tripled to 9,569 in March (+203% YoY), near all-time high, on cheaper Model Y/3 versions launched late 2025; (2) leasing social scheme + company car benefit-in-kind reform from Jan 2026 driving fleet electrification. Yellow because both are structural, not fuel-shock.",
+    swingSummary:"BEV YoY of +65% is dramatically above trend. Decomposition: Tesla France tripled to 9,569 (+203% YoY) but only contributed ~33% of the total BEV growth — part of the surge is Tesla's aggressive price cuts and growth from the low Mar 2025 base. The other ~67% (~13,000 units) came from non-Tesla brands driven by structural policy changes: leasing social scheme renewal + company car benefit-in-kind reform (Jan 2026) accelerating fleet electrification. Yellow because the dominant catalysts are structural, not fuel-shock.",
     sourceLabel:"AVEM / Ministère de l'Écologie — Apr 4",
     stats:[
       { val:"49,406", lbl:"March BEV" },
@@ -535,7 +535,7 @@ const DETAIL = [
   {
     id:"norway", flag:"🇳🇴", name:"Norway", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV volume +56% YoY and share at record 98.4% — but the move is dominated by Tesla, whose Norway registrations were +178% YoY (6,150 units) on the back of cheaper Model Y/3 versions launched late 2025. Norway is already 98%+ electric so this is brand-mix shift, not a fuel-shock signal.",
+    swingSummary:"BEV volume +56% YoY and share at record 98.4%. Decomposition: Tesla contributed ~63% of the total BEV growth (Tesla up ~3,940 of the ~6,220 unit increase). Tesla's aggressive price cuts and growth from the low Mar 2025 base drove much of this. Norway is already 98%+ electric so this is mostly a brand-mix story (Tesla winning back share), not a fuel-shock signal.",
     sourceLabel:"OFV — Apr 1",
     stats:[
       { val:"~17,400", lbl:"March BEV" },
@@ -560,8 +560,8 @@ const DETAIL = [
   },
   {
     id:"sweden", flag:"🇸🇪", name:"Sweden", metric:"BEV", metricCls:"bev",
-    swing:"watch",
-    swingSummary:"BEV YoY of +27% is dramatically above the trailing trend, but Reuters/Mobility Sweden confirmed Tesla alone surged +144% YoY in March (1,447 units) on the back of cheaper Model Y/3 versions launched late 2025. Tesla recovery + brand-level price cuts is the structural driver, not the fuel crisis. Yellow because it's a vendor-led structural lift, not a one-month energy shock.",
+    swing:"up2",
+    swingSummary:"BEV YoY of +27% is well above the trailing trend (low single digits for months). Decomposition: Tesla Sweden contributed ~37% of the YoY growth (Tesla up ~850 units of the ~2,300 total BEV growth) — part of the surge is Tesla's aggressive price cuts and growth from the low Mar 2025 base. The remaining ~63% came from non-Tesla brands. Sweden has NO active EV subsidy (klimatbonusen ended Nov 2022), no policy change, and modest fuel rise (~7-8%). Light green: fuel-shock contribution is the most plausible explanation for the non-Tesla growth, but with confounders.",
     sourceLabel:"Mobility Sweden — Apr 2026",
     stats:[
       { val:"~10,897", lbl:"March BEV" },
@@ -586,7 +586,7 @@ const DETAIL = [
   {
     id:"denmark", flag:"🇩🇰", name:"Denmark", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV YoY of +57% is above the trailing trend, but Denmark has been on a steady upward trajectory all year (registration tax exemption + fleet/leasing policy). Yellow because this is structural acceleration, not a fuel-shock pop.",
+    swingSummary:"BEV YoY of +57% is above the trailing trend. Decomposition: Tesla Denmark contributed only ~16% of the total BEV growth (Tesla up ~870 of the ~5,330 unit increase) — Tesla's price cuts and growth from a low Mar 2025 base play a small role. The other ~84% came from non-Tesla brands continuing Denmark's steady upward trajectory (registration tax exemption + fleet/leasing policy). Yellow because this is structural acceleration, not a fuel-shock pop.",
     sourceLabel:"Mobility Denmark / meremobil.dk — Apr 2026",
     stats:[
       { val:"14,616", lbl:"March BEV" },
@@ -613,7 +613,7 @@ const DETAIL = [
   {
     id:"italy", flag:"🇮🇹", name:"Italy", metric:"BEV", metricCls:"bev",
     swing:"watch",
-    swingSummary:"BEV YoY of +68% looks dramatic but is roughly in line with Italy's trailing trend. PHEV +114% is the bigger acceleration story. Tesla Italy contributed (+32% YoY to 2,920 units per Reuters) but is a smaller share of Italy's BEV total than in northern markets. Working-day adjustment and dealer self-registrations also inflate the print.",
+    swingSummary:"BEV YoY of +68% looks dramatic but is roughly in line with Italy's trailing trend. PHEV +114% is the bigger acceleration story. Decomposition: Tesla Italy contributed only ~11% of the total BEV growth (Tesla up ~710 of the ~6,560 unit increase) — Tesla's price cuts contributed marginally from the low Mar 2025 base. The other ~89% came from broad-based non-Tesla growth. Working-day adjustment and dealer self-registrations also inflate the print.",
     sourceLabel:"UNRAE — published Apr 1",
     stats:[
       { val:"16,137", lbl:"March BEV" },
@@ -642,7 +642,7 @@ const DETAIL = [
   {
     id:"spain", flag:"🇪🇸", name:"Spain", metric:"BEV", metricCls:"bev",
     swing:"decel",
-    swingSummary:"BEV YoY of +41% sounds strong but is meaningfully below Spain's own trailing trend — recent 6-month average was ~50% and last March's YoY was much higher. Tesla Spain only +25% YoY (2,477 units), one of the weakest Tesla-recovery markets in Europe. Spain is decelerating, not accelerating.",
+    swingSummary:"BEV YoY of +41% sounds strong but is meaningfully below Spain's own trailing trend — recent 6-month average was ~50% and last March's YoY was much higher. Decomposition: Tesla Spain contributed only ~14% of total BEV growth (Tesla up ~500 of the ~3,420 unit increase), one of the weakest Tesla-recovery markets in Europe. Spain is decelerating, not accelerating.",
     sourceLabel:"ANFAC — published Apr 1",
     stats:[
       { val:"11,861", lbl:"March BEV" },
@@ -778,8 +778,8 @@ const DETAIL = [
   },
   {
     id:"australia", flag:"🇦🇺", name:"Australia", metric:"BEV", metricCls:"bev",
-    swing:"up2",
-    swingSummary:"BEV +115% YoY, share nearly doubled (7.5% → 14.6%). Fuel crisis is a major catalyst (petrol +43% — sharpest among tracked markets), BUT there's a real Tesla promo confounder: Tesla AU cut Model Y RWD by $5K and Model 3 RWD by $4K, plus $2–3K trade-in bonus and extended warranty through March 31. Tesla's cheaper Standard Models confirmed not coming, but existing trims DID get significant price cuts. Light green: fuel shock is dominant but Tesla promos contribute.",
+    swing:"up",
+    swingSummary:"BEV +115% YoY, share nearly doubled (7.5% → 14.6%). Decomposition: Tesla AU only contributed ~7% of the YoY growth in units (Tesla up only ~600 units while total BEV grew ~8,500). The +7,884 non-Tesla growth came from BYD, Kia, MG and other Chinese-brand expansion responding to fuel crisis. Tesla DID cut prices ($4–5K off base trims) but those promos are essentially noise vs. the broad-based brand-mix shift. Combined with petrol +43% (sharpest of any tracked market) and FCAI's direct attribution, this is the cleanest fuel-shock case in the tracker alongside NZ.",
     sourceLabel:"FCAI VFACTS — published Apr 7",
     stats:[
       { val:"15,839", lbl:"March BEV (record)" },
@@ -792,13 +792,12 @@ const DETAIL = [
       "EVs are the sole growth segment — total market down 3.3% YoY while BEV up 88.9%",
     ],
     structural:[
-      "NVES (New Vehicle Efficiency Standard) effective Jan 2025 — forces manufacturers to supply more EVs; in place 14 months with no prior March-sized surge, so NOT the main March driver",
-      "Tesla Australia DID cut prices: Model Y RWD −$5,000 (now $55,900), Model 3 RWD −$4,000 (now $54,900); plus $3K/$2K trade-in bonus and extended warranty through Mar 31",
-      "Tesla's cheaper Standard Models (overseas rebrand) confirmed NOT coming to Australia — distinct from the existing-model price cuts above",
-      "BYD and Kia entered overall top 3 brands — Chinese/Korean brand expansion ongoing",
+      "BYD, Kia, MG and other Chinese brands carrying the surge — entered overall top 3 brands; affordable BEV model range expanding rapidly",
+      "NVES (New Vehicle Efficiency Standard) effective Jan 2025 — forces manufacturers to supply more EVs; in place 14 months without producing this magnitude of surge before, so NOT the main March driver",
+      "Tesla AU price cuts ($4–5K off base trims) DID happen but only contribute ~7% of total BEV growth (Tesla only +600 units) — minor confounder, not the story",
       "Fringe Benefits Tax (FBT) exemption for employer-provided EVs still in place",
     ],
-    caveat:"Light green (was dark green): Tesla price cut confounder means fuel-shock attribution isn't clean. Total market −3.3% supports the 'real demand' argument. Tesla 3,485 units (22% of BEV); majority of BEV surge came from non-Tesla brands (BYD, Kia, etc.), consistent with broad fuel-crisis response.",
+    caveat:"Dark green (re-upgraded after Tesla decomposition): Tesla AU contributed only ~7% of the +8,484 unit BEV growth (Tesla +600, non-Tesla +7,884). Total market −3.3% YoY rules out market-wide lift. Combined with petrol +43% and explicit FCAI attribution, the fuel-shock case is clean once we look at brand mix.",
     sources:[
       { date:"2026-04-07", name:"FCAI", url:"https://www.fcai.com.au/evs-surge-as-buyers-respond-to-fuel-uncertainty/", note:"Official VFACTS release" },
       { date:"2026-04-07", name:"CarExpert", url:"https://www.carexpert.com.au/car-news/vfacts-march-2026-market-down-but-ev-sales-jump-kia-and-byd-enter-top-three", note:"Analysis + brand ranking" },
