@@ -302,7 +302,7 @@
 <header>
   <div class="header-inner">
     <h1>Monthly EV sales tracker: March 2026</h1>
-    <div class="header-sub">Data collected April 8, 2026</div>
+    <div class="header-sub">Data collected April 9, 2026</div>
   </div>
 </header>
 
@@ -312,7 +312,7 @@
   <div class="daily-feed">
     <table>
       <thead><tr>
-        <th>Date</th><th>Country</th><th>What dropped</th><th>Source</th>
+        <th>Date</th><th>Country</th><th>Source</th><th>What dropped</th>
       </tr></thead>
       <tbody id="daily-tbody"></tbody>
     </table>
@@ -378,17 +378,16 @@
 
 </main>
 
-<footer>Monthly EV Sales Tracker &nbsp;·&nbsp; Updated April 8, 2026</footer>
+<footer>Monthly EV Sales Tracker &nbsp;·&nbsp; Updated April 9, 2026</footer>
 
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
 // DAILY UPDATES — first appearance of each country's March BEV data
 // ─────────────────────────────────────────────────────────────────────────────
 const DAILY = [
-  { date: "2026-04-08", country: "🌏 APAC add",  isNew: true,  summary: "Added 4 APAC markets to tracker: Malaysia (BEV 4,717 +58.5%, orange/decel — Q1 was +113%), Taiwan (Tesla Model Y #1 in whole market at 4,540, yellow — Tesla recovery story), Hong Kong (pending, ~152K cumulative EVs), Nepal (partial, Middle East crisis driving imports).", source: "JPJ / DigiTimes", url: "https://soyacincau.com/2026/04/04/malaysia-jpj-ev-registration-march-2026/" },
-  { date: "2026-04-08", country: "🇦🇺🇳🇿 AU/NZ", isNew: true,  summary: "Australia reclassified light-green: Tesla AU DID cut prices ($4-5K off Model Y/3 base + trade-in bonuses). NZ stays dark green — petrol share collapsed 16pp (44.3%→28.1%) even as total market grew 20%, proving direct ICE→EV substitution (the fuel-shock signature).", source: "CarExpert / NZTA", url: "https://www.carexpert.com.au/car-news/tesla-cuts-australian-prices-by-up-to-3400" },
+  { date: "2026-04-09", country: "🇪🇺 EU agg",   isNew: true,  summary: "T&E (Lucien Mathieu) extrapolation across 8 EU countries (78% of EU market): EU BEV sales +31% Q1 2026 vs Q1 2025. EU BEV share rose to ~21% in March (+5.3pp YoY). Country breakdowns: Germany +41%, France +53%, Italy +65%, Spain +25%.", source: "Transport & Environment", url: "https://www.transportenvironment.org/" },
+  { date: "2026-04-09", country: "🇩🇪 Germany",  isNew: true,  summary: "Germany Q1 2026 BEV: 159,630 units (+41.3% YoY), 22.8% share. Tesla Germany alone: 9,252 units in March (+315.1% YoY) — best-ever March for Tesla in Germany.", source: "Tekedia / KBA", url: "https://www.tekedia.com/new-battery-electric-vehicle-registrations-in-germany-surged-yoy-to-70663-units-in-march/" },
   { date: "2026-04-08", country: "🇺🇸 US",       isNew: true,  summary: "First US estimate added — derived from Cox Automotive's published Q1 2026 BEV total (212,600). Implies March BEV YoY around −27%, slightly improving from the recent trend. Stabilizing in a post-incentive range. Argonne official monthly still pending.", source: "Cox Automotive", url: "https://www.coxautoinc.com/insights/cox-automotive-forecast-mar-2026-u-s-auto-sales-forecast/" },
-  { date: "2026-04-08", country: "🇰🇷 S. Korea", isNew: false, summary: "Earlier-attributed Hyundai+Kia data corrected — that was Feb 2026, not March. Korea March still partial: only KAIDA imports confirmed.", source: "(correction)", url: null },
   { date: "2026-04-07", country: "🇩🇪 Germany",  isNew: false, summary: "KBA: BEV 70,663 (+63.2% YoY), 24.0% share. PHEV 29,996. First green flag.", source: "KBA", url: "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm14_2026_n_03_26_pm_komplett.html" },
   { date: "2026-04-07", country: "🇬🇧 UK",       isNew: false, summary: "SMMT: BEV 86,120 (+23.2% YoY), 22.6% share. All-time monthly BEV record.", source: "SMMT", url: "https://www.smmt.co.uk/best-month-ever-for-new-ev-registrations-as-market-grows-in-all-important-plate-change-march/" },
   { date: "2026-04-07", country: "🇦🇺 Australia", isNew: false, summary: "FCAI VFACTS: BEV 15,839 (+115.4% YoY), 15.1% share. Record share, fuel crisis catalyst.", source: "FCAI", url: "https://www.fcai.com.au/evs-surge-as-buyers-respond-to-fuel-uncertainty/" },
@@ -463,9 +462,10 @@ const DETAIL = [
     ],
     structural:[
       "MILESTONE: BEVs (70,663) outsold gasoline registrations (66,959) for first time in a March",
-      "Tesla recovery: cheaper Model Y/3 versions launched late 2025 driving European sales rebound after Tesla lost half its EU share in 2025",
+      "Tesla Germany alone: 9,252 units (+315% YoY) — best-ever March for Tesla in Germany. Cheaper Model Y/3 versions launched late 2025 driving European sales rebound",
+      "Q1 2026 Germany BEV: 159,630 units (+41.3% YoY), 22.8% share",
       "Umweltbonus ended Dec 2023 — current growth is market/mandate-driven, not subsidy-driven",
-      "EU CO2 fleet emission targets for 2025 pushing manufacturers to incentivise BEV sales",
+      "EU CO2 fleet emission targets for 2025 pushing manufacturers to incentivise BEV sales (per T&E analysis: 'targets are working as intended')",
       "Company car tax (Dienstwagensteuer) at 0.25% for BEV vs 1% for ICE — strong fleet pull",
     ],
     caveat:"Total market 294,161 (+16.0% YoY). PHEV 29,996 (+13.0% YoY, 10.2% share). Total hybrid (incl. PHEV): 117,846 (40.1%). Per BNP Paribas economist (Reuters): fuel-crisis impact on March registrations 'still marginal' due to order-book lag.",
@@ -957,7 +957,7 @@ const DETAIL = [
 // ─────────────────────────────────────────────────────────────────────────────
 const PENDING = [
   // Key countries
-  { flag:"🇪🇺", country:"EU / Europe", source:"ACEA",                       expected:"Mid-to-late April", latest:"Jan–Feb YTD: 312,369 BEV (18.8% share, +23.7% YoY)" },
+  { flag:"🇪🇺", country:"EU / Europe", source:"ACEA",                       expected:"Mid-to-late April", latest:"T&E Q1 extrapolation (78% of EU): BEV +31% Q1 YoY, share ~21% in March (+5.3pp). Official ACEA still pending." },
   { flag:"🇨🇦", country:"Canada",      source:"Electric Autonomy / S&P",    expected:"~June 2026 (quarterly)", latest:"Q4 2025: ZEV 12.1% share, BEV 8.0%. New EVAP ($5K) launched Mar '26" },
   // Emerging markets
   { flag:"🇹🇭", country:"Thailand",    source:"TAI / EVAT",                 expected:"~Apr 20",           latest:"Feb '26: 6,168 BEV (−18.6% YoY) — EV3.0 subsidy expired. Jan anomaly: ~44K (deadline rush)" },
@@ -976,7 +976,8 @@ const PENDING = [
 // RENDER
 // ─────────────────────────────────────────────────────────────────────────────
 // Sort key: primary = flag priority, secondary = sales (descending)
-const FLAG_PRIORITY = { up: 1, up2: 2, down: 3, decel: 4, watch: 5, trend: 6 };
+// Order: dark green > light green > yellow > orange > red > trend > others
+const FLAG_PRIORITY = { up: 1, up2: 2, watch: 3, decel: 4, down: 5, trend: 6 };
 function flagRank(swing) { return FLAG_PRIORITY[swing] ?? 99; }
 function parseSales(s) {
   if (!s || s === '—') return 0;
@@ -1210,8 +1211,8 @@ function renderDaily() {
     <tr${cls}>
       <td class="feed-date">${dateCell}</td>
       <td class="feed-country">${d.country}</td>
-      <td class="feed-summary">${d.summary}</td>
       <td class="feed-source">${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">${d.source}</a>` : `<span style="color:#aaa">${d.source}</span>`}</td>
+      <td class="feed-summary">${d.summary}</td>
     </tr>`;
   }).join('');
 }

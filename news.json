@@ -1,5 +1,53 @@
 [
   {
+    "date": "2026-04-09",
+    "region": "Europe",
+    "country": "Global",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "T&E (Lucien Mathieu): Electric car sales rose 31% across the EU in Q1 2026",
+    "data_point": "EU* BEV +31% Q1 YoY (8 countries, 78% of EU). Germany +41%, France +53%, Italy +65%, Spain +25%. EU BEV share rose to ~21% in March (+5.3pp). France 28.5% (+10pp), Germany 24% (+7.2pp). Catalysts: EU CO2 targets driving cheaper compact models + pro-EV national policies (French company car tax, leasing social).",
+    "source_name": "Transport & Environment",
+    "source_url": "https://www.transportenvironment.org/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-09",
+    "region": "Europe",
+    "country": "Germany",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Germany Q1 2026 BEV: 159,630 units (+41.3% YoY), 22.8% share. Tesla Germany 9,252 in March (+315% YoY)",
+    "data_point": "Q1 2026: 159,630 BEV (+41.3%), 22.8% share | Tesla Germany March: 9,252 units (+315.1% YoY) — best-ever March",
+    "source_name": "Tekedia / KBA",
+    "source_url": "https://www.tekedia.com/new-battery-electric-vehicle-registrations-in-germany-surged-yoy-to-70663-units-in-march/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-08",
+    "region": "Europe",
+    "country": "UK",
+    "category": "Market Data",
+    "subcategory": "Official Data",
+    "headline": "Electrive: UK logs record EV registrations in March 2026 — BEV 86,120 (+24.2% YoY), 22.6% share",
+    "data_point": "BEV 86,120 (+24.2% YoY, 22.6% share) | March is plate-change month, BEV still trailing 33% ZEV mandate target",
+    "source_name": "Electrive",
+    "source_url": "https://www.electrive.com/2026/04/07/uk-logs-record-ev-registrations-in-march/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-08",
+    "region": "Europe",
+    "country": "UK",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "BYD UK Q1 2026: record 21,337 registrations, March alone 15,162",
+    "data_point": "BYD UK Q1 2026: 21,337 registrations (record). March: 15,162 — fastest-growing major brand in UK BEV market",
+    "source_name": "BYD UK / industry data",
+    "source_url": "https://www.electrive.com/2026/04/07/uk-logs-record-ev-registrations-in-march/",
+    "key_country": true
+  },
+  {
     "date": "2026-04-07",
     "region": "Europe",
     "country": "UK",
@@ -117,6 +165,18 @@
     "data_point": "",
     "source_name": "WhichCar",
     "source_url": "https://www.whichcar.com.au/news/vfacts-march-2026-ev-sales-surge-record-market-share-demand-accelerates",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-07",
+    "region": "North America",
+    "country": "US",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "CleanTechnica: Cadillac EV sales up in 2026",
+    "data_point": "Cadillac brand EV sales rising in 2026 — bright spot in declining US BEV market",
+    "source_name": "CleanTechnica",
+    "source_url": "https://cleantechnica.com/2026/04/07/cadillac-ev-sales-up-in-2026/",
     "key_country": true
   },
   {
@@ -588,6 +648,18 @@
     "key_country": true
   },
   {
+    "date": "2026-04-02",
+    "region": "Global",
+    "country": "Global",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "Tesla Q1 2026: 358,023 deliveries (+6.3% YoY) — missed 365,645 consensus; 408,386 produced",
+    "data_point": "Q1 2026 deliveries: 358,023 (+6.3% YoY) | Production 408,386 | ~50K inventory build | Missed consensus of 365,645",
+    "source_name": "Electrek",
+    "source_url": "https://electrek.co/2026/04/02/tesla-tsla-q1-2026-delivery-results-misses-expectations/",
+    "key_country": true
+  },
+  {
     "date": "2026-04-01",
     "region": "Europe",
     "country": "Spain",
@@ -789,6 +861,42 @@
     "data_point": "MIA official attribution of NZ EV surge to fuel-cost shock. March BEV 2,303 (+286% YoY), PHEV 1,107 (+273%), plug-in share 10.6% to 33.9%. Petrol share collapsed 16.2pp.",
     "source_name": "EVs & Beyond NZ",
     "source_url": "https://evsandbeyond.co.nz/ev-demand-surges-as-fuel-costs-drive-buyer-shift/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "Asia",
+    "country": "China",
+    "category": "Market Data",
+    "subcategory": "OEM Report",
+    "headline": "BYD March 2026: 300,222 NEV (+57.85% MoM, −20.45% YoY). BEV 147,601, PHEV 148,092",
+    "data_point": "March 2026: 300,222 NEV total | BEV 147,601 | PHEV 148,092 | Exports 120,083 | +57.85% MoM, −20.45% YoY | Q1 NEV: 700,463 (−30.01% YoY)",
+    "source_name": "CnEVPost",
+    "source_url": "https://cnevpost.com/2026/04/01/byd-mar-2026-nev-sales/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "North America",
+    "country": "US",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Hyundai US Q1 2026: record Q1 with IONIQ 5 best-ever March (+13% YoY)",
+    "data_point": "Hyundai US Q1 2026: record quarter | IONIQ 5 best March ever (+13% YoY) | Despite broader US EV market −28% YoY",
+    "source_name": "Hyundai US / industry",
+    "source_url": "https://www.hyundainews.com/",
+    "key_country": true
+  },
+  {
+    "date": "2026-04-01",
+    "region": "North America",
+    "country": "US",
+    "category": "Market Data",
+    "subcategory": "Quarterly",
+    "headline": "Kia US Q1 2026: 207,015 units (+4% YoY), record Q1",
+    "data_point": "Kia US Q1 2026: 207,015 units (+4% YoY) — record Q1",
+    "source_name": "Kia US / industry",
+    "source_url": "https://press.kia.com/",
     "key_country": true
   },
   {
